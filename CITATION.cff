@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software or data, please cite it as below."
 type: software
 title: "TiAI: Making Material States Count in Literature-Driven Design of Titanium Alloys and Titanium Matrix Composites — numerical reproduction"
-version: 1.0.1
+version: 1.0.2
 date-released: 2026-11-04
 authors:
   - family-names: Chu

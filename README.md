@@ -47,7 +47,7 @@ python tools/reproduce_analysis.py --analysis target-plane
 | `saved-models` | Figure 8a–f | Metrics and error distributions of the five property models on 4,808 qualified saved queries |
 | `target-plane` | Figure 8g–l | The 40,401-cell strength–elongation target plane for 913 candidates from 168 sources |
 | `addition-maps` | Figures 9 and 10 | Designed-series selection, source medians, 4,000-draw intervals and reinforcement-content bins |
-| `dose` | Figure S23 | Regressions of 3,646 dose series, source summaries and 2,000-draw intervals for 536 summary cells |
+| `dose` | Figure S11 | Regressions of 3,646 dose series, source summaries and 2,000-draw intervals for 536 summary cells |
 
 The `materials` command runs every mode except `saved-models` and `target-plane`, which have their own commands. Any single mode can be run with `--analysis <mode>`.
 
