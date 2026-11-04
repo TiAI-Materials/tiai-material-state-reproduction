@@ -10,13 +10,13 @@
     "cuda": "12.8",
     "device": "NVIDIA GeForce RTX 5080 Laptop GPU"
   },
-  "code_sha256": "372a58ad07638d6e6dcd5f662f201b6fab93e48ad50440f7051641c348185e1e",
-  "data_inputs_sha256": "aea7ca90100cb084014742cddae093ac58309fed856b78e0a751be939ed5b172",
+  "code_sha256": "2444568d4e8e21e36cb0032b7a58dc2fd439305e3810a6f1f09321fbe3c61745",
+  "data_inputs_sha256": "07a95a644ca507b05c3acecc93c01da48d9b0a093a3b86cc10b0beac7bb34afc",
   "model_fit_calls": 0,
   "elapsed_seconds": {
-    "materials": 124.8,
-    "saved-models": 2.8,
-    "target-plane": 2.9
+    "materials": 50.0,
+    "saved-models": 2.7,
+    "target-plane": 2.7
   },
   "reports": {
     "material-relations": {
@@ -32,16 +32,16 @@
             "pooled_r": 0.04008713005180712,
             "balanced_slope_mpa_per_pct": -0.026722186091477914,
             "balanced_r": -0.0005541146384782798,
-            "within_slope_mpa_per_pct": -11.0989710051041,
-            "within_r": -0.36094740739021086,
+            "within_slope_mpa_per_pct": -11.098971005104103,
+            "within_r": -0.360947407390211,
             "between_slope_mpa_per_pct": 2.3473088315814366,
             "between_r": 0.04584476857233381,
             "el_between_source_variance_share": 0.8234432834577913,
             "uts_between_source_variance_share": 0.9282177441422145
           },
-          "maximum_absolute_difference": 1.7763568394002505e-15,
+          "maximum_absolute_difference": 0.0,
           "primary_interval": {
-            "within_slope_ci_low": -14.345848833181991,
+            "within_slope_ci_low": -14.345848833181993,
             "within_slope_ci_high": -7.877767357786955
           }
         },
@@ -687,7 +687,7 @@
       "computation": {
         "backend": "PyTorch CUDA float64",
         "device": "NVIDIA GeForce RTX 5080 Laptop GPU",
-        "cuda_elapsed_ms": 339.97216796875,
+        "cuda_elapsed_ms": 285.34454345703125,
         "synchronized": true,
         "operations": [
           "metrics",
@@ -704,7 +704,7 @@
       "model_fits": 0,
       "model_inference": 0,
       "bootstrap_intervals_recomputed": false,
-      "scope": "Figure 9 saved-query metrics, residual normalization and error ECDFs under each recorded support/overlap boundary; not model retraining, recalibration or unseen-source validation."
+      "scope": "Figure 8a–f saved-query metrics, residual normalization and error ECDFs under each recorded support/overlap boundary; not model retraining, recalibration or unseen-source validation."
     },
     "target-plane": {
       "status": "passed",

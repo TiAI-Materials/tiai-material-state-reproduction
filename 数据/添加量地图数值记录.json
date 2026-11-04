@@ -1,6 +1,6 @@
 {
   "mode": "DATA_ONLY",
-  "purpose": "Numerical Source Data of Figures 11 and 12",
+  "purpose": "Numerical Source Data of Figures 9 and 10",
   "inputs": {
     "all_source_context_spans.csv.gz": {
       "bytes": 514736,

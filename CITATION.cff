@@ -2,11 +2,17 @@ cff-version: 1.2.0
 message: "If you use this software or data, please cite it as below."
 type: software
 title: "TiAI: Making Material States Count in Literature-Driven Design of Titanium Alloys and Titanium Matrix Composites — numerical reproduction"
-version: 1.0.0
-date-released: 2026-10-29
+version: 1.0.1
+date-released: 2026-11-04
 authors:
   - family-names: Chu
     given-names: Ranxing
+    affiliation: "Harbin Institute of Technology"
+  - family-names: Chen
+    given-names: Huicong
+    affiliation: "Harbin Institute of Technology"
+  - family-names: Huang
+    given-names: Lujun
     affiliation: "Harbin Institute of Technology"
 repository-code: "https://github.com/sddvacav/tiai-material-state-reproduction"
 license:

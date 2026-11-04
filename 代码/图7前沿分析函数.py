@@ -1,4 +1,4 @@
-"""Observed strength–elongation frontier, dated hypervolume and source-balanced portfolios (Figure 8)."""
+"""Observed strength–elongation frontier, dated hypervolume and source-balanced portfolios (Figure 7h–j)."""
 from __future__ import annotations
 import json
 from pathlib import Path
@@ -85,7 +85,7 @@ def analyze_admitted_pairs(xy, groups, years, dated, n_sources):
 def reproduce_saved_pairs(source: Path) -> dict:
     """Replay adopted figure analyses from complete saved pairs, never re-admit sources."""
     if not torch.cuda.is_available():
-        raise RuntimeError('GPU_REQUIRED: Figure 8 frontier reproduction')
+        raise RuntimeError('GPU_REQUIRED: Figure 7h–j frontier reproduction')
     row = pd.read_csv(source / f'{STEM}_source_data.csv', float_precision='round_trip', dtype={'feature_row_id': 'Int64'})
     states = pd.read_csv(source / f'{STEM}_states.csv', float_precision='round_trip', dtype={'feature_row_id': 'Int64'})
     layers = pd.read_csv(source / f'{STEM}_analysis_matrix.csv', float_precision='round_trip')

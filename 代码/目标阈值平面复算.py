@@ -122,7 +122,7 @@ def recount_target_plane(root):
         raise ValueError('The changed second choices differ from the paired fixed-ridge diagnostics')
     import torch
     if not torch.cuda.is_available():
-        raise RuntimeError('GPU_REQUIRED: Figure 10 target-plane recount')
+        raise RuntimeError('GPU_REQUIRED: Figure 8g–l target-plane recount')
     decisions = table['decisions']
     if decisions.admitted.dtype != bool:
         raise ValueError('Saved decision admission flags are not boolean')

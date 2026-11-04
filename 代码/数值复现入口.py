@@ -417,7 +417,7 @@ def saved_model_metrics(root: Path) -> dict:
         root/'data/model_oof_authority_registry.csv',root/'data/passed_model_point_predictions.csv')
     return dict(prediction_queries=len(points),targets=checks,computation=figure_code.COMPUTE_RECEIPT,
         model_fits=0,model_inference=0,bootstrap_intervals_recomputed=False,
-        scope='Figure 9 saved-query metrics, residual normalization and error ECDFs under each recorded support/overlap boundary; not model retraining, recalibration or unseen-source validation.')
+        scope='Figure 8a–f saved-query metrics, residual normalization and error ECDFs under each recorded support/overlap boundary; not model retraining, recalibration or unseen-source validation.')
 
 
 def target_plane(root: Path) -> dict:

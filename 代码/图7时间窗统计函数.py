@@ -1,4 +1,4 @@
-"""Five-year endpoint windows and source-bootstrap intervals (Figure 7)."""
+"""Five-year endpoint windows and source-bootstrap intervals (Figure 7a–g)."""
 from __future__ import annotations
 import torch
 

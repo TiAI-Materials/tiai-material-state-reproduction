@@ -1,4 +1,4 @@
-"""Figures 11 and 12: whole-domain maps of how additions move titanium properties.
+"""Figures 9 and 10: whole-domain maps of how additions move titanium properties.
 
 Reads the source-context series supplied under data/. A series is compared when its amount at least
 doubles within its source context (additions from zero included). Alloying-element
@@ -6,10 +6,10 @@ series are read only in contexts where the reinforcement content and the
 reinforcement-forming elements B, C and La stay unchanged, so matrix dilution by
 reinforcement cannot appear as an alloying response. Each paper family contributes
 the mean of its series changes. Medians, net directions, family-bootstrap intervals and
-binned quantiles run on PyTorch CUDA; both figures are composed at their Word inline
-width (178 mm) and rasterized by the shared ti_figstyle Skia GPU route.
+binned quantiles run on PyTorch CUDA. This release computes the numerical Source Data
+of both figures; drawing them is not part of the package.
 
-usage: build_addition_maps.py [--source DIR] [--output DIR] [--log FILE]
+usage: python tools/reproduce_addition_maps.py [--source DIR] [--output DIR] [--log FILE]
 """
 import argparse
 import hashlib
@@ -27,7 +27,7 @@ ap.add_argument('--log', type=Path)
 ap.add_argument('--data-only', action='store_true', help='Refresh original numerical Source Data without rendering or changing figure pixels')
 ap.add_argument('--render-only', action='store_true', help='Draw from the registered numerical CSV files without recomputing or rewriting statistics')
 ap.add_argument('--statistics-directory', type=Path, help='Existing addition-map CSV directory for --render-only')
-ap.add_argument('--figure', choices=('11', '12', 'all'), default='all', help='Select one existing figure for revision')
+ap.add_argument('--figure', choices=('9', '10', 'all'), default='all', help='Select one existing figure for revision')
 args = ap.parse_args()
 args.data_only = True
 args.render_only = False
@@ -236,7 +236,7 @@ if args.data_only:
     pd.DataFrame(contrast).to_csv(out / 'addition_maps_contrast.csv', index=False, encoding='utf-8')
     if any((sha(p) != INPUT_IDENTITIES[n]['sha256'] for (n, p) in INPUTS.items())):
         raise RuntimeError('Addition-map source inputs changed during numerical refresh')
-    receipt = dict(mode='DATA_ONLY', purpose='Numerical Source Data of Figures 11 and 12', inputs=INPUT_IDENTITIES, code=dict(path=str(Path(__file__).resolve()), sha256=sha(__file__)), comparison=dict(designed='amount at least doubles within source context; zero-baseline additions included', alloying='reinforcement content and B/C/La fixed in the same context', aggregation='paper-family mean of series changes'), bootstrap=dict(draws=DRAWS, seed=20261028, interval='95% percentile of the family-bootstrap median'), counts=dict(spans=len(spans), compared_spans=int(spans['compared'].sum()), paired=len(paired), compared_paired=int(paired['compared'].sum()), families=int(spans['family'].nunique()), designed_series=len(pcloud), reinforcement_cloud=len(cloud), content_points=len(pts), zero_baseline_content_series=int(pts['series_id'].nunique()), zero_baseline_content_sources=int(pts['family'].nunique())), numeric_gpu=dict(backend='PyTorch CUDA', torch=torch.__version__, cuda=torch.version.cuda, device=torch.cuda.get_device_name(0), operations=len(CUDA_LOG), cpu_fallback=False), figures_rendered=False, prior_render_receipt_text=prior_receipt_text, prior_render_csv_text=prior_csv_text)
+    receipt = dict(mode='DATA_ONLY', purpose='Numerical Source Data of Figures 9 and 10', inputs=INPUT_IDENTITIES, code=dict(path=str(Path(__file__).resolve()), sha256=sha(__file__)), comparison=dict(designed='amount at least doubles within source context; zero-baseline additions included', alloying='reinforcement content and B/C/La fixed in the same context', aggregation='paper-family mean of series changes'), bootstrap=dict(draws=DRAWS, seed=20261028, interval='95% percentile of the family-bootstrap median'), counts=dict(spans=len(spans), compared_spans=int(spans['compared'].sum()), paired=len(paired), compared_paired=int(paired['compared'].sum()), families=int(spans['family'].nunique()), designed_series=len(pcloud), reinforcement_cloud=len(cloud), content_points=len(pts), zero_baseline_content_series=int(pts['series_id'].nunique()), zero_baseline_content_sources=int(pts['family'].nunique())), numeric_gpu=dict(backend='PyTorch CUDA', torch=torch.__version__, cuda=torch.version.cuda, device=torch.cuda.get_device_name(0), operations=len(CUDA_LOG), cpu_fallback=False), figures_rendered=False, prior_render_receipt_text=prior_receipt_text, prior_render_csv_text=prior_csv_text)
     receipt['outputs'] = {p.name: dict(bytes=p.stat().st_size, sha256=sha(p)) for p in sorted(out.glob('addition_maps_*.csv'))}
     (out / 'addition_maps_receipt.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=1, default=str), encoding='utf-8')
     print('DATA_ONLY_DONE', json.dumps(receipt['counts']), flush=True)

@@ -5,9 +5,9 @@
     {
       "repository_path": "CITATION.cff",
       "runtime_path": "CITATION.cff",
-      "bytes": 825,
-      "sha256": "fc801bd3960f8c07ecdb281cb6cf65824f295779a3fcef3cbb82d8b992e8c1d2",
-      "runtime_sha256": "fc801bd3960f8c07ecdb281cb6cf65824f295779a3fcef3cbb82d8b992e8c1d2"
+      "bytes": 1020,
+      "sha256": "c12c892ec2fa02732806ff0383270e8bf0b634cc13f43849b3c2153f0f5fbd0a",
+      "runtime_sha256": "c12c892ec2fa02732806ff0383270e8bf0b634cc13f43849b3c2153f0f5fbd0a"
     },
     {
       "repository_path": "LICENSE",
@@ -19,9 +19,9 @@
     {
       "repository_path": "README.md",
       "runtime_path": "README.md",
-      "bytes": 5073,
-      "sha256": "b1d1eac248a4c5e4ba6c44065fa99f7076ca826e2a54d4df160907062893d201",
-      "runtime_sha256": "b1d1eac248a4c5e4ba6c44065fa99f7076ca826e2a54d4df160907062893d201"
+      "bytes": 5229,
+      "sha256": "5b7d55c44ddd5fb7482f47ea150c14c936fdb3f7ac443d50d26fa82fcb78bd7a",
+      "runtime_sha256": "5b7d55c44ddd5fb7482f47ea150c14c936fdb3f7ac443d50d26fa82fcb78bd7a"
     },
     {
       "repository_path": "代码/GPU设备检查.py",
@@ -33,9 +33,9 @@
     {
       "repository_path": "代码/五目标模型指标与查询资格.py",
       "runtime_path": "tools/render_five_target_model_authority_atlas.py",
-      "bytes": 11272,
-      "sha256": "56ba9d67815b6843791ce63d004a7ed742db2229c98ce3c51cacdada6fdc1ccd",
-      "runtime_sha256": "56ba9d67815b6843791ce63d004a7ed742db2229c98ce3c51cacdada6fdc1ccd"
+      "bytes": 11277,
+      "sha256": "16806cbc469b41034ea1c7e2b601aa37e82c763af4a2fca92c037ef2f31a77c9",
+      "runtime_sha256": "16806cbc469b41034ea1c7e2b601aa37e82c763af4a2fca92c037ef2f31a77c9"
     },
     {
       "repository_path": "代码/关联统计函数.py",
@@ -59,25 +59,25 @@
       "runtime_sha256": "a86533e664f215a5b7a09932f3cc3738527ea7ae089173dfb0c2adb4c8d3a0b0"
     },
     {
-      "repository_path": "代码/图7时间窗统计函数.py",
-      "runtime_path": "tools/CODE_TITMC_FIG04_temporal_frontier.py",
-      "bytes": 5748,
-      "sha256": "5263ee9ede3947a757d89a3bffb2ac79131ec3970d843547f0d8a9856e37c071",
-      "runtime_sha256": "5263ee9ede3947a757d89a3bffb2ac79131ec3970d843547f0d8a9856e37c071"
+      "repository_path": "代码/图7前沿分析函数.py",
+      "runtime_path": "tools/CODE_TITMC_FIG07_pareto_audit.py",
+      "bytes": 11002,
+      "sha256": "a53f945f75b40abf3716ba5971138f19266960c5a664e8d38062acbfd58213bc",
+      "runtime_sha256": "a53f945f75b40abf3716ba5971138f19266960c5a664e8d38062acbfd58213bc"
     },
     {
-      "repository_path": "代码/图8前沿分析函数.py",
-      "runtime_path": "tools/CODE_TITMC_FIG07_pareto_audit.py",
-      "bytes": 10992,
-      "sha256": "f956da2eab20150776b00891a89d4c29c1e108a222bfd59e17627f14e70f477d",
-      "runtime_sha256": "f956da2eab20150776b00891a89d4c29c1e108a222bfd59e17627f14e70f477d"
+      "repository_path": "代码/图7时间窗统计函数.py",
+      "runtime_path": "tools/CODE_TITMC_FIG04_temporal_frontier.py",
+      "bytes": 5753,
+      "sha256": "6e9a17799a6d4ad49e10011d0c90b137918b4265c7074ef22cadac64d70afd97",
+      "runtime_sha256": "6e9a17799a6d4ad49e10011d0c90b137918b4265c7074ef22cadac64d70afd97"
     },
     {
       "repository_path": "代码/数值复现入口.py",
       "runtime_path": "tools/reproduce_analysis.py",
-      "bytes": 33150,
-      "sha256": "372a58ad07638d6e6dcd5f662f201b6fab93e48ad50440f7051641c348185e1e",
-      "runtime_sha256": "372a58ad07638d6e6dcd5f662f201b6fab93e48ad50440f7051641c348185e1e"
+      "bytes": 33155,
+      "sha256": "2444568d4e8e21e36cb0032b7a58dc2fd439305e3810a6f1f09321fbe3c61745",
+      "runtime_sha256": "2444568d4e8e21e36cb0032b7a58dc2fd439305e3810a6f1f09321fbe3c61745"
     },
     {
       "repository_path": "代码/文件完整性核对.py",
@@ -96,9 +96,9 @@
     {
       "repository_path": "代码/材料剂量地图数值函数.py",
       "runtime_path": "tools/reproduce_addition_maps.py",
-      "bytes": 18043,
-      "sha256": "da28125140d82cfa372f6810267ee19a18c3079835a67704de8ca1ba9bc12ae8",
-      "runtime_sha256": "da28125140d82cfa372f6810267ee19a18c3079835a67704de8ca1ba9bc12ae8"
+      "bytes": 18044,
+      "sha256": "215b03598ff83de77ef991d78b6bdce280ae781bbceb0d416d05a01dc6153f4c",
+      "runtime_sha256": "215b03598ff83de77ef991d78b6bdce280ae781bbceb0d416d05a01dc6153f4c"
     },
     {
       "repository_path": "代码/材料剂量运行入口.py",
@@ -110,9 +110,9 @@
     {
       "repository_path": "代码/目标阈值平面复算.py",
       "runtime_path": "tools/selection_target_plane.py",
-      "bytes": 20314,
-      "sha256": "d9064ab6b47ecc3b700457f1dc2914438a56751b4121c8e6b25b465557b4beea",
-      "runtime_sha256": "d9064ab6b47ecc3b700457f1dc2914438a56751b4121c8e6b25b465557b4beea"
+      "bytes": 20318,
+      "sha256": "3be09fd605c662e0592b27f64036d312b007be15947b6328a99445dc4416dfd9",
+      "runtime_sha256": "3be09fd605c662e0592b27f64036d312b007be15947b6328a99445dc4416dfd9"
     },
     {
       "repository_path": "代码/选择分析函数.py",
@@ -164,7 +164,7 @@
       "runtime_sha256": "efbb88c00b7802ba8bb565fde7a2c5d758f0889ac08741fe1b25eeec0cd90917"
     },
     {
-      "repository_path": "数据/全系列指纹.csv",
+      "repository_path": "数据/全系列添加响应汇总.csv",
       "runtime_path": "data/addition_maps_fingerprint_all_series.csv",
       "bytes": 8108,
       "sha256": "62d3759b86c2b247d8ad6a725e6fb8c243545a08a6bf472cc73002f2776ea2a4",
@@ -187,9 +187,9 @@
     {
       "repository_path": "数据/发布文件清单.json",
       "runtime_path": "EXPORT_MANIFEST.json",
-      "bytes": 21001,
-      "sha256": "fddcf0af91f0c3113e4934446a38cb357d4acdb261fdbecdb0a4165a902bb8c8",
-      "runtime_sha256": "fddcf0af91f0c3113e4934446a38cb357d4acdb261fdbecdb0a4165a902bb8c8"
+      "bytes": 21002,
+      "sha256": "df34d118d3643f2bcd93f5a982113c795f1f49c3bb88e79422cc8ab17d8b5c04",
+      "runtime_sha256": "df34d118d3643f2bcd93f5a982113c795f1f49c3bb88e79422cc8ab17d8b5c04"
     },
     {
       "repository_path": "数据/可比配对系列.csv",
@@ -197,27 +197,6 @@
       "bytes": 31115,
       "sha256": "621a50de908227c0f141286621d65876e006ee9a8fc7825b23e0af1fb1fd63cc",
       "runtime_sha256": "621a50de908227c0f141286621d65876e006ee9a8fc7825b23e0af1fb1fd63cc"
-    },
-    {
-      "repository_path": "数据/图10完整目标阈值平面.csv",
-      "runtime_path": "data/selection_target_plane.csv",
-      "bytes": 3638074,
-      "sha256": "5a93f6ee8a917ca77da959ab41a8e61bcb49c04b2b23742d9d19a3825aae1876",
-      "runtime_sha256": "5a93f6ee8a917ca77da959ab41a8e61bcb49c04b2b23742d9d19a3825aae1876"
-    },
-    {
-      "repository_path": "数据/图10实际统计量.csv",
-      "runtime_path": "data/selection_plotted_values.csv",
-      "bytes": 81275,
-      "sha256": "3ed1a449fcb27444966880585fb4d8194a5ece5974d4b110ff2c732c5f0dde4a",
-      "runtime_sha256": "3ed1a449fcb27444966880585fb4d8194a5ece5974d4b110ff2c732c5f0dde4a"
-    },
-    {
-      "repository_path": "数据/图10目标平面定义.json",
-      "runtime_path": "data/selection_target_plane_metadata.json",
-      "bytes": 6160,
-      "sha256": "3e7cae86bacba5a2aac440bfbdc00dafec34648cacaf9585547021d21e9a853f",
-      "runtime_sha256": "3e7cae86bacba5a2aac440bfbdc00dafec34648cacaf9585547021d21e9a853f"
     },
     {
       "repository_path": "数据/图4主协议区间.json",
@@ -276,6 +255,41 @@
       "runtime_sha256": "7f572c14fa790998e8c6f034eecbcfedee599bb45952c8a8f724d36a75a52887"
     },
     {
+      "repository_path": "数据/图7前沿分析矩阵.csv",
+      "runtime_path": "data/TITMC_FIG07_pareto_audit_analysis_matrix.csv",
+      "bytes": 338117,
+      "sha256": "11e890cffdd9cd65c9189a131b54a655829ac03f65402f0f9eb6728835a0e72d",
+      "runtime_sha256": "11e890cffdd9cd65c9189a131b54a655829ac03f65402f0f9eb6728835a0e72d"
+    },
+    {
+      "repository_path": "数据/图7前沿同态配对状态.csv",
+      "runtime_path": "data/TITMC_FIG07_pareto_audit_states.csv",
+      "bytes": 307247,
+      "sha256": "01d7e74e95771cfca1978bfd9f13905b55dc8d1a2d6e6f4dbd14db4c42d85009",
+      "runtime_sha256": "01d7e74e95771cfca1978bfd9f13905b55dc8d1a2d6e6f4dbd14db4c42d85009"
+    },
+    {
+      "repository_path": "数据/图7前沿总体与协议.json",
+      "runtime_path": "data/TITMC_FIG07_pareto_audit_claim_receipt.json",
+      "bytes": 929,
+      "sha256": "e2981162fc7b2940f205ee230a7e95d66ceb53ab0aedcd97c4fad63950ee84d7",
+      "runtime_sha256": "e2981162fc7b2940f205ee230a7e95d66ceb53ab0aedcd97c4fad63950ee84d7"
+    },
+    {
+      "repository_path": "数据/图7前沿来源支持计数.csv",
+      "runtime_path": "data/TITMC_FIG07_pareto_audit_paperfamily_support.csv",
+      "bytes": 11915,
+      "sha256": "08a78f29c3f7c770add5cad3da1b43ed24856ceac7abe84abfd90488f2d39419",
+      "runtime_sha256": "08a78f29c3f7c770add5cad3da1b43ed24856ceac7abe84abfd90488f2d39419"
+    },
+    {
+      "repository_path": "数据/图7前沿统计.csv",
+      "runtime_path": "data/TITMC_FIG07_pareto_audit_source_data.csv",
+      "bytes": 578809,
+      "sha256": "96e8f49ffce91ff9b80368ca5ee52e5141c6bdb1c2ae8258072fc007b98e71b2",
+      "runtime_sha256": "96e8f49ffce91ff9b80368ca5ee52e5141c6bdb1c2ae8258072fc007b98e71b2"
+    },
+    {
       "repository_path": "数据/图7时间窗准入观测.csv",
       "runtime_path": "data/TITMC_FIG04_temporal_frontier_states.csv",
       "bytes": 814125,
@@ -290,39 +304,25 @@
       "runtime_sha256": "4fcf9ecbb324f4228fbde14b9f7b8636ff63297da06f5b5ab6d283476eed1e3e"
     },
     {
-      "repository_path": "数据/图8分析矩阵.csv",
-      "runtime_path": "data/TITMC_FIG07_pareto_audit_analysis_matrix.csv",
-      "bytes": 338117,
-      "sha256": "11e890cffdd9cd65c9189a131b54a655829ac03f65402f0f9eb6728835a0e72d",
-      "runtime_sha256": "11e890cffdd9cd65c9189a131b54a655829ac03f65402f0f9eb6728835a0e72d"
+      "repository_path": "数据/图8完整目标阈值平面.csv",
+      "runtime_path": "data/selection_target_plane.csv",
+      "bytes": 3638074,
+      "sha256": "5a93f6ee8a917ca77da959ab41a8e61bcb49c04b2b23742d9d19a3825aae1876",
+      "runtime_sha256": "5a93f6ee8a917ca77da959ab41a8e61bcb49c04b2b23742d9d19a3825aae1876"
     },
     {
-      "repository_path": "数据/图8前沿统计.csv",
-      "runtime_path": "data/TITMC_FIG07_pareto_audit_source_data.csv",
-      "bytes": 578809,
-      "sha256": "96e8f49ffce91ff9b80368ca5ee52e5141c6bdb1c2ae8258072fc007b98e71b2",
-      "runtime_sha256": "96e8f49ffce91ff9b80368ca5ee52e5141c6bdb1c2ae8258072fc007b98e71b2"
+      "repository_path": "数据/图8目标平面定义.json",
+      "runtime_path": "data/selection_target_plane_metadata.json",
+      "bytes": 6160,
+      "sha256": "3e7cae86bacba5a2aac440bfbdc00dafec34648cacaf9585547021d21e9a853f",
+      "runtime_sha256": "3e7cae86bacba5a2aac440bfbdc00dafec34648cacaf9585547021d21e9a853f"
     },
     {
-      "repository_path": "数据/图8同态配对状态.csv",
-      "runtime_path": "data/TITMC_FIG07_pareto_audit_states.csv",
-      "bytes": 307247,
-      "sha256": "01d7e74e95771cfca1978bfd9f13905b55dc8d1a2d6e6f4dbd14db4c42d85009",
-      "runtime_sha256": "01d7e74e95771cfca1978bfd9f13905b55dc8d1a2d6e6f4dbd14db4c42d85009"
-    },
-    {
-      "repository_path": "数据/图8总体与协议.json",
-      "runtime_path": "data/TITMC_FIG07_pareto_audit_claim_receipt.json",
-      "bytes": 929,
-      "sha256": "e2981162fc7b2940f205ee230a7e95d66ceb53ab0aedcd97c4fad63950ee84d7",
-      "runtime_sha256": "e2981162fc7b2940f205ee230a7e95d66ceb53ab0aedcd97c4fad63950ee84d7"
-    },
-    {
-      "repository_path": "数据/图8来源支持计数.csv",
-      "runtime_path": "data/TITMC_FIG07_pareto_audit_paperfamily_support.csv",
-      "bytes": 11915,
-      "sha256": "08a78f29c3f7c770add5cad3da1b43ed24856ceac7abe84abfd90488f2d39419",
-      "runtime_sha256": "08a78f29c3f7c770add5cad3da1b43ed24856ceac7abe84abfd90488f2d39419"
+      "repository_path": "数据/图8选择实际统计量.csv",
+      "runtime_path": "data/selection_plotted_values.csv",
+      "bytes": 81275,
+      "sha256": "3ed1a449fcb27444966880585fb4d8194a5ece5974d4b110ff2c732c5f0dde4a",
+      "runtime_sha256": "3ed1a449fcb27444966880585fb4d8194a5ece5974d4b110ff2c732c5f0dde4a"
     },
     {
       "repository_path": "数据/增强体区间.csv",
@@ -356,8 +356,8 @@
       "repository_path": "数据/复现输入索引.json",
       "runtime_path": "DATA_INPUTS.json",
       "bytes": 16855,
-      "sha256": "aea7ca90100cb084014742cddae093ac58309fed856b78e0a751be939ed5b172",
-      "runtime_sha256": "aea7ca90100cb084014742cddae093ac58309fed856b78e0a751be939ed5b172"
+      "sha256": "07a95a644ca507b05c3acecc93c01da48d9b0a093a3b86cc10b0beac7bb34afc",
+      "runtime_sha256": "07a95a644ca507b05c3acecc93c01da48d9b0a093a3b86cc10b0beac7bb34afc"
     },
     {
       "repository_path": "数据/序贯选择全部改变的第二选择.csv",
@@ -404,9 +404,9 @@
     {
       "repository_path": "数据/数值复现结果.json",
       "runtime_path": "NUMERICAL_REPLAY_RESULTS.json",
-      "bytes": 26878,
-      "sha256": "5c3ff0582cefb486245ed1199a426de9d866c0e13231696a5ee4db6198238953",
-      "runtime_sha256": "5c3ff0582cefb486245ed1199a426de9d866c0e13231696a5ee4db6198238953"
+      "bytes": 26866,
+      "sha256": "4823ded414777d1fdad0b5c904d0b89a66af992054f49fedb8077734b603ab9b",
+      "runtime_sha256": "4823ded414777d1fdad0b5c904d0b89a66af992054f49fedb8077734b603ab9b"
     },
     {
       "repository_path": "数据/材料剂量分析参数.json",
@@ -772,9 +772,9 @@
     {
       "repository_path": "数据/添加量地图数值记录.json",
       "runtime_path": "data/addition_maps_receipt.json",
-      "bytes": 3197,
-      "sha256": "168b46e304bc9a602078e8c768cc1fd6237aff669fa848bf249e4d6e6961d19c",
-      "runtime_sha256": "168b46e304bc9a602078e8c768cc1fd6237aff669fa848bf249e4d6e6961d19c"
+      "bytes": 3196,
+      "sha256": "6584c6cfa34d114080f6ce915589c15c4a9dc93bad437efcf0297bc55a2f71eb",
+      "runtime_sha256": "6584c6cfa34d114080f6ce915589c15c4a9dc93bad437efcf0297bc55a2f71eb"
     },
     {
       "repository_path": "数据/科研抽取任务与提示.jsonl",
@@ -805,7 +805,7 @@
       "runtime_sha256": "628b45c16c5ff88d9a333b043016f8671960374de199badf14fa10923b318720"
     },
     {
-      "repository_path": "数据/设计系列指纹.csv",
+      "repository_path": "数据/设计系列添加响应汇总.csv",
       "runtime_path": "data/addition_maps_fingerprint.csv",
       "bytes": 6571,
       "sha256": "3bd80da2f2de40ff595fa924d3e3c74fd6c948179a08e98e004888a0ef7540f8",
@@ -856,16 +856,16 @@
     {
       "repository_path": "说明/发布范围.md",
       "runtime_path": "RELEASE_NOTES.md",
-      "bytes": 574,
-      "sha256": "a98f3331b57c21b697104f33706bc80008156faf667af7a392f5b2d2eac96aaa",
-      "runtime_sha256": "a98f3331b57c21b697104f33706bc80008156faf667af7a392f5b2d2eac96aaa"
+      "bytes": 519,
+      "sha256": "1c24d8132cde09cb4bbd618082f82d55f2ec1b8ad6c74545a05d32db0697b6e9",
+      "runtime_sha256": "1c24d8132cde09cb4bbd618082f82d55f2ec1b8ad6c74545a05d32db0697b6e9"
     },
     {
       "repository_path": "说明/数据字典.md",
       "runtime_path": "DATA_DICTIONARY.md",
-      "bytes": 13919,
-      "sha256": "26e84f00d09856c3f3261f2ac48652a77ff9741a6d55046db47650ab901257ba",
-      "runtime_sha256": "26e84f00d09856c3f3261f2ac48652a77ff9741a6d55046db47650ab901257ba"
+      "bytes": 14083,
+      "sha256": "1f01ccbc568917cd7a3792d644255aae40653ce546f8ae571495b684a5d53e84",
+      "runtime_sha256": "1f01ccbc568917cd7a3792d644255aae40653ce546f8ae571495b684a5d53e84"
     },
     {
       "repository_path": "说明/数据许可.md",
@@ -877,9 +877,9 @@
     {
       "repository_path": "说明/数据访问范围.md",
       "runtime_path": "DATA_ACCESS.md",
-      "bytes": 1501,
-      "sha256": "6c3b8b8ae3214fda746ecf9f2c5a90e07076ff2ee21039d8bc476ea657b739a8",
-      "runtime_sha256": "6c3b8b8ae3214fda746ecf9f2c5a90e07076ff2ee21039d8bc476ea657b739a8"
+      "bytes": 1488,
+      "sha256": "03413cd2e395c6f2afb7d6349f42e7fa016333484ecb5984c6bf95a057cfc18e",
+      "runtime_sha256": "03413cd2e395c6f2afb7d6349f42e7fa016333484ecb5984c6bf95a057cfc18e"
     },
     {
       "repository_path": "说明/环境依赖.txt",

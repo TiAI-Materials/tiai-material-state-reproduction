@@ -1,6 +1,6 @@
 {
   "schema": "tiai.release.data.v2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scope": "Numerical inputs of the nine analyses listed in README.md, with size and SHA-256.",
   "expected": {
     "frozen_candidates": 1111,
@@ -272,8 +272,8 @@
     {
       "path": "data/addition_maps_receipt.json",
       "role": "figure_result",
-      "bytes": 3197,
-      "sha256": "168b46e304bc9a602078e8c768cc1fd6237aff669fa848bf249e4d6e6961d19c"
+      "bytes": 3196,
+      "sha256": "6584c6cfa34d114080f6ce915589c15c4a9dc93bad437efcf0297bc55a2f71eb"
     },
     {
       "path": "data/extraction_tasks.jsonl",

@@ -1,4 +1,4 @@
-"""Metrics and error distributions of the five saved property models on the qualified queries (Figure 9)."""
+"""Metrics and error distributions of the five saved property models on the qualified queries (Figure 8a–f)."""
 from __future__ import annotations
 from pathlib import Path
 from typing import Any
