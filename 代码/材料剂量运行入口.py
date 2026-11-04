@@ -1,4 +1,4 @@
-"""Dose-series regressions, source summaries and bootstrap intervals of the source-equal addition analysis (Figure S23)."""
+"""Dose-series regressions, source summaries and bootstrap intervals of the source-equal addition analysis (Figure S11)."""
 from __future__ import annotations
 import json
 import numpy as np
