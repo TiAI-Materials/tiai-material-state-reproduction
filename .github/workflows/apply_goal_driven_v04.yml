@@ -1,0 +1,44 @@
+name: Apply Goal-Driven Core v0.4 payload
+
+on:
+  push:
+    branches:
+      - feat/tiai-agentbench-goal-driven-core-v0.4
+    paths:
+      - matbench/tools/apply_goal_driven_v04.py
+      - matbench/tools/goal_driven_v04_payload/**
+      - .github/workflows/apply_goal_driven_v04.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Apply verified payload
+        run: python matbench/tools/apply_goal_driven_v04.py
+      - name: Validate Goal-Driven Core v0.4
+        env:
+          PYTHONPATH: matbench/src
+        run: |
+          python -m compileall -q matbench/src matbench/tests matbench/reconstruction
+          python -m unittest discover -s matbench/tests -v
+          python -m tiai_matbench validate-goal-registry --registry matbench/GOAL_DRIVEN_REGISTRY.json
+          python -m tiai_matbench validate-goal-protocols --protocols matbench/goal_driven/protocols_v0.4.jsonl --registry matbench/GOAL_DRIVEN_REGISTRY.json --adapters matbench/DOMAIN_ADAPTER_REGISTRY.json
+          python -m tiai_matbench score-goal-runs --protocols matbench/goal_driven/protocols_v0.4.jsonl --runs matbench/examples/goal_oracle_runs.jsonl --require-gds 1.0 --require-vwr 1.0 --max-fcr 0.0
+          python -m tiai_matbench score-goal-runs --protocols matbench/goal_driven/protocols_v0.4.jsonl --runs matbench/examples/goal_human_loop_runs.jsonl --require-gds 1.0 --max-fcr 0.0
+          python -m tiai_matbench verify-reconstruction --task-dir matbench/reconstruction/fea1d --submission matbench/reconstruction/fea1d/oracle_solver.py --require-signoff --min-pass-rate 1.0
+      - name: Commit Goal-Driven Core v0.4
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: add Goal-Driven cross-industry replacement core v0.4"
+          git push origin HEAD:${GITHUB_REF_NAME}
