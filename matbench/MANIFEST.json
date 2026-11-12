@@ -1,0 +1,83 @@
+{
+  "assets": [
+    {
+      "asset": "代码/文献抽取评分协议.py",
+      "git_blob_sha": "cf5e04da65c43a345b355bc4dd56b6ce4690dc47"
+    },
+    {
+      "asset": "数据/数值复现结果.json",
+      "git_blob_sha": "b69588db6ee51b56439b3492faddf9f9367d745e"
+    },
+    {
+      "asset": "数据/科研抽取任务与提示.jsonl",
+      "git_blob_sha": "24d9ce14c16af56a189504223409ee9af75ef7cc"
+    },
+    {
+      "asset": "数据/选择候选来源资格.json",
+      "git_blob_sha": "4c5a1013ccaa61abc0655f01b88d94a0ac1d8763"
+    },
+    {
+      "asset": "说明/数据字典.md",
+      "git_blob_sha": "bb6cb15388e2bc735ff7fccb944781153291415b"
+    }
+  ],
+  "benchmark": "TiAI-AgentBench / TiAI-MatBench EvidenceCore",
+  "benchmark_version": "0.1.0-dev",
+  "critical_gate_policy": {
+    "caps": {
+      "POOLED_WITHIN_DIRECTION_ERROR": 0.4,
+      "REQUIRED_EVIDENCE_MISSING": 0.4,
+      "STATE_CONDITION_CONFUSION": 0.25,
+      "TOOL_EXECUTION_FAILURE": 0.5
+    },
+    "zero_score": [
+      "AMBIGUOUS_NUMERIC_SERIALIZATION",
+      "DISALLOWED_RESPONSE_STATUS",
+      "EVIDENCE_IDENTITY_MISMATCH",
+      "EVIDENCE_LOCATOR_OUT_OF_SCOPE",
+      "FABRICATED_EVIDENCE_ALLOWED",
+      "MISSING_RESPONSE",
+      "OUT_OF_SCOPE_ANSWER",
+      "SCORER_SELF_CHECK_FAILED",
+      "SOURCE_LEAKAGE_ALLOWED",
+      "STATE_CONDITION_MIXING",
+      "TASK_NOT_ANSWERED",
+      "UNREGISTERED_EVIDENCE_ASSET",
+      "UNSUPPORTED_CAUSAL_CLAIM",
+      "UNSUPPORTED_PROSPECTIVE_ESTIMATE",
+      "WRONG_SPLIT_UNIT"
+    ]
+  },
+  "current_executable_pack": "EvidenceCore-v0.1",
+  "dimension_weights": {
+    "claim_calibration": 0.15,
+    "evidence_fidelity": 0.25,
+    "execution_integrity": 0.05,
+    "outcome_correctness": 0.3,
+    "split_integrity": 0.1,
+    "state_condition_fidelity": 0.15
+  },
+  "limitations": [
+    "Public EvidenceCore references are visible and must not be used for headline leaderboard claims.",
+    "Only EvidenceCore is currently an executable public scientific pack; the v0.2 registry and 39 task specifications are an implementation roadmap.",
+    "Thermodynamics, DFT, MLIP/MD, mesoscale, continuum and multiscale suites require sanitized replay assets or authorized live compute before capability claims.",
+    "Laboratory robotics and physical closed-loop suites require certified digital twins or frozen physical hardware protocols.",
+    "The current scientific domain begins with titanium alloys and titanium-matrix composites, not a complete materials-science census.",
+    "The synthetic execution task validates the scorer contract and is reported separately from real released tasks."
+  ],
+  "primary_metric": "macro_score_after_critical_gates",
+  "primary_population": "REAL_RELEASED",
+  "release_commit": "1f16938c615e5bbed742dc59faf168117dcd12fe",
+  "schema": "tiai.matbench.manifest.v1",
+  "scope_statement": "EvidenceCore is the currently executable public pack inside a twelve-suite full-stack materials-research benchmark architecture.",
+  "status": "PUBLIC_DEV_SET",
+  "suite_registry": "SUITE_REGISTRY.json",
+  "task_counts": {
+    "real_released": 7,
+    "synthetic_scorer_test": 1,
+    "total": 8
+  },
+  "task_roadmap": "suites/roadmap_v0.2.jsonl",
+  "umbrella_benchmark": "TiAI-AgentBench",
+  "umbrella_version": "0.2.0-architecture"
+}

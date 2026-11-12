@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiai-matbench"
+version = "0.2.0.dev0"
+description = "Full-stack benchmark for verifiable autonomous materials-research agents"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "TiAI-Materials"}]
+dependencies = []
+
+[project.scripts]
+tiai-matbench = "tiai_matbench.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
