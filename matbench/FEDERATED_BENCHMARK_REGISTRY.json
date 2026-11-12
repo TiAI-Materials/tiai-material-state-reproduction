@@ -1,0 +1,373 @@
+{
+  "schema": "tiai.agentbench.federation_registry.v1",
+  "benchmark": "TiAI-AgentBench",
+  "version": "0.6",
+  "policy": "Preserve each upstream benchmark's native success definition; normalize only observable outcomes and never impute missing safety, human-loop, cost, provenance or false-completion evidence as success.",
+  "expected_industry_families": [
+    "materials_science",
+    "chemistry",
+    "biology_biotechnology",
+    "software_engineering",
+    "eda_semiconductor",
+    "cad_architecture_construction",
+    "cae_simulation",
+    "control_signal_electrical",
+    "scientific_robotics",
+    "manufacturing",
+    "healthcare_clinical",
+    "finance_accounting",
+    "legal_compliance",
+    "logistics_supply_chain",
+    "energy_climate",
+    "education_training",
+    "enterprise_operations",
+    "mathematics_theoretical_computer_science",
+    "media_design_communication",
+    "public_administration_policy"
+  ],
+  "anchors": [
+    {
+      "benchmark_id": "goal_driven",
+      "title": "Goal-Driven",
+      "industry_family": "mathematics_theoretical_computer_science",
+      "official_repository": "https://github.com/lidangzzz/goal-driven",
+      "native_success_semantics": "Master agent independently checks explicit Goal and Criteria and continues or restarts work until the criteria are met.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "SANDBOX_CODE",
+      "verifiability_level": "V0_LOCAL_DETERMINISTIC",
+      "replacement_scope": "WORKFLOW",
+      "source_files": [
+        "https://github.com/lidangzzz/goal-driven"
+      ]
+    },
+    {
+      "benchmark_id": "swe_bench",
+      "title": "SWE-bench",
+      "industry_family": "software_engineering",
+      "official_repository": "https://github.com/SWE-bench/SWE-bench",
+      "native_success_semantics": "A real GitHub issue instance is resolved by the upstream repository-specific test harness and appears in resolved_ids.",
+      "adapter_status": "EXECUTABLE",
+      "result_adapter": "SWE_BENCH_RESULTS_V2",
+      "execution_mode": "SANDBOX_CODE",
+      "verifiability_level": "V0_LOCAL_DETERMINISTIC",
+      "replacement_scope": "TASK",
+      "source_files": [
+        "https://github.com/SWE-bench/SWE-bench/blob/main/swebench/harness/reporting.py",
+        "https://github.com/SWE-bench/SWE-bench/blob/main/docs/assets/evaluation.md"
+      ]
+    },
+    {
+      "benchmark_id": "osworld",
+      "title": "OSWorld",
+      "industry_family": "enterprise_operations",
+      "official_repository": "https://github.com/xlang-ai/OSWorld",
+      "native_success_semantics": "The upstream task evaluator emits a score in [0,1]; errors remain explicit and are not removed from the denominator.",
+      "adapter_status": "EXECUTABLE",
+      "result_adapter": "OSWORLD_RESULTS_V1",
+      "execution_mode": "REAL_COMPUTER",
+      "verifiability_level": "V1_COMPUTE_OR_REPLAY",
+      "replacement_scope": "TASK",
+      "source_files": [
+        "https://github.com/xlang-ai/OSWorld/blob/main/lib_results_logger.py",
+        "https://github.com/xlang-ai/OSWorld"
+      ]
+    },
+    {
+      "benchmark_id": "calvin",
+      "title": "CALVIN",
+      "industry_family": "scientific_robotics",
+      "official_repository": "https://github.com/mees/calvin",
+      "native_success_semantics": "Long-horizon robot performance is measured by average successful sequence length, chain success rates and per-task success counts.",
+      "adapter_status": "EXECUTABLE",
+      "result_adapter": "CALVIN_RESULTS_V1",
+      "execution_mode": "DIGITAL_TWIN",
+      "verifiability_level": "V2_DIGITAL_TWIN",
+      "replacement_scope": "WORKFLOW",
+      "source_files": [
+        "https://github.com/mees/calvin/blob/main/calvin_models/calvin_agent/evaluation/utils.py",
+        "https://github.com/mees/calvin"
+      ]
+    },
+    {
+      "benchmark_id": "rlbench",
+      "title": "RLBench",
+      "industry_family": "scientific_robotics",
+      "official_repository": "https://github.com/stepjam/RLBench",
+      "native_success_semantics": "The environment evaluates vision-guided manipulation task completion under its native task definitions.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "DIGITAL_TWIN",
+      "verifiability_level": "V2_DIGITAL_TWIN",
+      "replacement_scope": "TASK",
+      "source_files": [
+        "https://github.com/stepjam/RLBench"
+      ]
+    },
+    {
+      "benchmark_id": "webarena",
+      "title": "WebArena",
+      "industry_family": "enterprise_operations",
+      "official_repository": "https://github.com/web-arena-x/webarena",
+      "native_success_semantics": "A realistic web task is passed by the upstream intent-specific evaluator in its self-hosted environment.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "REAL_COMPUTER",
+      "verifiability_level": "V1_COMPUTE_OR_REPLAY",
+      "replacement_scope": "TASK",
+      "source_files": [
+        "https://github.com/web-arena-x/webarena"
+      ]
+    },
+    {
+      "benchmark_id": "workarena",
+      "title": "WorkArena",
+      "industry_family": "enterprise_operations",
+      "official_repository": "https://github.com/ServiceNow/WorkArena",
+      "native_success_semantics": "Knowledge-work tasks are evaluated by the upstream ServiceNow environment and task-specific validators.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "REAL_COMPUTER",
+      "verifiability_level": "V1_COMPUTE_OR_REPLAY",
+      "replacement_scope": "WORKFLOW",
+      "source_files": [
+        "https://github.com/ServiceNow/WorkArena"
+      ]
+    },
+    {
+      "benchmark_id": "openroad_flow",
+      "title": "OpenROAD Flow Scripts",
+      "industry_family": "eda_semiconductor",
+      "official_repository": "https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "native_success_semantics": "A design flow is judged by native build completion and physical-design reports such as timing, power, area and rule checks.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "LIVE_HPC",
+      "verifiability_level": "V1_COMPUTE_OR_REPLAY",
+      "replacement_scope": "WORKFLOW",
+      "source_files": [
+        "https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts"
+      ]
+    },
+    {
+      "benchmark_id": "lean_dojo",
+      "title": "LeanDojo",
+      "industry_family": "mathematics_theoretical_computer_science",
+      "official_repository": "https://github.com/lean-dojo/LeanDojo",
+      "native_success_semantics": "A theorem proof is accepted only when Lean checks the generated proof in the frozen repository context.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "SANDBOX_CODE",
+      "verifiability_level": "V0_LOCAL_DETERMINISTIC",
+      "replacement_scope": "TASK",
+      "source_files": [
+        "https://github.com/lean-dojo/LeanDojo"
+      ]
+    },
+    {
+      "benchmark_id": "science_agent_bench",
+      "title": "ScienceAgentBench",
+      "industry_family": "materials_science",
+      "official_repository": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
+      "native_success_semantics": "Scientific coding tasks are assessed by executable artifacts and task-specific output checks from publication-derived problems.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "SANDBOX_CODE",
+      "verifiability_level": "V1_COMPUTE_OR_REPLAY",
+      "replacement_scope": "TASK",
+      "source_files": [
+        "https://github.com/OSU-NLP-Group/ScienceAgentBench"
+      ]
+    },
+    {
+      "benchmark_id": "compmat_bench",
+      "title": "CompMat-Bench",
+      "industry_family": "materials_science",
+      "official_repository": "https://github.com/cz2014/CompMat-Bench",
+      "native_success_semantics": "Computational-materials tasks and linked workflows are graded by the upstream fixed-rule evaluators over precomputed expensive simulations.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "PRECOMPUTED_REPLAY",
+      "verifiability_level": "V1_COMPUTE_OR_REPLAY",
+      "replacement_scope": "WORKFLOW",
+      "source_files": [
+        "https://github.com/cz2014/CompMat-Bench"
+      ]
+    },
+    {
+      "benchmark_id": "tiai_fea1d_reconstruction",
+      "title": "TiAI-AgentBench 1D FEA Reconstruction Fixture",
+      "industry_family": "cae_simulation",
+      "official_repository": "https://github.com/TiAI-Materials/tiai-material-state-reproduction",
+      "native_success_semantics": "A specification-driven solver receives functional signoff only after differential, physical-invariant and invalid-input tests all pass.",
+      "adapter_status": "CATALOG_ONLY",
+      "result_adapter": "NONE",
+      "execution_mode": "SANDBOX_CODE",
+      "verifiability_level": "V0_LOCAL_DETERMINISTIC",
+      "replacement_scope": "WORKFLOW",
+      "source_files": [
+        "https://github.com/TiAI-Materials/tiai-material-state-reproduction/tree/main/matbench/reconstruction/fea1d"
+      ]
+    }
+  ],
+  "industry_coverage": [
+    {
+      "industry_family": "materials_science",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "science_agent_bench",
+        "compmat_bench"
+      ],
+      "next_minimum_task": "Add a public adapter for one CompMat-Bench result schema while retaining TiAI RealReplayCore as the source-bound full-stack vertical."
+    },
+    {
+      "industry_family": "chemistry",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "science_agent_bench"
+      ],
+      "next_minimum_task": "Admit one mass-balance or spectra task with a deterministic verifier and explicit hazard/authority boundary."
+    },
+    {
+      "industry_family": "biology_biotechnology",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "science_agent_bench"
+      ],
+      "next_minimum_task": "Admit one sequence or assay-analysis replay with lineage, controls and biosafety metadata."
+    },
+    {
+      "industry_family": "software_engineering",
+      "status": "EXECUTABLE",
+      "benchmark_ids": [
+        "swe_bench"
+      ],
+      "next_minimum_task": "Run matched agent baselines on a frozen SWE-bench subset and record intervention, cost and false-completion traces."
+    },
+    {
+      "industry_family": "eda_semiconductor",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "openroad_flow"
+      ],
+      "next_minimum_task": "Freeze one small specification-to-RTL or RTL-to-GDS flow and require native timing, power, area and rule-check signoff."
+    },
+    {
+      "industry_family": "cad_architecture_construction",
+      "status": "GAP",
+      "benchmark_ids": [],
+      "next_minimum_task": "Select one open IFC/BIM or parametric-CAD task with geometry and code-check verification instead of inventing a new CAD simulator."
+    },
+    {
+      "industry_family": "cae_simulation",
+      "status": "EXECUTABLE",
+      "benchmark_ids": [
+        "tiai_fea1d_reconstruction"
+      ],
+      "next_minimum_task": "Add one external two-dimensional benchmark case only after the 1D functional-signoff kernel remains stable."
+    },
+    {
+      "industry_family": "control_signal_electrical",
+      "status": "GAP",
+      "benchmark_ids": [],
+      "next_minimum_task": "Admit one open control-design task with closed-loop stability and simulation-trace checks."
+    },
+    {
+      "industry_family": "scientific_robotics",
+      "status": "EXECUTABLE",
+      "benchmark_ids": [
+        "calvin",
+        "rlbench"
+      ],
+      "next_minimum_task": "Add a trajectory-safety wrapper so collision, force, contamination and identity evidence are not inferred from task success."
+    },
+    {
+      "industry_family": "manufacturing",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "rlbench"
+      ],
+      "next_minimum_task": "Admit one manipulation-plus-inspection digital-twin task with part revision and nonconformance closure."
+    },
+    {
+      "industry_family": "healthcare_clinical",
+      "status": "REQUIRES_PARTNER",
+      "benchmark_ids": [],
+      "next_minimum_task": "Use de-identified data and preserve licensed human authority; do not equate decision support with autonomous care delivery."
+    },
+    {
+      "industry_family": "finance_accounting",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "workarena"
+      ],
+      "next_minimum_task": "Admit one reconciliation workflow with immutable ledger lineage and approval boundaries."
+    },
+    {
+      "industry_family": "legal_compliance",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "workarena"
+      ],
+      "next_minimum_task": "Admit one authority-bound research or clause-mapping task without representing output as licensed legal advice."
+    },
+    {
+      "industry_family": "logistics_supply_chain",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "workarena"
+      ],
+      "next_minimum_task": "Admit one inventory or routing disruption replay with service-level and exception records."
+    },
+    {
+      "industry_family": "energy_climate",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "science_agent_bench"
+      ],
+      "next_minimum_task": "Admit one forecast or grid-model task with telemetry lineage and physical constraint checks."
+    },
+    {
+      "industry_family": "education_training",
+      "status": "GAP",
+      "benchmark_ids": [],
+      "next_minimum_task": "Admit one rubric-scored instructional task while separating learning support from credential authority."
+    },
+    {
+      "industry_family": "enterprise_operations",
+      "status": "EXECUTABLE",
+      "benchmark_ids": [
+        "osworld",
+        "webarena",
+        "workarena"
+      ],
+      "next_minimum_task": "Run the OSWorld adapter now, then add WebArena and WorkArena result parsers without redefining their native validators."
+    },
+    {
+      "industry_family": "mathematics_theoretical_computer_science",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "goal_driven",
+        "lean_dojo"
+      ],
+      "next_minimum_task": "Add a Lean proof-result adapter that requires compiler acceptance and exposes restarts, wall time and proof-search budget."
+    },
+    {
+      "industry_family": "media_design_communication",
+      "status": "ANCHORED",
+      "benchmark_ids": [
+        "osworld",
+        "webarena"
+      ],
+      "next_minimum_task": "Admit one editable design or publishing workflow with source-file and accessibility checks, not screenshot-only grading."
+    },
+    {
+      "industry_family": "public_administration_policy",
+      "status": "REQUIRES_PARTNER",
+      "benchmark_ids": [
+        "workarena"
+      ],
+      "next_minimum_task": "Admit one public-record workflow with jurisdiction, audit and human authority explicitly preserved."
+    }
+  ]
+}

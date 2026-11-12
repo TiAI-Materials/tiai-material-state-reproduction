@@ -1,0 +1,17 @@
+[
+  {
+    "application": "chrome",
+    "task_id": "desktop-task-1",
+    "status": "success",
+    "score": 1.0,
+    "timestamp": "2026-11-12 00:00:00"
+  },
+  {
+    "application": "chrome",
+    "task_id": "desktop-task-2",
+    "status": "error",
+    "score": null,
+    "timestamp": "2026-11-12 00:01:00",
+    "err_message": "virtual machine unavailable"
+  }
+]
