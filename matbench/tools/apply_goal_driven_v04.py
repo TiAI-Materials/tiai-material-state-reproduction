@@ -10,14 +10,22 @@ from pathlib import Path
 
 PAYLOAD_SHA256 = "d51047295cf3aefb3db80f6b928c8f32c17664cc6ad1dfbf2d0452a7814b7eba"
 EXPECTED_FILES = 25
+PARTS = (
+    "part01.txt",
+    "part02.txt",
+    "part03.txt",
+    "part04a.txt",
+    "part04b.txt",
+    "part05.txt",
+)
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[2]
     payload_dir = root / "matbench" / "tools" / "goal_driven_v04_payload"
     encoded = "".join(
-        part.read_text(encoding="utf-8").strip()
-        for part in sorted(payload_dir.glob("part*.txt"))
+        (payload_dir / name).read_text(encoding="utf-8").strip()
+        for name in PARTS
     )
     compressed = base64.b64decode(encoded)
     observed = hashlib.sha256(compressed).hexdigest()
