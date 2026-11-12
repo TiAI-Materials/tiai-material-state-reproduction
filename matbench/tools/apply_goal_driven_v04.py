@@ -15,7 +15,12 @@ PARTS = (
     "part02.txt",
     "part03.txt",
     "part04a.txt",
-    "part04b.txt",
+    "part04b1.txt",
+    "part04b2.txt",
+    "part04b3.txt",
+    "part04b4.txt",
+    "part04b5.txt",
+    "part04b6.txt",
     "part05.txt",
 )
 
