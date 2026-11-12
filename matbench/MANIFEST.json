@@ -31,16 +31,21 @@
       "TOOL_EXECUTION_FAILURE": 0.5
     },
     "zero_score": [
-      "UNREGISTERED_EVIDENCE_ASSET",
+      "AMBIGUOUS_NUMERIC_SERIALIZATION",
+      "DISALLOWED_RESPONSE_STATUS",
       "EVIDENCE_IDENTITY_MISMATCH",
       "EVIDENCE_LOCATOR_OUT_OF_SCOPE",
-      "STATE_CONDITION_MIXING",
-      "SOURCE_LEAKAGE_ALLOWED",
-      "WRONG_SPLIT_UNIT",
-      "UNSUPPORTED_CAUSAL_CLAIM",
       "FABRICATED_EVIDENCE_ALLOWED",
+      "MISSING_RESPONSE",
       "OUT_OF_SCOPE_ANSWER",
-      "UNSUPPORTED_PROSPECTIVE_ESTIMATE"
+      "SCORER_SELF_CHECK_FAILED",
+      "SOURCE_LEAKAGE_ALLOWED",
+      "STATE_CONDITION_MIXING",
+      "TASK_NOT_ANSWERED",
+      "UNREGISTERED_EVIDENCE_ASSET",
+      "UNSUPPORTED_CAUSAL_CLAIM",
+      "UNSUPPORTED_PROSPECTIVE_ESTIMATE",
+      "WRONG_SPLIT_UNIT"
     ]
   },
   "dimension_weights": {
@@ -57,6 +62,7 @@
     "The synthetic execution task validates the scorer contract and is reported separately from real released tasks."
   ],
   "primary_metric": "macro_score_after_critical_gates",
+  "primary_population": "REAL_RELEASED",
   "release_commit": "1f16938c615e5bbed742dc59faf168117dcd12fe",
   "schema": "tiai.matbench.manifest.v1",
   "status": "PUBLIC_DEV_SET",

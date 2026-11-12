@@ -59,6 +59,46 @@ def _load_bundle(args: argparse.Namespace) -> tuple[list[dict[str, Any]], list[d
         raise ValidationError("task benchmark_version differs from manifest")
     if commits != {manifest["release_commit"]}:
         raise ValidationError("task release_commit differs from manifest")
+
+    manifest_assets = {
+        item["asset"]: item["git_blob_sha"] for item in manifest["assets"]
+    }
+    task_assets: dict[str, str] = {}
+    for task in tasks:
+        for item in task["inputs"]:
+            previous = task_assets.setdefault(item["asset"], item["git_blob_sha"])
+            if previous != item["git_blob_sha"]:
+                raise ValidationError(
+                    f"task assets disagree on blob identity for {item['asset']!r}"
+                )
+    if task_assets != manifest_assets:
+        raise ValidationError(
+            "manifest asset registry differs from task inputs: "
+            f"task_only={sorted(set(task_assets) - set(manifest_assets))}, "
+            f"manifest_only={sorted(set(manifest_assets) - set(task_assets))}, "
+            "or a registered blob identity differs"
+        )
+
+    gate_policy = manifest["critical_gate_policy"]
+    zero_score = set(gate_policy["zero_score"])
+    caps = {key: float(value) for key, value in gate_policy["caps"].items()}
+    for reference in references:
+        for check in reference["checks"]:
+            critical = check.get("critical")
+            if not critical:
+                continue
+            violation = critical["violation"]
+            if critical["action"] == "zero" and violation not in zero_score:
+                raise ValidationError(
+                    f"reference critical zero gate {violation!r} is absent from manifest"
+                )
+            if critical["action"] == "cap":
+                expected_cap = caps.get(violation)
+                observed_cap = float(critical["value"])
+                if expected_cap is None or abs(expected_cap - observed_cap) > 1e-12:
+                    raise ValidationError(
+                        f"reference cap gate {violation!r} differs from manifest"
+                    )
     return tasks, references, manifest
 
 
@@ -101,7 +141,10 @@ def command_grade(args: argparse.Namespace) -> int:
     if args.output:
         write_json(args.output, report)
     print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
-    if args.min_score is not None and report["macro_score"] + 1e-12 < args.min_score:
+    if (
+        args.min_score is not None
+        and (report["macro_score"] is None or report["macro_score"] + 1e-12 < args.min_score)
+    ):
         return 1
     return 0
 

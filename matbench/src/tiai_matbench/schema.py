@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import PurePosixPath
 from typing import Any, Iterable
 
 from .io import BenchmarkFormatError
@@ -71,6 +72,21 @@ def _require_number(value: Any, label: str, *, minimum: float | None = None) -> 
     return number
 
 
+def _require_repository_path(value: Any, label: str) -> str:
+    path = _require_string(value, label)
+    parsed = PurePosixPath(path)
+    if parsed.is_absolute() or ".." in parsed.parts or "\\" in path:
+        raise ValidationError(f"{label} must be a safe repository-relative POSIX path")
+    return path
+
+
+def _require_git_blob_sha(value: Any, label: str) -> str:
+    git_sha = _require_string(value, label)
+    if len(git_sha) != 40 or any(ch not in "0123456789abcdef" for ch in git_sha):
+        raise ValidationError(f"{label} must be a lowercase SHA-1")
+    return git_sha
+
+
 def validate_task(task: dict[str, Any]) -> None:
     _require_object(task, "task")
     if task.get("schema") != TASK_SCHEMA:
@@ -89,17 +105,15 @@ def validate_task(task: dict[str, Any]) -> None:
     seen_assets: set[str] = set()
     for index, raw_input in enumerate(inputs):
         item = _require_object(raw_input, f"task.inputs[{index}]")
-        asset = _require_string(item.get("asset"), f"task.inputs[{index}].asset")
+        asset = _require_repository_path(
+            item.get("asset"), f"task.inputs[{index}].asset"
+        )
         if asset in seen_assets:
             raise ValidationError(f"task has duplicate input asset: {asset}")
         seen_assets.add(asset)
-        git_sha = _require_string(
+        _require_git_blob_sha(
             item.get("git_blob_sha"), f"task.inputs[{index}].git_blob_sha"
         )
-        if len(git_sha) != 40 or any(ch not in "0123456789abcdef" for ch in git_sha):
-            raise ValidationError(
-                f"task.inputs[{index}].git_blob_sha must be a lowercase SHA-1"
-            )
         locators = _require_list(
             item.get("allowed_locators"),
             f"task.inputs[{index}].allowed_locators",
@@ -249,6 +263,26 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         raise ValidationError(f"invalid manifest schema: {manifest.get('schema')!r}")
     _require_string(manifest.get("benchmark_version"), "manifest.benchmark_version")
     _require_string(manifest.get("release_commit"), "manifest.release_commit")
+    _require_string(manifest.get("primary_metric"), "manifest.primary_metric")
+    if manifest.get("primary_population") != "REAL_RELEASED":
+        raise ValidationError("manifest.primary_population must be REAL_RELEASED")
+
+    assets = _require_list(manifest.get("assets"), "manifest.assets")
+    if not assets:
+        raise ValidationError("manifest.assets must not be empty")
+    seen_assets: set[str] = set()
+    for index, raw_asset in enumerate(assets):
+        item = _require_object(raw_asset, f"manifest.assets[{index}]")
+        asset = _require_repository_path(
+            item.get("asset"), f"manifest.assets[{index}].asset"
+        )
+        if asset in seen_assets:
+            raise ValidationError(f"manifest has duplicate asset: {asset}")
+        seen_assets.add(asset)
+        _require_git_blob_sha(
+            item.get("git_blob_sha"), f"manifest.assets[{index}].git_blob_sha"
+        )
+
     weights = _require_object(manifest.get("dimension_weights"), "manifest.dimension_weights")
     unknown = set(weights) - VALID_DIMENSIONS
     if unknown:
@@ -268,6 +302,31 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         "manifest.task_counts.synthetic_scorer_test",
         minimum=0,
     )
+
+    gate_policy = _require_object(
+        manifest.get("critical_gate_policy"), "manifest.critical_gate_policy"
+    )
+    zero_score = _require_list(
+        gate_policy.get("zero_score"), "manifest.critical_gate_policy.zero_score"
+    )
+    if not zero_score:
+        raise ValidationError("manifest critical zero-score policy must not be empty")
+    for index, violation in enumerate(zero_score):
+        _require_string(
+            violation, f"manifest.critical_gate_policy.zero_score[{index}]"
+        )
+    if len(zero_score) != len(set(zero_score)):
+        raise ValidationError("manifest critical zero-score policy has duplicates")
+    caps = _require_object(
+        gate_policy.get("caps"), "manifest.critical_gate_policy.caps"
+    )
+    for violation, value in caps.items():
+        _require_string(violation, "manifest.critical_gate_policy.caps key")
+        cap = _require_number(
+            value, f"manifest.critical_gate_policy.caps.{violation}"
+        )
+        if not 0.0 <= cap <= 1.0:
+            raise ValidationError("manifest critical cap values must be in [0, 1]")
 
 
 def index_unique(records: Iterable[dict[str, Any]], key: str, label: str) -> dict[str, dict[str, Any]]:

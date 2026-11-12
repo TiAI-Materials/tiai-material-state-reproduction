@@ -108,7 +108,10 @@ A submission is JSONL with one strict JSON object per answered task. Duplicate k
 
 ## Scoring
 
-The primary score is the unweighted macro-average across tasks **after critical gates**.
+The primary score is the unweighted macro-average across **real released tasks** after
+critical gates. Scorer-only synthetic fixtures are reported separately and never contribute
+to the scientific capability score. An all-task diagnostic is emitted only for harness
+debugging.
 Within a task, applicable dimensions use the manifest weights:
 
 | Dimension | Weight |
@@ -140,7 +143,8 @@ Every check, observed value, expected value and gate is emitted in the score rep
 
 ## Interpreting scores
 
-The oracle fixture should score `1.0`. The deliberately incomplete pooled-only negative
-control scores very low and triggers causal-calibration violations. Neither result is a
-claim about a language model. A model comparison must record the exact model, prompt,
-tool permissions, retry policy, cost, wall time and benchmark commit.
+The oracle fixture should score `1.0` on both the real-task primary metric and the synthetic
+self-check. The deliberately incomplete pooled-only negative control scores very low and
+triggers causal-calibration violations. Neither result is a claim about a language model. A
+model comparison must record the exact model, prompt, tool permissions, retry policy, cost,
+wall time and benchmark commit.

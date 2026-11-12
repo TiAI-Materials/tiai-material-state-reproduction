@@ -41,7 +41,22 @@ class GraderTests(unittest.TestCase):
             self.tasks, self.references, self.oracle, self.weights
         )
         self.assertEqual(report["macro_score"], 1.0)
+        self.assertEqual(report["real_released_macro_score"], 1.0)
+        self.assertEqual(report["synthetic_scorer_macro_score"], 1.0)
         self.assertEqual(report["violation_counts"], {})
+
+    def test_synthetic_fixture_does_not_change_primary_score(self) -> None:
+        responses = [
+            response
+            for response in self.oracle
+            if response["task_id"] != "TMB-EXECUTION-001"
+        ]
+        report = grade_submission(
+            self.tasks, self.references, responses, self.weights
+        )
+        self.assertEqual(report["macro_score"], 1.0)
+        self.assertEqual(report["synthetic_scorer_macro_score"], 0.0)
+        self.assertLess(report["all_task_macro_score"], 1.0)
 
     def test_naive_pooled_only_baseline_is_penalized(self) -> None:
         report = grade_submission(

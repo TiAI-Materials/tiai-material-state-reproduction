@@ -48,8 +48,9 @@ research.
 
 The report exposes:
 
-- post-gate task macro score (primary);
-- raw task macro score before critical gates;
+- post-gate macro score over real released tasks (primary);
+- raw real-task macro score before critical gates;
+- synthetic scorer-fixture score and all-task harness diagnostics separately;
 - per-track macro scores;
 - per-dimension macro scores;
 - every rule result;

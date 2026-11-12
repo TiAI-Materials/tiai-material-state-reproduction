@@ -331,16 +331,26 @@ def grade_submission(
         for task_id, task in task_index.items()
     ]
 
-    macro_score = (
-        sum(report["score"] for report in task_reports) / len(task_reports)
-        if task_reports
-        else 0.0
-    )
-    raw_macro_score = (
-        sum(report["raw_score"] for report in task_reports) / len(task_reports)
-        if task_reports
-        else 0.0
-    )
+    real_reports = [
+        report for report in task_reports if report["data_kind"] == "REAL_RELEASED"
+    ]
+    synthetic_reports = [
+        report
+        for report in task_reports
+        if report["data_kind"] == "SYNTHETIC_SCORER_TEST"
+    ]
+
+    def macro(reports: list[dict[str, Any]], field: str) -> float | None:
+        if not reports:
+            return None
+        return sum(float(report[field]) for report in reports) / len(reports)
+
+    # The primary scientific score excludes scorer-only synthetic fixtures.
+    macro_score = macro(real_reports, "score")
+    raw_macro_score = macro(real_reports, "raw_score")
+    all_task_macro_score = macro(task_reports, "score")
+    all_task_raw_macro_score = macro(task_reports, "raw_score")
+    synthetic_macro_score = macro(synthetic_reports, "score")
 
     track_values: dict[str, list[float]] = {}
     dimension_values: dict[str, list[float]] = {}
@@ -360,8 +370,14 @@ def grade_submission(
         "release_commit": tasks[0]["release_commit"] if tasks else None,
         "n_tasks": len(tasks),
         "n_responses": len(responses),
+        "n_real_released_tasks": len(real_reports),
+        "n_synthetic_scorer_tasks": len(synthetic_reports),
         "macro_score": macro_score,
+        "real_released_macro_score": macro_score,
         "raw_macro_score_before_critical_gates": raw_macro_score,
+        "all_task_macro_score": all_task_macro_score,
+        "all_task_raw_macro_score_before_critical_gates": all_task_raw_macro_score,
+        "synthetic_scorer_macro_score": synthetic_macro_score,
         "track_macro": {
             track: sum(values) / len(values) for track, values in track_values.items()
         },
