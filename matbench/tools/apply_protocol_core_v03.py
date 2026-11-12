@@ -33,7 +33,6 @@ def main() -> None:
 
     shutil.rmtree(payload_dir)
     (root / "matbench" / "tools" / "apply_protocol_core_v03.py").unlink()
-    (root / ".github" / "workflows" / "apply_protocol_core_v03.yml").unlink()
     print(f"applied {len(files)} ProtocolCore v0.3 files")
 
 
