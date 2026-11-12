@@ -1,4 +1,4 @@
-"""Command-line interface for TiAI-MatBench."""
+"""Command-line interface for the TiAI-AgentBench materials benchmark."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from .schema import (
     validate_reference,
     validate_task,
 )
+from .suites import suite_rows, validate_task_roadmap
 
 
 def _load_bundle(args: argparse.Namespace) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
@@ -149,6 +150,34 @@ def command_grade(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_validate_registry(args: argparse.Namespace) -> int:
+    registry = read_json(args.registry)
+    roadmap = read_jsonl(args.roadmap)
+    report = validate_task_roadmap(roadmap, registry)
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    return 0
+
+
+def command_list_suites(args: argparse.Namespace) -> int:
+    registry = read_json(args.registry)
+    rows = suite_rows(registry)
+    if args.json:
+        print(json.dumps(rows, ensure_ascii=False, indent=2, sort_keys=True))
+        return 0
+    for row in rows:
+        modes = ",".join(row["execution_modes"])
+        autonomy = ",".join(row["autonomy_levels"])
+        horizons = ",".join(row["horizons"])
+        current = row["current_pack"] or "-"
+        print(
+            f"{row['suite_id']}\t{row['readiness']}\t{row['title']}\t"
+            f"modes={modes}\tautonomy={autonomy}\thorizons={horizons}\tpack={current}"
+        )
+    return 0
+
+
 def _common_bundle_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--tasks", required=True, help="task JSONL path")
     parser.add_argument("--references", required=True, help="reference JSONL path")
@@ -159,13 +188,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tiai-matbench",
         description=(
-            "Deterministic evaluation for source-aware, executable and trustworthy "
-            "materials-research agents."
+            "Deterministic evaluation for the TiAI-AgentBench materials vertical: "
+            "evidence, code, simulation, multiscale, experiment and campaign suites."
         ),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    validate = subparsers.add_parser("validate", help="validate benchmark records")
+    validate = subparsers.add_parser(
+        "validate", help="validate the executable EvidenceCore task and reference bundle"
+    )
     _common_bundle_arguments(validate)
     validate.set_defaults(func=command_validate)
 
@@ -177,12 +208,28 @@ def build_parser() -> argparse.ArgumentParser:
     verify.add_argument("--output")
     verify.set_defaults(func=command_verify_assets)
 
-    grade = subparsers.add_parser("grade", help="grade an agent submission")
+    grade = subparsers.add_parser("grade", help="grade an EvidenceCore agent submission")
     _common_bundle_arguments(grade)
     grade.add_argument("--submission", required=True)
     grade.add_argument("--output")
     grade.add_argument("--min-score", type=float)
     grade.set_defaults(func=command_grade)
+
+    registry = subparsers.add_parser(
+        "validate-registry",
+        help="validate the full-stack suite registry and staged task roadmap",
+    )
+    registry.add_argument("--registry", required=True)
+    registry.add_argument("--roadmap", required=True)
+    registry.add_argument("--output")
+    registry.set_defaults(func=command_validate_registry)
+
+    suites = subparsers.add_parser(
+        "list-suites", help="list the full-stack benchmark suites and readiness states"
+    )
+    suites.add_argument("--registry", required=True)
+    suites.add_argument("--json", action="store_true")
+    suites.set_defaults(func=command_list_suites)
     return parser
 
 
@@ -192,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         return int(args.func(args))
     except (BenchmarkFormatError, ValidationError, OSError) as exc:
-        print(f"TiAI-MatBench error: {exc}", file=sys.stderr)
+        print(f"TiAI-AgentBench error: {exc}", file=sys.stderr)
         return 2
 
 

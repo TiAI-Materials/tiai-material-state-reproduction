@@ -1,115 +1,217 @@
-# TiAI-MatBench benchmark card — v0.1 public development set
+# TiAI-AgentBench benchmark card — v0.2 architecture and EvidenceCore v0.1
 
 ## Intended use
 
-TiAI-MatBench measures whether a research agent can produce a numerically correct,
-source-bound and scientifically calibrated answer from frozen materials-research assets.
-The intended unit is an **agent run**, not a conversational impression. The output is
-machine-readable, and every scored assertion is evaluated by a fixed rule.
+TiAI-AgentBench evaluates whether an AI agent can replace verified units of professional
+materials-research work. The unit of evaluation is an **agent run with artifacts and an
+execution trajectory**, not a conversational impression.
 
-The public development set supports implementation testing, baseline debugging, error
-taxonomy development and collaboration design. Because its references are visible, it is
-not a blind test set and must not be used for a definitive leaderboard claim.
+The umbrella benchmark covers the full research lifecycle:
+
+```text
+goal → evidence → problem definition → method selection → execution → verification/recovery
+→ multiscale integration → decision → experiment/robot action → knowledge update → artifact
+```
+
+The current executable public pack, EvidenceCore, evaluates source identity, material state,
+condition fidelity, source-aware statistics, split integrity, claim calibration, abstention
+and basic execution receipts. The full-stack registry adds staged suites for research
+software, thermodynamics, DFT, MLIP/MD, mesoscale and continuum simulation, cross-scale
+integration, experiments, robotics, campaigns and scientific communication.
+
+## What the benchmark is trying to measure
+
+The central question is not whether an agent can produce a plausible answer. It is:
+
+> How much of the work normally performed by literature researchers, data analysts,
+> computational materials scientists, simulation engineers, experimentalists, instrument
+> operators, laboratory-automation engineers, scientific leads and authors can the agent
+> complete autonomously and pass to an independent verifier?
+
+The benchmark therefore reports capability by work horizon, autonomy level, execution mode,
+suite, resource budget, intervention rate and safety—not only by final-answer accuracy.
 
 ## Scientific construction principles
 
-1. **Real released tasks first.** Seven tasks are derived from the released TiAI material-
-   state reproduction package. Synthetic data are reserved for testing the scorer itself.
-2. **Evidence is an object, not prose decoration.** A citation carries an asset path, a
-   frozen Git blob identity and a permitted locator.
-3. **State and source are part of the answer.** Temperature regime, material state and
-   paper-family split cannot be discarded while keeping only a property value.
-4. **Execution is observable.** A run distinguishes answer, abstention and failure and
-   reports artifacts and warnings.
-5. **No LLM judge.** Scoring is deterministic and inspectable.
-6. **Fatal scientific errors cannot be averaged away.** Critical gates zero or cap a task.
+1. **Goal → Execution → Verification.** A plan is not completion. Consequential work must
+   produce artifacts and pass independent gates.
+2. **Real work units before generic questions.** Tasks are derived from actual research
+   activities and failure modes.
+3. **Evidence is an object.** Sources, locators, material states, structures, specimens,
+   models and simulation inputs have stable identities.
+4. **Deterministic work belongs in code.** Stable checks, unit conversions, parsers and
+   numerical comparisons are programmatic; agents handle planning, adaptation and recovery.
+5. **The truth chain excludes unsupported model invention.** Scientific numerical truth must
+   originate from executed code, admitted models, instruments or admissible sources.
+6. **Human intervention is observable.** Corrections, overrides and takeovers are logged and
+   reduce autonomy credit.
+7. **Replay, live compute and physical work are distinct.** A frozen replay is not relabeled
+   as an HPC run; a digital twin is not relabeled as a physical laboratory.
+8. **Fatal errors cannot be averaged away.** Identity, convergence, leakage, cross-scale,
+   provenance, authorization and safety failures trigger gates.
+9. **Negative results remain.** Nonconvergence, absence of an event on an insufficient time
+   scale and rejected hypotheses are retained in the failure ledger.
+10. **Cross-industry extensibility.** The runtime and work-replacement protocol is generic;
+    materials science supplies the first domain adapter.
 
-## Task taxonomy
+## Suite taxonomy
 
-| Track | What it tests | v0.1 task |
-| --- | --- | --- |
-| source-aware statistics | pooled, equal-source and within-source distinctions | RT and 500–<800 °C slope tasks |
-| state/condition fidelity | preservation of temperature-specific cohorts | separate-cohort accounting |
-| claim calibration | descriptive evidence versus causal inference | pooled-slope causal claim |
-| source split integrity | paper-family grouping and no cross-fold source leakage | 1,111 → 1,070 → 913 cohort accounting |
-| provenance | task/query/source/locator identity | extraction protocol identity fields |
-| abstention | refusal outside released estimand | complete unseen-corpus prospective request |
-| execution integrity | deterministic machine-readable receipts | synthetic scorer self-check |
+| Suite | Professional work represented |
+| --- | --- |
+| `S00_EVIDENCE` | literature review, extraction, scientific memory and source-aware analysis |
+| `S01_RESEARCH_OPS` | environment setup, artifact deployment, HPC dispatch, checkpoint and recovery |
+| `S02_THERMO_KINETICS` | CALPHAD, Scheil, diffusion, precipitation and phase stability |
+| `S03_DFT_ATOMISTIC` | crystallography, DFT, defects, interfaces and energy paths |
+| `S04_MLIP_MD` | dataset curation, potential training/admission and MD |
+| `S05_MESO` | phase-field, cellular automata and mesoscale evolution |
+| `S06_CONTINUUM` | CPFEM, RVE, FEM, calibration and field validation |
+| `S07_MULTISCALE` | quantity handoffs, UQ propagation and cross-scale contradiction resolution |
+| `S08_EXPERIMENT` | experimental design, specimen ledgers, DIC, EBSD and characterization |
+| `S09_ROBOT_LAB` | protocol compilation, safe embodied execution and hardware recovery |
+| `S10_CAMPAIGN` | goal-directed end-to-end research campaigns and closed loops |
+| `S11_COMMUNICATION` | figures, source data, manuscripts, peer review and revision |
 
-## Evidence boundary
+## Work horizons and autonomy
 
-The track is closed-book with respect to evidence: each task lists all admissible assets and
-locator prefixes. A response may use fewer assets, but it may not introduce an undeclared
-file. The blob SHA prevents a same-path file from silently changing. This design measures
-whether an agent used the supplied evidence correctly; it does not measure unrestricted web
-research.
+Unit tasks test local competence. Workflow tasks test multi-step state and tool coordination.
+Campaign tasks test method selection and budgets. Closed-loop tasks test adaptation from new
+observations.
 
-## Metrics and gates
+Autonomy ranges from `A0` advisory work to `A5` embodied closed-loop operation. A task's target
+level is declared before evaluation. A system cannot gain A4/A5 credit by returning a plan for
+work a human subsequently performs.
 
-The report exposes:
+## Primary full-stack metrics
 
-- post-gate macro score over real released tasks (primary);
-- raw real-task macro score before critical gates;
-- synthetic scorer-fixture score and all-task harness diagnostics separately;
-- per-track macro scores;
-- per-dimension macro scores;
-- every rule result;
-- critical-violation counts.
+- **Verified Scientific Success (`VSS`)**: mandatory scientific and execution gates pass.
+- **Work Replacement Coverage (`WRC`)**: criticality-weighted fraction of human work units
+  executed autonomously and accepted independently.
+- **End-to-End Autonomous Success Rate (`E2E_ASR`)**: full campaign success under fixed
+  budgets.
+- **Human Intervention Rate (`HIR`)**: frequency and severity of disclosed human help.
+- **Recovery and Resume Reliability (`RRR`)**: successful terminal states after faults.
+- **Resource-Normalized Utility (`RNU`)**: scientific utility relative to time, compute, cost
+  and experimental budget.
+- **Scientific Safety Rate (`SSR`)**: trajectory-level compliance with physical, instrument,
+  data-governance and laboratory safety constraints.
 
-Examples of zero-score events are source leakage, temperature-regime mixing, fabricated or
-unregistered evidence, unsupported causal endorsement and answering a prospective estimand
-that the released retrospective package cannot identify. Missing required evidence or a
-failed tool can impose a score cap when the numerical portion remains partially useful.
+No single aggregate may hide suite- or horizon-level collapse. Results must include the metric
+vector and gate profile.
 
-## Data provenance and licensing
+## Multiscale evaluation contract
 
-The benchmark adds task and scoring metadata around files already present in this repository.
-It does not redistribute source articles, publisher figures, credentials, API histories or
-the complete curated corpus. Original-source documents must be acquired lawfully. The
-benchmark records only released asset identities and locators.
+Cross-scale tasks must verify more than the individual solvers. Each handoff declares:
+
+- source and target quantity semantics;
+- units and normalization;
+- composition, temperature, material state and structure compatibility;
+- phase, specimen, trajectory and model lineage;
+- uncertainty and applicability-domain propagation;
+- calibration and validation independence;
+- allowed claims and contradiction handling.
+
+A scientifically correct abstention from an invalid handoff can outscore a forced but
+unsupported multiscale narrative.
+
+## Robotics and physical-lab protocol
+
+Physical evaluation is staged through protocol reasoning, digital twins, supervised physical
+replay and adaptive physical campaigns. Task success and trajectory safety are scored
+separately. A robot that reaches the final state after unsafe force, tilt, collision,
+contamination or sample-identity violations does not pass.
+
+The physical benchmark must freeze or report:
+
+- robot and instrument configuration;
+- calibration and safety envelopes;
+- sample and reagent inventory;
+- perception and control interfaces;
+- human emergency supervision;
+- sim-to-real differences;
+- intervention and abort policy.
+
+## Current executable pack: EvidenceCore
+
+EvidenceCore contains seven real released tasks and one isolated scorer fixture. Its primary
+metric is the post-gate macro-average over only the real tasks. Its six dimensions are:
+
+- outcome correctness;
+- evidence fidelity;
+- state/condition fidelity;
+- split integrity;
+- claim calibration;
+- execution integrity.
+
+Examples of critical failures are source leakage, temperature mixing, unregistered evidence,
+unsupported causal endorsement and answering an estimand that the released evidence cannot
+identify.
+
+## Data and artifact governance
+
+Each public task identifies admissible assets and frozen Git identities. Future computational
+and physical task packs must additionally record:
+
+- software, solver and parser versions;
+- database, pseudopotential or interatomic-potential identities;
+- input hashes and boundary conditions;
+- hardware and parallel layout;
+- queue time, wall time and restart lineage;
+- raw-output and derived-output locations;
+- convergence and admission status;
+- sample, instrument and calibration identities;
+- human interventions and safety events.
+
+Commercial software and proprietary databases are not redistributed. A benchmark can expose
+an adapter and input/output contract without exposing licensed binaries or files.
 
 ## Contamination policy
 
-The development tasks and references are public by design. Any future blind evaluation must:
+Public development references are visible and cannot support definitive leaderboard claims.
+A blind release must:
 
-- freeze candidate tasks before model access;
-- retain a private reference/gate file;
-- group variants by source and scientific template;
-- prevent near-duplicate task templates from crossing development and test sets;
-- publish task hashes and the hidden-set construction protocol after evaluation;
-- disclose any model or agent exposure to TiAI repositories.
+- freeze candidate tasks before evaluated model access;
+- keep reference values, gate thresholds and adversarial variants private;
+- group variants by source, scientific template, structure lineage and workflow family;
+- prevent near-duplicate protocols or calculations crossing development and test;
+- disclose model and agent exposure to TiAI repositories;
+- publish hashes and construction methodology after the evaluation window;
+- separate public-development, private-replay, live-compute and physical-lab scores.
 
-A public-dev score and a hidden-test score must never be presented as interchangeable.
+## Baseline reporting protocol
 
-## Baseline protocol
+A defensible baseline must disclose:
 
-A defensible baseline report should include at least:
+- model, agent scaffold and prompt;
+- tool permissions and network access;
+- software and hardware environment;
+- retry, timeout, checkpoint and recovery policy;
+- number and severity of human interventions;
+- run success distribution over repeated trials;
+- wall time, compute, monetary and experimental cost;
+- artifacts and failure ledger;
+- per-suite, per-horizon and per-autonomy results;
+- VSS, WRC, E2E_ASR, HIR, RRR, RNU and SSR where applicable.
 
-- model and agent version;
-- prompt and tool policy;
-- temperature/seed when applicable;
-- retry and timeout policy;
-- whether evidence files were directly visible;
-- run success rate, cost and wall time;
-- post-gate score, raw score and violation profile.
+The included oracle remains a scorer regression fixture, not a competitive baseline.
 
-The included oracle is a unit-test fixture. The included naive baseline is a negative control,
-not a competitive model baseline.
+## Limitations and claim boundary
 
-## Limitations
-
-- The current domain is titanium-alloy and titanium-matrix-composite evidence, not all
-  materials science.
-- The public set is small and visible.
-- Evidence-locator validation checks the frozen identity and declared locator contract; it
-  does not independently re-download publisher documents.
-- Most tasks evaluate analysis and evidence discipline rather than long-running DFT/MD jobs.
-- English is the primary task language; Chinese mirror prompts are supplied but cross-language
-  equivalence has not yet been independently adjudicated.
+- EvidenceCore is currently the only executable public scientific pack.
+- The 39 v0.2 task specifications are a validated implementation roadmap, not 39 completed
+  benchmark environments.
+- Sanitized simulation assets, licensed-software adapters, live HPC contracts, digital twins
+  and physical-lab setups remain staged work.
+- The benchmark begins with titanium alloys and titanium-matrix composites, not a complete
+  census of materials science.
+- Expert review remains necessary for open-ended mechanism novelty and physical safety, but
+  expert review must be calibrated against deterministic artifacts and cannot replace them.
 
 ## Release path
 
-A publication-grade v1 should add an externally reviewed hidden set, at least two additional
-materials families, tool-execution tasks with sandboxed artifacts, multi-run uncertainty,
-strong model/agent baselines, contamination audits, inter-annotator agreement and an error
-analysis that separates domain knowledge from evidence-use and execution failures.
+1. keep EvidenceCore stable and add real agent baselines;
+2. release sanitized computational replay packs;
+3. add sandboxed and authorized live-compute tracks;
+4. add experiment and characterization task packs;
+5. certify scientific-robot digital twins;
+6. run supervised physical tasks;
+7. release externally adjudicated hidden campaigns and a public leaderboard.

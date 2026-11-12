@@ -21,7 +21,7 @@
       "git_blob_sha": "bb6cb15388e2bc735ff7fccb944781153291415b"
     }
   ],
-  "benchmark": "TiAI-MatBench",
+  "benchmark": "TiAI-AgentBench / TiAI-MatBench EvidenceCore",
   "benchmark_version": "0.1.0-dev",
   "critical_gate_policy": {
     "caps": {
@@ -48,6 +48,7 @@
       "WRONG_SPLIT_UNIT"
     ]
   },
+  "current_executable_pack": "EvidenceCore-v0.1",
   "dimension_weights": {
     "claim_calibration": 0.15,
     "evidence_fidelity": 0.25,
@@ -57,18 +58,26 @@
     "state_condition_fidelity": 0.15
   },
   "limitations": [
-    "Public development references are visible and must not be used for headline leaderboard claims.",
-    "The current tasks are titanium-alloy evidence and analysis tasks, not a complete materials-science domain census.",
+    "Public EvidenceCore references are visible and must not be used for headline leaderboard claims.",
+    "Only EvidenceCore is currently an executable public scientific pack; the v0.2 registry and 39 task specifications are an implementation roadmap.",
+    "Thermodynamics, DFT, MLIP/MD, mesoscale, continuum and multiscale suites require sanitized replay assets or authorized live compute before capability claims.",
+    "Laboratory robotics and physical closed-loop suites require certified digital twins or frozen physical hardware protocols.",
+    "The current scientific domain begins with titanium alloys and titanium-matrix composites, not a complete materials-science census.",
     "The synthetic execution task validates the scorer contract and is reported separately from real released tasks."
   ],
   "primary_metric": "macro_score_after_critical_gates",
   "primary_population": "REAL_RELEASED",
   "release_commit": "1f16938c615e5bbed742dc59faf168117dcd12fe",
   "schema": "tiai.matbench.manifest.v1",
+  "scope_statement": "EvidenceCore is the currently executable public pack inside a twelve-suite full-stack materials-research benchmark architecture.",
   "status": "PUBLIC_DEV_SET",
+  "suite_registry": "SUITE_REGISTRY.json",
   "task_counts": {
     "real_released": 7,
     "synthetic_scorer_test": 1,
     "total": 8
-  }
+  },
+  "task_roadmap": "suites/roadmap_v0.2.jsonl",
+  "umbrella_benchmark": "TiAI-AgentBench",
+  "umbrella_version": "0.2.0-architecture"
 }

@@ -1,4 +1,4 @@
-name: TiAI-MatBench
+name: TiAI-AgentBench
 
 on:
   pull_request:
@@ -31,6 +31,12 @@ jobs:
         run: python -m compileall -q matbench/src matbench/tests
       - name: Unit tests
         run: python -m unittest discover -s matbench/tests -v
+      - name: Validate full-stack suite registry
+        run: |
+          python -m tiai_matbench validate-registry \
+            --registry matbench/SUITE_REGISTRY.json \
+            --roadmap matbench/suites/roadmap_v0.2.jsonl \
+            --output suite_registry_report.json
       - name: Validate task and reference bundle
         run: |
           python -m tiai_matbench validate \

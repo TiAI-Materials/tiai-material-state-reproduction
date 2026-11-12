@@ -1,47 +1,94 @@
-# TiAI-MatBench
+# TiAI-AgentBench
 
-**A source-aware, executable benchmark for trustworthy materials-research agents.**
+**A full-stack benchmark for verifiable autonomous materials research.**
 
-TiAI-MatBench evaluates whether an agent can complete a materials-research task while
-preserving source identity, material state, test conditions, split integrity, evidential
-scope and execution status. It does not award credit merely because an answer sounds
-scientific, and it does not use another language model as the judge.
+`TiAI-AgentBench` measures how much of a real materials-research workflow an agent can
+replace: evidence acquisition, data analysis, research-software deployment, thermodynamics,
+DFT, ML potentials, MD, phase-field, CPFEM/RVE/FEM, multiscale integration, experimental
+planning, characterization, laboratory robotics, closed-loop campaigns and scientific
+communication.
 
-This directory is the **v0.1 public development set**. It is executable and CI-tested,
-but its visible references make it unsuitable for headline leaderboard claims. A hidden,
-externally adjudicated evaluation set is a later release milestone.
+The package name and CLI remain `tiai-matbench` for backward compatibility. The earlier
+**TiAI-MatBench v0.1** source-aware benchmark is retained as the first executable suite,
+`EvidenceCore`; it is no longer presented as the complete benchmark.
 
-## What is different
+## Current status
 
-The benchmark targets failure modes that ordinary materials question answering and
-workflow-reproduction benchmarks do not isolate:
+Two layers are committed:
 
-- pooled versus within-source inference;
-- room-temperature versus high-temperature state boundaries;
-- source-held-out evaluation and source leakage;
-- task/query/source/evidence binding;
-- unsupported causal or prospective claims;
-- tool failure, missing artifacts and ambiguous serialization.
+1. **Executable EvidenceCore public development pack** — seven real released TiAI tasks plus
+   one isolated scorer self-test. It has deterministic grading, critical scientific gates,
+   frozen Git-blob evidence and CI regression tests.
+2. **Full-stack v0.2 architecture** — twelve suites and 39 concrete staged task
+   specifications spanning digital analysis, live computation, multiscale simulation,
+   experiments, robotics and end-to-end research campaigns.
 
-Seven tasks are derived from released TiAI titanium-alloy evidence and numerical replay.
-One task is explicitly labeled `SYNTHETIC_SCORER_TEST`; it tests the evaluation harness and
-must not be interpreted as evidence of materials-research capability.
+Only layer 1 is currently a runnable scientific task pack. The remaining suite entries carry
+explicit readiness states such as `DESIGN_READY`, `REQUIRES_SANITIZED_ASSETS`,
+`REQUIRES_LIVE_HPC`, `REQUIRES_DIGITAL_TWIN` and `REQUIRES_PHYSICAL_LAB`. A roadmap entry is
+not mislabeled as a completed benchmark.
 
-## Frozen evidence base
+Read [FULL_STACK_SPEC.md](FULL_STACK_SPEC.md) for the benchmark model and
+[SUITE_REGISTRY.json](SUITE_REGISTRY.json) for the machine-readable authority.
 
-The development set is bound to repository commit
-`1f16938c615e5bbed742dc59faf168117dcd12fe`. Each allowed asset carries its Git blob SHA.
-The grader rejects an unregistered asset, a mismatched blob identity, or a locator outside
-the task's declared evidence scope. `verify-assets` recomputes Git blob identities from a
-local checkout before a run.
+## Full-stack suites
 
-## Install and run
+| Suite | Scope | Current readiness |
+| --- | --- | --- |
+| `S00_EVIDENCE` | literature, evidence, material states, source-aware analysis | executable public dev |
+| `S01_RESEARCH_OPS` | environments, research artifacts, HPC, checkpoint and recovery | design ready |
+| `S02_THERMO_KINETICS` | CALPHAD, Scheil, phase stability and kinetics | sanitized assets needed |
+| `S03_DFT_ATOMISTIC` | structures, DFT, defects, interfaces and energy paths | live HPC needed |
+| `S04_MLIP_MD` | datasets, potential training/admission and MD | live HPC needed |
+| `S05_MESO` | phase-field, CA and mesoscale microstructure | sanitized assets needed |
+| `S06_CONTINUUM` | CPFEM, RVE, FEM and local-field validation | sanitized assets needed |
+| `S07_MULTISCALE` | cross-scale handoffs, UQ and contradiction resolution | design ready |
+| `S08_EXPERIMENT` | experiment planning, DIC, EBSD and characterization | sanitized assets needed |
+| `S09_ROBOT_LAB` | protocol compilation, digital twins and physical robots | digital twin needed |
+| `S10_CAMPAIGN` | end-to-end autonomous research campaigns | design ready |
+| `S11_COMMUNICATION` | figures, source data, manuscripts and review | design ready |
 
-The package has no runtime dependency outside the Python 3.11+ standard library.
+The roadmap includes real TiAI flagship missions: Ti65 temperature-dependent ductility
+reversal, TC4 high-index twinning, Ti–B–W potential admission, TC4 fixed-phase dynamic
+recrystallization and a design-build-test-learn campaign.
+
+## Benchmark axes
+
+Scores are reported by:
+
+- suite;
+- work horizon: `UNIT`, `WORKFLOW`, `CAMPAIGN`, `CLOSED_LOOP`;
+- autonomy: `A0` advisory through `A5` embodied closed loop;
+- execution mode: evidence, sandbox code, precomputed replay, live HPC, digital twin,
+  physical lab or expert review;
+- readiness and contamination boundary.
+
+The main full-stack metrics are Verified Scientific Success, Work Replacement Coverage,
+End-to-End Autonomous Success Rate, Human Intervention Rate, Recovery and Resume Reliability,
+Resource-Normalized Utility and Scientific Safety Rate.
+
+## Validate the full-stack registry
+
+The package has no runtime dependency outside Python 3.11+.
 
 ```bash
 python -m pip install -e ./matbench
 
+tiai-matbench validate-registry \
+  --registry matbench/SUITE_REGISTRY.json \
+  --roadmap matbench/suites/roadmap_v0.2.jsonl
+
+tiai-matbench list-suites \
+  --registry matbench/SUITE_REGISTRY.json
+```
+
+The validator checks the suite vocabulary, autonomy levels, horizons, execution modes,
+readiness states, metric registry, task-to-suite compatibility, resource-mode consistency
+and the requirement that every suite has at least one concrete task specification.
+
+## Run the executable EvidenceCore pack
+
+```bash
 tiai-matbench validate \
   --tasks matbench/tasks/dev.jsonl \
   --references matbench/references/dev.jsonl \
@@ -61,58 +108,12 @@ tiai-matbench grade \
   --output score_report.json
 ```
 
-For an offline checkout without an editable install:
+EvidenceCore uses strict JSONL and rejects duplicate keys, non-finite numbers, unknown task
+IDs, unregistered evidence, mismatched Git blobs and locators outside a task's evidence scope.
 
-```bash
-PYTHONPATH=matbench/src python -m tiai_matbench.cli validate \
-  --tasks matbench/tasks/dev.jsonl \
-  --references matbench/references/dev.jsonl \
-  --manifest matbench/MANIFEST.json
-```
+## EvidenceCore scoring
 
-## Submission contract
-
-A submission is JSONL with one strict JSON object per answered task. Duplicate keys,
-`NaN`, `Infinity` and unknown task IDs are rejected.
-
-```json
-{
-  "schema": "tiai.matbench.response.v1",
-  "task_id": "TMB-STAT-RT-001",
-  "status": "ANSWERED",
-  "answer": {
-    "cohort": "rt",
-    "pairs": 1233
-  },
-  "evidence": [
-    {
-      "asset": "数据/数值复现结果.json",
-      "git_blob_sha": "b69588db6ee51b56439b3492faddf9f9367d745e",
-      "locator": "/reports/material-relations/cohorts/rt"
-    }
-  ],
-  "claims": [
-    {
-      "claim_id": "example",
-      "scope": "descriptive",
-      "support": "SUPPORTED"
-    }
-  ],
-  "execution": {
-    "success": true,
-    "artifacts": [],
-    "warnings": []
-  }
-}
-```
-
-## Scoring
-
-The primary score is the unweighted macro-average across **real released tasks** after
-critical gates. Scorer-only synthetic fixtures are reported separately and never contribute
-to the scientific capability score. An all-task diagnostic is emitted only for harness
-debugging.
-Within a task, applicable dimensions use the manifest weights:
+The current executable pack retains its six deterministic dimensions:
 
 | Dimension | Weight |
 | --- | ---: |
@@ -123,28 +124,27 @@ Within a task, applicable dimensions use the manifest weights:
 | claim calibration | 0.15 |
 | execution integrity | 0.05 |
 
-A weighted average alone can hide scientifically fatal errors. TiAI-MatBench therefore
-applies deterministic gates. Unregistered or mismatched evidence, state mixing, source
-leakage, a wrong split unit, a fabricated value, an unsupported causal claim, or an
-out-of-scope prospective answer can zero the task. Less severe failures cap the task score.
-Every check, observed value, expected value and gate is emitted in the score report.
+Fatal errors such as source leakage, state mixing, fabricated evidence, unsupported causality
+or false tool success can zero a task. The primary EvidenceCore score includes only the seven
+real released tasks; the synthetic scorer fixture is reported separately.
 
-## Files
+## Repository map
 
-- `tasks/dev.jsonl`: prompts, frozen assets and allowed evidence locators;
-- `references/dev.jsonl`: deterministic checks and critical-gate rules;
-- `MANIFEST.json`: version, task accounting, weights and policy;
-- `examples/oracle_submission.jsonl`: scorer regression fixture, not a model baseline;
-- `examples/naive_submission.jsonl`: pooled-only/causal-error negative control;
-- `src/tiai_matbench/`: strict parser, validator, asset verifier, grader and CLI;
-- `tests/`: regression tests for leakage, state mixing, evidence fabrication and CLI use;
-- `BENCHMARK_CARD.md`: scientific scope, governance and release plan;
-- `RELATED_WORK.md`: benchmark boundary and the Matbench naming-collision note.
+- `FULL_STACK_SPEC.md`: benchmark vision, axes, metrics, multiscale and robotics protocol;
+- `SUITE_REGISTRY.json`: authoritative suite, metric, autonomy and readiness registry;
+- `suites/roadmap_v0.2.jsonl`: 39 concrete task specifications and implementation states;
+- `tasks/dev.jsonl`, `references/dev.jsonl`: executable EvidenceCore public development pack;
+- `MANIFEST.json`: EvidenceCore scoring and frozen asset registry plus umbrella metadata;
+- `src/tiai_matbench/`: strict parser, grader, asset verifier, suite validator and CLI;
+- `tests/`: EvidenceCore and full-stack registry regression tests;
+- `BENCHMARK_CARD.md`: governance, claims and evaluation protocol;
+- `RELATED_WORK.md`: benchmark landscape and positioning.
 
-## Interpreting scores
+## Interpretation boundary
 
-The oracle fixture should score `1.0` on both the real-task primary metric and the synthetic
-self-check. The deliberately incomplete pooled-only negative control scores very low and
-triggers causal-calibration violations. Neither result is a claim about a language model. A
-model comparison must record the exact model, prompt, tool permissions, retry policy, cost,
-wall time and benchmark commit.
+The public EvidenceCore references are visible and cannot support a headline blind
+leaderboard. The v0.2 full-stack registry is an executable architecture and task roadmap, not
+a claim that all simulation, robotics and physical-lab suites have already been built. A
+publication-grade comparison requires externally adjudicated hidden tasks, frozen hardware and
+software contracts where relevant, strong agent baselines, repeated trials, cost and
+intervention accounting, contamination auditing and expert review.
