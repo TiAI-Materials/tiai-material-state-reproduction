@@ -4,6 +4,21 @@ This document positions the full-stack benchmark. It does not claim that one ben
 replace every existing benchmark; different systems isolate different parts of professional
 work.
 
+
+## Goal-Driven long-horizon work replacement
+
+Li Dang's Goal-Driven repository defines an explicit Goal, strict Criteria, persistent
+subagents and a master agent that independently verifies completion and restarts inactive or
+prematurely finished workers. TiAI-AgentBench converts that control pattern into benchmark
+objects: goal contracts, work graphs, episode lineage, independent criteria, false-completion
+checks, human-loop accounting and scope from task to industry.
+
+The related human-loop thesis distinguishes locally executable/testable work—formal systems,
+compilers and many scientific simulations—from work dominated by communication, deployment,
+professional authority or other persistent human decisions. The benchmark treats this as a
+measurable hypothesis through verifiability levels and Human-Loop Fraction, not as a foregone
+conclusion that all jobs are already fully autonomous.
+
 ## Property and materials-model benchmarks
 
 - **Matbench** standardizes materials-property prediction datasets and nested validation. It
@@ -70,6 +85,10 @@ lineage.
   single success rate.
 - **SafeLab** evaluates scientific-laboratory manipulation with trajectory-level safety,
   calibrated assets, unsafe-but-successful trajectories and simulated-to-physical replay.
+- **LADDER** isolates long-horizon task scaling and separates orchestration gains from physical
+  execution bottlenecks and cost.
+- **RobotAgentBench** evaluates task discovery, contextual reasoning, manipulation, failure
+  recovery and robustness in open-world robot-agent scenarios.
 - **LABSHIELD** evaluates multimodal hazard identification and safety-critical planning in
   scientific laboratories.
 - **SciHorizon-eLab** compiles natural-language scientific protocols into certified embodied
@@ -96,7 +115,10 @@ benchmark.” It is the integration of the following in one domain-adapter archi
 5. checkpoint, recovery, provenance, human-intervention and resource accounting;
 6. work-replacement coverage rather than answer accuracy alone;
 7. unit, workflow, campaign and embodied closed-loop reporting;
-8. real titanium-alloy flagship missions with negative results and counterexamples.
+8. real titanium-alloy flagship missions with negative results and counterexamples;
+9. explicit Goal/Criteria control, persistent episode recovery and false-completion detection;
+10. tool operation and specification-driven tool reconstruction kept as distinct claims;
+11. measured human-loop dependence at task, workflow, role, team, organization and industry scope.
 
 The benchmark is designed so that chemistry, biology, manufacturing and other verticals can
 reuse the core contracts while supplying their own domain objects, tools and safety gates.
@@ -139,3 +161,7 @@ A final public name should be frozen before DOI registration and leaderboard lau
     autonomous chemical experimentation.” *Scientific Reports* 16, 19554 (2026).
 15. Jiang, T. et al. “What Are We Actually Benchmarking in Robot Manipulation?”
     arXiv:2606.04233.
+
+16. Li Dang. “Goal-Driven.” GitHub repository, 2026.
+17. Petkov, P. et al. “LADDER: A Long-Horizon Robot Manipulation Benchmark.” 2026.
+18. Mao, L. et al. “RobotAgentBench: Towards Open-world Robot Autonomy.” arXiv:2610.34649.

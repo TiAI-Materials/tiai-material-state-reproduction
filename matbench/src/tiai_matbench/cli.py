@@ -10,6 +10,12 @@ from typing import Any
 
 from .adapters import validate_adapter_registry
 from .grader import grade_submission, verify_assets
+from .goal_driven import (
+    aggregate_goal_runs,
+    index_goal_protocols,
+    validate_goal_registry,
+)
+from .reconstruction import verify_reconstruction
 from .io import BenchmarkFormatError, read_json, read_jsonl, write_json
 from .schema import (
     ValidationError,
@@ -277,6 +283,121 @@ def command_list_adapters(args: argparse.Namespace) -> int:
             )
     return 0
 
+
+
+def command_validate_goal_registry(args: argparse.Namespace) -> int:
+    result = validate_goal_registry(read_json(args.registry))
+    report = {
+        "schema": "tiai.agentbench.goal_registry_validation.v1",
+        "status": "PASSED",
+        "benchmark": result["benchmark"],
+        "version": result["version"],
+        "principle_count": result["principle_count"],
+        "industry_count": result["industry_count"],
+        "industry_ids": sorted(result["industries"]),
+        "verifiability_levels": sorted(result["verifiability_levels"]),
+        "replacement_scopes": sorted(result["replacement_scopes"]),
+    }
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    return 0
+
+
+def command_list_industries(args: argparse.Namespace) -> int:
+    result = validate_goal_registry(read_json(args.registry))
+    rows = []
+    for industry_id, row in sorted(result["industries"].items()):
+        rows.append({
+            "industry_id": industry_id,
+            "title": row["title"],
+            "readiness": row["readiness"],
+            "example_roles": row["example_roles"],
+            "verifiability_levels": row["verifiability_levels"],
+        })
+    if args.json:
+        print(json.dumps(rows, ensure_ascii=False, indent=2, sort_keys=True))
+    else:
+        for row in rows:
+            print(
+                f"{row['industry_id']}\t{row['readiness']}\t{row['title']}\t"
+                f"roles={len(row['example_roles'])}\tlevels={','.join(row['verifiability_levels'])}"
+            )
+    return 0
+
+
+def command_validate_goal_protocols(args: argparse.Namespace) -> int:
+    registry = validate_goal_registry(read_json(args.registry))
+    adapters = validate_adapter_registry(read_json(args.adapters))
+    protocols = read_jsonl(args.protocols)
+    index = index_goal_protocols(protocols)
+    unknown_industries = sorted(
+        {row["industry_family"] for row in protocols} - set(registry["industries"])
+    )
+    unknown_adapters = sorted(
+        {row["domain_adapter"] for row in protocols} - set(adapters["adapters"])
+    )
+    if unknown_industries:
+        raise ValidationError(
+            f"goal protocols reference unknown industry families: {unknown_industries}"
+        )
+    if unknown_adapters:
+        raise ValidationError(
+            f"goal protocols reference unknown domain adapters: {unknown_adapters}"
+        )
+    report = {
+        "schema": "tiai.agentbench.goal_protocol_validation.v1",
+        "status": "PASSED",
+        "protocol_count": len(index),
+        "goal_ids": sorted(index),
+        "industries": sorted({row["industry_family"] for row in protocols}),
+        "replacement_scopes": sorted({row["replacement_scope"] for row in protocols}),
+        "verifiability_levels": sorted({row["verifiability_level"] for row in protocols}),
+        "data_kinds": dict(sorted({
+            kind: sum(row["data_kind"] == kind for row in protocols)
+            for kind in {row["data_kind"] for row in protocols}
+        }.items())),
+    }
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    return 0
+
+
+def command_score_goal_runs(args: argparse.Namespace) -> int:
+    report = aggregate_goal_runs(read_jsonl(args.protocols), read_jsonl(args.runs))
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    checks = [
+        ("GDS", args.require_gds, "minimum"),
+        ("VWR", args.require_vwr, "minimum"),
+        ("FCR", args.max_fcr, "maximum"),
+    ]
+    for metric, threshold, direction in checks:
+        if threshold is None:
+            continue
+        observed = report["metrics"][metric]
+        if observed is None:
+            return 1
+        if direction == "minimum" and observed + 1e-12 < threshold:
+            return 1
+        if direction == "maximum" and observed - 1e-12 > threshold:
+            return 1
+    return 0
+
+
+def command_verify_reconstruction(args: argparse.Namespace) -> int:
+    report = verify_reconstruction(args.task_dir, args.submission)
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    if args.require_signoff and not report["functional_signoff"]:
+        return 1
+    if args.min_pass_rate is not None and report["pass_rate"] + 1e-12 < args.min_pass_rate:
+        return 1
+    return 0
+
 def _common_bundle_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--tasks", required=True, help="task JSONL path")
     parser.add_argument("--references", required=True, help="reference JSONL path")
@@ -287,8 +408,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tiai-matbench",
         description=(
-            "Deterministic evaluation for the TiAI-AgentBench materials vertical: "
-            "evidence, code, simulation, multiscale, experiment and campaign suites."
+            "Goal-Driven cross-industry evaluation for verified replacement of professional work, "
+            "with materials science as the first active full vertical."
         ),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -367,6 +488,55 @@ def build_parser() -> argparse.ArgumentParser:
     score_runs.add_argument("--require-vss", type=float)
     score_runs.add_argument("--require-wrc", type=float)
     score_runs.set_defaults(func=command_score_work_runs)
+
+    goal_registry = subparsers.add_parser(
+        "validate-goal-registry",
+        help="validate the Goal-Driven industry, role-scope and verifiability registry",
+    )
+    goal_registry.add_argument("--registry", required=True)
+    goal_registry.add_argument("--output")
+    goal_registry.set_defaults(func=command_validate_goal_registry)
+
+    industries = subparsers.add_parser(
+        "list-industries",
+        help="list staged cross-industry work-replacement families",
+    )
+    industries.add_argument("--registry", required=True)
+    industries.add_argument("--json", action="store_true")
+    industries.set_defaults(func=command_list_industries)
+
+    goal_protocols = subparsers.add_parser(
+        "validate-goal-protocols",
+        help="validate persistent Goal/Criteria protocols against industry and domain registries",
+    )
+    goal_protocols.add_argument("--protocols", required=True)
+    goal_protocols.add_argument("--registry", required=True)
+    goal_protocols.add_argument("--adapters", required=True)
+    goal_protocols.add_argument("--output")
+    goal_protocols.set_defaults(func=command_validate_goal_protocols)
+
+    goal_runs = subparsers.add_parser(
+        "score-goal-runs",
+        help="score criteria closure, persistence, human-loop fraction and verified replacement",
+    )
+    goal_runs.add_argument("--protocols", required=True)
+    goal_runs.add_argument("--runs", required=True)
+    goal_runs.add_argument("--output")
+    goal_runs.add_argument("--require-gds", type=float)
+    goal_runs.add_argument("--require-vwr", type=float)
+    goal_runs.add_argument("--max-fcr", type=float)
+    goal_runs.set_defaults(func=command_score_goal_runs)
+
+    reconstruction = subparsers.add_parser(
+        "verify-reconstruction",
+        help="run differential and physics verification for a specification-driven tool reconstruction",
+    )
+    reconstruction.add_argument("--task-dir", required=True)
+    reconstruction.add_argument("--submission", required=True)
+    reconstruction.add_argument("--output")
+    reconstruction.add_argument("--min-pass-rate", type=float)
+    reconstruction.add_argument("--require-signoff", action="store_true")
+    reconstruction.set_defaults(func=command_verify_reconstruction)
     return parser
 
 

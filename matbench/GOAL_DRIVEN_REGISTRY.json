@@ -1,0 +1,656 @@
+{
+  "benchmark": "TiAI-AgentBench",
+  "industry_families": [
+    {
+      "example_roles": [
+        "materials researcher",
+        "computational materials scientist",
+        "experimental materials scientist",
+        "materials software engineer"
+      ],
+      "human_loop_sources": [
+        "mechanism interpretation",
+        "experimental safety",
+        "scope and novelty judgment"
+      ],
+      "industry_id": "materials_science",
+      "readiness": "ACTIVE_VERTICAL",
+      "scope": "Literature, data, CALPHAD, DFT, MLIP/MD, mesoscale, continuum, experiments and laboratories.",
+      "title": "Materials science and engineering",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "source records",
+        "solver outputs",
+        "model cards",
+        "specimen and instrument receipts",
+        "cross-scale contracts"
+      ]
+    },
+    {
+      "example_roles": [
+        "computational chemist",
+        "synthetic chemist",
+        "analytical chemist",
+        "laboratory automation engineer"
+      ],
+      "human_loop_sources": [
+        "hazard approval",
+        "novel synthesis judgment",
+        "physical exception handling"
+      ],
+      "industry_id": "chemistry",
+      "readiness": "STAGED",
+      "scope": "Molecular design, quantum chemistry, reaction planning, synthesis, analysis and autonomous laboratories.",
+      "title": "Chemistry and molecular science",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "reaction records",
+        "spectra",
+        "mass balance",
+        "instrument receipts",
+        "hazard checks"
+      ]
+    },
+    {
+      "example_roles": [
+        "bioinformatician",
+        "molecular biologist",
+        "assay scientist",
+        "biolab automation engineer"
+      ],
+      "human_loop_sources": [
+        "biosafety",
+        "sample interpretation",
+        "ethical approval"
+      ],
+      "industry_id": "biology_biotechnology",
+      "readiness": "STAGED",
+      "scope": "Sequence, protein, assay, cell, imaging and experimental workflows with lineage and biosafety.",
+      "title": "Biology and biotechnology",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "sequence lineage",
+        "assay controls",
+        "replicate records",
+        "biosafety receipts"
+      ]
+    },
+    {
+      "example_roles": [
+        "software engineer",
+        "SRE",
+        "security engineer",
+        "database engineer"
+      ],
+      "human_loop_sources": [
+        "product requirements",
+        "risk acceptance",
+        "organizational coordination"
+      ],
+      "industry_id": "software_engineering",
+      "readiness": "PROTOCOL_FIXTURE",
+      "scope": "Specification, implementation, testing, deployment, monitoring, security and incident recovery.",
+      "title": "Software engineering and operations",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "repository revision",
+        "tests",
+        "build artifacts",
+        "deployment health",
+        "incident trace"
+      ]
+    },
+    {
+      "example_roles": [
+        "RTL designer",
+        "verification engineer",
+        "physical-design engineer",
+        "analog designer"
+      ],
+      "human_loop_sources": [
+        "architecture tradeoffs",
+        "foundry authorization",
+        "silicon risk acceptance"
+      ],
+      "industry_id": "eda_semiconductor",
+      "readiness": "STAGED",
+      "scope": "Specification-to-RTL, verification, physical design, signoff, packaging and silicon bring-up.",
+      "title": "Electronic design automation and semiconductor engineering",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "datasheets",
+        "testbenches",
+        "formal proofs",
+        "timing and power reports",
+        "functional signoff"
+      ]
+    },
+    {
+      "example_roles": [
+        "CAD engineer",
+        "architect",
+        "BIM coordinator",
+        "construction planner"
+      ],
+      "human_loop_sources": [
+        "client preference",
+        "professional stamping",
+        "site safety and regulatory approval"
+      ],
+      "industry_id": "cad_architecture_construction",
+      "readiness": "STAGED",
+      "scope": "Requirements, geometry, building information models, code checks, coordination and construction planning.",
+      "title": "CAD, architecture and construction",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "specifications",
+        "geometry models",
+        "code checks",
+        "clash reports",
+        "inspection records"
+      ]
+    },
+    {
+      "example_roles": [
+        "FEA analyst",
+        "CFD engineer",
+        "multiphysics engineer",
+        "simulation verification engineer"
+      ],
+      "human_loop_sources": [
+        "model-form judgment",
+        "safety factor approval",
+        "physical validation selection"
+      ],
+      "industry_id": "cae_simulation",
+      "readiness": "RECONSTRUCTION_FIXTURE",
+      "scope": "Finite element, CFD, multiphysics, uncertainty, optimization and model validation.",
+      "title": "CAE and engineering simulation",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT"
+      ],
+      "verification_assets": [
+        "mesh and model identity",
+        "solver convergence",
+        "benchmark cases",
+        "validation data",
+        "uncertainty reports"
+      ]
+    },
+    {
+      "example_roles": [
+        "control engineer",
+        "signal-processing engineer",
+        "communications engineer",
+        "motor-drive engineer"
+      ],
+      "human_loop_sources": [
+        "operational authorization",
+        "physical tuning",
+        "safety certification"
+      ],
+      "industry_id": "control_signal_electrical",
+      "readiness": "STAGED",
+      "scope": "Modeling, controller design, signal processing, communication systems, motor and power-system simulation.",
+      "title": "Control, signal, communications and electrical engineering",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "plant models",
+        "stability proofs",
+        "simulation traces",
+        "hardware-in-loop results",
+        "safety envelopes"
+      ]
+    },
+    {
+      "example_roles": [
+        "robotics engineer",
+        "laboratory automation engineer",
+        "instrument scientist",
+        "robot safety engineer"
+      ],
+      "human_loop_sources": [
+        "emergency supervision",
+        "novel failure handling",
+        "physical safety authorization"
+      ],
+      "industry_id": "scientific_robotics",
+      "readiness": "PROTOCOL_FIXTURE",
+      "scope": "Protocol compilation, perception, planning, manipulation, instruments, safe recovery and closed-loop science.",
+      "title": "Scientific robotics and embodied laboratories",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "action traces",
+        "sensor logs",
+        "digital-twin replay",
+        "safety receipts",
+        "physical outcomes"
+      ]
+    },
+    {
+      "example_roles": [
+        "manufacturing engineer",
+        "process engineer",
+        "quality engineer",
+        "maintenance engineer"
+      ],
+      "human_loop_sources": [
+        "shop-floor safety",
+        "production prioritization",
+        "supplier coordination"
+      ],
+      "industry_id": "manufacturing",
+      "readiness": "STAGED",
+      "scope": "Process planning, machine execution, quality, maintenance, production scheduling and optimization.",
+      "title": "Manufacturing and industrial operations",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "part revision",
+        "machine capability",
+        "sensor traces",
+        "inspection records",
+        "nonconformance closure"
+      ]
+    },
+    {
+      "example_roles": [
+        "clinical analyst",
+        "radiologist",
+        "care coordinator",
+        "clinical operations manager"
+      ],
+      "human_loop_sources": [
+        "licensed clinical judgment",
+        "consent",
+        "patient communication",
+        "legal responsibility"
+      ],
+      "industry_id": "healthcare_clinical",
+      "readiness": "REQUIRES_REGULATORY_PARTNER",
+      "scope": "Clinical documentation, decision support, diagnostics, treatment planning, operations and regulated care delivery.",
+      "title": "Healthcare and clinical operations",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "patient identity",
+        "clinical evidence",
+        "device outputs",
+        "consent",
+        "audit records"
+      ]
+    },
+    {
+      "example_roles": [
+        "accountant",
+        "financial analyst",
+        "risk analyst",
+        "auditor"
+      ],
+      "human_loop_sources": [
+        "fiduciary judgment",
+        "market accountability",
+        "transaction authorization"
+      ],
+      "industry_id": "finance_accounting",
+      "readiness": "STAGED",
+      "scope": "Reconciliation, forecasting, valuation, risk, reporting, audit and controlled transactions.",
+      "title": "Finance, accounting and audit",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "ledger lineage",
+        "market data",
+        "model validation",
+        "approval trails",
+        "regulatory reports"
+      ]
+    },
+    {
+      "example_roles": [
+        "legal researcher",
+        "contract analyst",
+        "compliance analyst",
+        "paralegal"
+      ],
+      "human_loop_sources": [
+        "licensed legal advice",
+        "negotiation",
+        "ethical duties",
+        "court and client authority"
+      ],
+      "industry_id": "legal_compliance",
+      "readiness": "STAGED",
+      "scope": "Research, drafting, review, evidence organization, policy mapping and regulated approval.",
+      "title": "Legal, contracts and compliance",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "authorities",
+        "matter files",
+        "clause maps",
+        "approval records",
+        "jurisdiction scope"
+      ]
+    },
+    {
+      "example_roles": [
+        "supply planner",
+        "logistics analyst",
+        "warehouse engineer",
+        "procurement analyst"
+      ],
+      "human_loop_sources": [
+        "supplier negotiation",
+        "emergency prioritization",
+        "physical exception handling"
+      ],
+      "industry_id": "logistics_supply_chain",
+      "readiness": "STAGED",
+      "scope": "Demand, inventory, routing, procurement, warehouse operations and disruption recovery.",
+      "title": "Logistics and supply chain",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "orders",
+        "inventory state",
+        "route constraints",
+        "sensor and scan receipts",
+        "service-level records"
+      ]
+    },
+    {
+      "example_roles": [
+        "grid analyst",
+        "battery engineer",
+        "energy systems modeler",
+        "climate-risk analyst"
+      ],
+      "human_loop_sources": [
+        "dispatch authority",
+        "public policy",
+        "infrastructure safety"
+      ],
+      "industry_id": "energy_climate",
+      "readiness": "STAGED",
+      "scope": "Grid, storage, process, weather, emissions, resource planning and physical infrastructure.",
+      "title": "Energy and climate technology",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V3_PHYSICAL_INSTRUMENT",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "telemetry",
+        "simulation outputs",
+        "forecast skill",
+        "equipment receipts",
+        "emissions lineage"
+      ]
+    },
+    {
+      "example_roles": [
+        "teacher",
+        "instructional designer",
+        "assessment specialist",
+        "training manager"
+      ],
+      "human_loop_sources": [
+        "pastoral care",
+        "fairness judgment",
+        "credential authority",
+        "social interaction"
+      ],
+      "industry_id": "education_training",
+      "readiness": "STAGED",
+      "scope": "Curriculum, tutoring, assessment, feedback, learning analytics and credentialing.",
+      "title": "Education and professional training",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "curriculum standards",
+        "student work",
+        "assessment rubrics",
+        "learning outcomes",
+        "credential records"
+      ]
+    },
+    {
+      "example_roles": [
+        "operations analyst",
+        "customer-support specialist",
+        "project coordinator",
+        "business analyst"
+      ],
+      "human_loop_sources": [
+        "stakeholder negotiation",
+        "policy exceptions",
+        "management authority"
+      ],
+      "industry_id": "enterprise_operations",
+      "readiness": "STAGED",
+      "scope": "Documents, customer support, procurement, scheduling, reporting, workflow execution and governance.",
+      "title": "Enterprise and administrative operations",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "case records",
+        "state changes",
+        "approvals",
+        "service-level metrics",
+        "audit logs"
+      ]
+    },
+    {
+      "example_roles": [
+        "mathematician",
+        "formalization engineer",
+        "theoretical computer scientist",
+        "algorithm researcher"
+      ],
+      "human_loop_sources": [
+        "problem taste",
+        "research direction",
+        "novelty judgment"
+      ],
+      "industry_id": "mathematics_tcs",
+      "readiness": "STAGED",
+      "scope": "Formal proof, theorem search, algorithm design, verification and executable mathematical artifacts.",
+      "title": "Mathematics and theoretical computer science",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "formal statements",
+        "proof terms",
+        "proof checker results",
+        "counterexamples",
+        "complexity certificates"
+      ]
+    },
+    {
+      "example_roles": [
+        "technical writer",
+        "designer",
+        "editor",
+        "product researcher"
+      ],
+      "human_loop_sources": [
+        "taste",
+        "brand authority",
+        "social context",
+        "rights clearance"
+      ],
+      "industry_id": "media_design",
+      "readiness": "STAGED",
+      "scope": "Research, writing, graphics, product design, editing, production and audience validation.",
+      "title": "Media, product and communication design",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V2_DIGITAL_TWIN",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "briefs",
+        "source assets",
+        "design files",
+        "review traces",
+        "audience tests"
+      ]
+    },
+    {
+      "example_roles": [
+        "policy analyst",
+        "case worker",
+        "program evaluator",
+        "public-service operations analyst"
+      ],
+      "human_loop_sources": [
+        "due process",
+        "public accountability",
+        "discretion",
+        "human rights"
+      ],
+      "industry_id": "public_administration",
+      "readiness": "STAGED",
+      "scope": "Case processing, evidence review, service delivery, policy analysis and accountable decisions.",
+      "title": "Public administration and policy operations",
+      "verifiability_levels": [
+        "V0_LOCAL_DETERMINISTIC",
+        "V1_COMPUTE_OR_REPLAY",
+        "V4_SOCIO_REGULATORY"
+      ],
+      "verification_assets": [
+        "statutory authority",
+        "case records",
+        "eligibility checks",
+        "decision logs",
+        "appeal records"
+      ]
+    }
+  ],
+  "mission": "Measure the frontier of verified agent replacement from bounded tasks to roles, teams, organizations and industry systems, while preserving explicit human-in-the-loop, verification, recovery, budget and safety boundaries.",
+  "principles": [
+    "Define a goal and executable criteria before execution.",
+    "The worker may propose completion, but only an independent verifier may close the goal.",
+    "If criteria are unmet, the system must continue, restart, replan or truthfully exhaust its budget.",
+    "Human-in-the-loop dependence is measured rather than hidden.",
+    "Locally verifiable work is separated from simulation, digital-twin, physical and socio-regulatory work.",
+    "Using an existing tool and reconstructing a compatible tool are distinct benchmark tracks.",
+    "Results are reported by task, workflow, role, team, organization and industry scope.",
+    "Materials multiscale work is the first active scientific vertical, not the boundary of the benchmark."
+  ],
+  "replacement_scopes": [
+    "TASK",
+    "WORKFLOW",
+    "ROLE",
+    "TEAM",
+    "ORGANIZATION",
+    "INDUSTRY"
+  ],
+  "schema": "tiai.agentbench.goal_driven_registry.v1",
+  "verifiability_levels": [
+    {
+      "definition": "Work can be executed and exhaustively or differentially checked on local compute, such as mathematics, compilers, parsers and deterministic software kernels.",
+      "id": "V0_LOCAL_DETERMINISTIC"
+    },
+    {
+      "definition": "Work is checked through scientific computation, frozen replay or bounded external solvers, such as DFT, CAE, EDA, ML training and multiscale simulation.",
+      "id": "V1_COMPUTE_OR_REPLAY"
+    },
+    {
+      "definition": "Work is verified in a stateful simulator or digital twin with trajectory and fault checks before physical deployment.",
+      "id": "V2_DIGITAL_TWIN"
+    },
+    {
+      "definition": "Work changes or measures the physical world and requires instrument, specimen, robot, calibration and safety receipts.",
+      "id": "V3_PHYSICAL_INSTRUMENT"
+    },
+    {
+      "definition": "Work depends materially on human judgment, consent, negotiation, law, policy, ethics or organizational authority and cannot be fully machine-certified.",
+      "id": "V4_SOCIO_REGULATORY"
+    }
+  ],
+  "version": "0.4.0-goal-driven"
+}

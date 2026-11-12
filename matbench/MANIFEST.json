@@ -57,13 +57,26 @@
     "split_integrity": 0.1,
     "state_condition_fidelity": 0.15
   },
+  "goal_driven_core": {
+    "alignment": "LIDANG_GOAL_DRIVEN_ALIGNMENT.md",
+    "claim_boundary": "Executable Goal/Criteria, persistence, human-loop and reconstruction evaluator fixtures; not real profession-replacement results.",
+    "data_kind": "SYNTHETIC_PROTOCOL_TEST",
+    "human_loop_runs": "examples/goal_human_loop_runs.jsonl",
+    "negative_runs": "examples/goal_negative_runs.jsonl",
+    "oracle_runs": "examples/goal_oracle_runs.jsonl",
+    "protocols": "goal_driven/protocols_v0.4.jsonl",
+    "reconstruction_fixture": "reconstruction/fea1d",
+    "registry": "GOAL_DRIVEN_REGISTRY.json",
+    "version": "0.4.0-goal-driven"
+  },
   "limitations": [
     "Public EvidenceCore references are visible and must not be used for headline leaderboard claims.",
-    "Only EvidenceCore is currently an executable public scientific pack; the v0.2 registry and 39 task specifications are an implementation roadmap.",
-    "Thermodynamics, DFT, MLIP/MD, mesoscale, continuum and multiscale suites require sanitized replay assets or authorized live compute before capability claims.",
-    "Laboratory robotics and physical closed-loop suites require certified digital twins or frozen physical hardware protocols.",
-    "The current scientific domain begins with titanium alloys and titanium-matrix composites, not a complete materials-science census.",
-    "The synthetic execution task validates the scorer contract and is reported separately from real released tasks."
+    "EvidenceCore is the only released real scientific task pack; v0.2-v0.4 architecture and synthetic fixtures validate the benchmark machinery, not profession replacement.",
+    "Thermodynamics, DFT, MLIP/MD, mesoscale, continuum and multiscale capability claims require sanitized replay assets or authorized live compute.",
+    "Laboratory robotics and physical closed-loop claims require certified digital twins or frozen supervised physical protocols.",
+    "Role, organization and industry replacement claims require representative hidden work, human baselines, repeated real agent runs and independent adjudication.",
+    "The current real scientific domain begins with titanium alloys and titanium-matrix composites, not a complete materials-science census.",
+    "Synthetic scorer/protocol fixtures are reported separately from real released tasks."
   ],
   "primary_metric": "macro_score_after_critical_gates",
   "primary_population": "REAL_RELEASED",
@@ -78,7 +91,7 @@
   },
   "release_commit": "1f16938c615e5bbed742dc59faf168117dcd12fe",
   "schema": "tiai.matbench.manifest.v1",
-  "scope_statement": "EvidenceCore is the currently executable public pack inside a twelve-suite full-stack materials-research benchmark architecture.",
+  "scope_statement": "EvidenceCore is the real public pack inside a cross-industry Goal-Driven benchmark federation; materials science is the first active full vertical.",
   "status": "PUBLIC_DEV_SET",
   "suite_registry": "SUITE_REGISTRY.json",
   "task_counts": {
@@ -88,5 +101,5 @@
   },
   "task_roadmap": "suites/roadmap_v0.2.jsonl",
   "umbrella_benchmark": "TiAI-AgentBench",
-  "umbrella_version": "0.3.0-protocol-core"
+  "umbrella_version": "0.4.0-goal-driven-core"
 }

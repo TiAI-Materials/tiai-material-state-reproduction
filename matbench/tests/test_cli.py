@@ -97,6 +97,69 @@ class CliTests(unittest.TestCase):
         self.assertEqual(report["metrics"]["VSS"], 1.0)
         self.assertEqual(report["metrics"]["WRC"], 1.0)
 
+    def test_validate_goal_driven_registry(self) -> None:
+        with redirect_stdout(StringIO()):
+            code = main([
+                "validate-goal-registry",
+                "--registry", str(ROOT / "GOAL_DRIVEN_REGISTRY.json"),
+            ])
+        self.assertEqual(code, 0)
+
+    def test_validate_goal_protocols(self) -> None:
+        with redirect_stdout(StringIO()):
+            code = main([
+                "validate-goal-protocols",
+                "--protocols", str(ROOT / "goal_driven" / "protocols_v0.4.jsonl"),
+                "--registry", str(ROOT / "GOAL_DRIVEN_REGISTRY.json"),
+                "--adapters", str(ROOT / "DOMAIN_ADAPTER_REGISTRY.json"),
+            ])
+        self.assertEqual(code, 0)
+
+    def test_score_goal_oracles(self) -> None:
+        output = StringIO()
+        with redirect_stdout(output):
+            code = main([
+                "score-goal-runs",
+                "--protocols", str(ROOT / "goal_driven" / "protocols_v0.4.jsonl"),
+                "--runs", str(ROOT / "examples" / "goal_oracle_runs.jsonl"),
+                "--require-gds", "1.0",
+                "--require-vwr", "1.0",
+                "--max-fcr", "0.0",
+            ])
+        self.assertEqual(code, 0)
+        report = json.loads(output.getvalue())
+        self.assertEqual(report["metrics"]["GDS"], 1.0)
+
+
+    def test_score_human_loop_fixture(self) -> None:
+        output = StringIO()
+        with redirect_stdout(output):
+            code = main([
+                "score-goal-runs",
+                "--protocols", str(ROOT / "goal_driven" / "protocols_v0.4.jsonl"),
+                "--runs", str(ROOT / "examples" / "goal_human_loop_runs.jsonl"),
+                "--require-gds", "1.0",
+                "--max-fcr", "0.0",
+            ])
+        self.assertEqual(code, 0)
+        report = json.loads(output.getvalue())
+        self.assertGreater(report["metrics"]["HLF"], 0.0)
+        self.assertLess(report["metrics"]["VWR"], 1.0)
+
+    def test_verify_reconstruction_cli(self) -> None:
+        output = StringIO()
+        with redirect_stdout(output):
+            code = main([
+                "verify-reconstruction",
+                "--task-dir", str(ROOT / "reconstruction" / "fea1d"),
+                "--submission", str(ROOT / "reconstruction" / "fea1d" / "oracle_solver.py"),
+                "--require-signoff",
+                "--min-pass-rate", "1.0",
+            ])
+        self.assertEqual(code, 0)
+        report = json.loads(output.getvalue())
+        self.assertTrue(report["functional_signoff"])
+
 
 if __name__ == "__main__":
     unittest.main()

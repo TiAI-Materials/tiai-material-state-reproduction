@@ -1,148 +1,133 @@
-# Cross-industry Agent Work Replacement Protocol
+# Cross-industry Goal-Driven work-replacement core
 
-## Scope
+## Purpose
 
-TiAI-AgentBench is not defined as a materials question-answering benchmark. Its reusable core
-asks a broader operational question:
+The universal core evaluates professional work independently of any one industry. It does not
+assume that every occupation is already replaceable. It defines a common contract for measuring
+which work units an agent completes, which remain human-led, whether the result is independently
+verified, and whether the system persists safely until its criteria are closed.
 
-> What verified fraction of a professional workflow did the agent actually execute, and what
-> scientific, operational, safety, resource or human-intervention conditions were required?
+Materials science is the first active vertical because it contains source work, scientific
+software, local computation, multiscale simulation, experiments, instruments and robotics in one
+connected domain.
 
-Materials science is the first full domain adapter. Chemistry, biology, manufacturing,
-software engineering, healthcare, energy and scientific robotics are represented as staged
-adapter contracts, not as completed public task packs.
-
-## Common work classes
-
-Every domain maps its work to a shared vocabulary:
-
-1. `GOAL_DEFINITION` — convert an objective into terminal states and constraints;
-2. `EVIDENCE` — acquire and bind sources, observations and prior results;
-3. `DATA` — curate, transform, validate and version data;
-4. `PLANNING` — select methods, tools, sequence and budgets;
-5. `SOFTWARE_EXECUTION` — deploy code, environments and services;
-6. `MODELING_SIMULATION` — execute mathematical, statistical or physical models;
-7. `EXPERIMENT_INSTRUMENT` — configure instruments and acquire measurements;
-8. `ROBOTIC_ACTION` — perform embodied manipulation or machine actions;
-9. `VERIFICATION_RECOVERY` — check outputs, diagnose faults, checkpoint and resume;
-10. `DECISION_OPTIMIZATION` — choose candidates, actions or operating points;
-11. `KNOWLEDGE_UPDATE` — revise models, memory and future decisions;
-12. `COMMUNICATION_GOVERNANCE` — produce auditable artifacts and respect approvals.
-
-A domain adapter supplies domain objects, tool families and fatal gates. For example,
-materials science adds material state, phase, structure, specimen, potential identity,
-solver convergence and cross-scale compatibility. Healthcare adds patient identity, consent,
-clinical scope and mandatory human approval. Manufacturing adds part revision, tolerance,
-machine capability and quality acceptance.
-
-## Work protocol
-
-A protocol declares:
-
-- domain adapter, suite, work horizon and autonomy target;
-- execution mode: evidence, sandbox code, replay, live compute, digital twin, physical lab or
-  expert review;
-- criticality-weighted work units and the corresponding human baseline time;
-- required artifacts and independent verifier gates for each work unit;
-- fatal, major and minor gate definitions;
-- time, compute, monetary, experimental and robot budgets;
-- required fault injections;
-- whether trajectory-level safety applies;
-- whether the task is real released, synthetic protocol testing or private hidden evaluation.
-
-The run record reports the actual performer (`AGENT`, `MIXED`, `HUMAN`), completion state,
-artifact SHA-256 identities, gate outcomes, interventions, faults, resources and safety steps.
-A missing work unit, artifact, gate, fault recovery or safety trace remains visible.
-
-## Implemented deterministic metrics
-
-The v0.3 protocol scorer computes a vector rather than hiding failure in one average:
-
-- `VSS` — verified scientific success after required work, fatal gates, budgets and safety;
-- `WRC` — criticality-weighted autonomous work replacement, reduced by mixed/human execution
-  and intervention severity;
-- `E2E_ASR` — run-level and aggregate end-to-end success rate;
-- `HIR` — normalized human-intervention severity;
-- `RRR` — recovery rate over required injected faults;
-- `RNU` — verified autonomous work multiplied by resource efficiency;
-- `SSR` — safe fraction of the recorded digital or physical trajectory.
-
-A run that claims success after a fatal scientific gate, unsafe trajectory or resource-budget
-violation receives `VSS = 0`. It can still expose partial work and failure details; negative
-results are not discarded.
-
-## Multiscale materials protocol
-
-The public protocol regression fixture represents the following chain:
+## Core objects
 
 ```text
-mission and material state
-→ source-bound evidence
-→ thermodynamic phase/quantity handoff
-→ converged DFT quantities and lineage
-→ MLIP admission
-→ finite-temperature MD
-→ continuum/experiment bridge
-→ bounded decision and next action
+GoalContract
+  objective + terminal states + non-goals + budgets + heartbeat/restart policy
+
+WorkGraph
+  criticality-weighted human work units + dependencies + baseline human time
+
+AgentEpisodes
+  worker/subagent identity + steps + checkpoints + inactivity/failure + resume lineage
+
+Criteria
+  required/optional + weight + verifier type + independence + required artifacts
+
+RunLedger
+  work results + artifact hashes + faults + interventions + resources + terminal status
 ```
 
-The scorer checks each handoff independently. A thermodynamic result cannot be passed to a
-mesoscale or mechanical model without quantity semantics, normalization, compatible state and
-uncertainty. DFT cannot justify MD without potential identity, training/test isolation,
-applicability-domain admission and trajectory stability. Individually valid calculations can
-still fail the cross-scale protocol.
+The worker's completion claim is an input to evaluation, not proof of completion.
 
-## Robotics protocol
+## Industry and profession federation
 
-Scientific robotics is a horizontal adapter because chemistry, biology, materials and
-manufacturing can all use embodied agents. The staged path is:
+`GOAL_DRIVEN_REGISTRY.json` stages 20 industry families and 80 representative roles. Every new
+vertical supplies:
+
+- work objects and stable identities;
+- tool and execution environments;
+- required artifacts;
+- fatal domain gates;
+- safety, legal and authorization constraints;
+- baseline human work units and time;
+- hidden task families and contamination groups.
+
+The core supports six replacement scopes: `TASK`, `WORKFLOW`, `ROLE`, `TEAM`, `ORGANIZATION` and
+`INDUSTRY`. Results may only be reported at a scope represented by the task pack.
+
+## Verifiability frontier
+
+The benchmark separates:
+
+- `V0_LOCAL_DETERMINISTIC`: compilers, formal systems, bounded algorithms and local test suites;
+- `V1_COMPUTE_OR_REPLAY`: scientific solvers, HPC and frozen computation replay;
+- `V2_DIGITAL_TWIN`: robots, instruments, manufacturing cells and other stateful simulators;
+- `V3_PHYSICAL_INSTRUMENT`: real equipment, specimens and embodied trajectories;
+- `V4_SOCIO_REGULATORY`: consent, negotiation, professional authority and regulation.
+
+This avoids turning a successful local test into an unsupported claim of physical or social
+replacement.
+
+## Human-loop accounting
+
+For work unit `i` with criticality `w_i`, performer credit is 1.0 for `AGENT`, 0.5 for `MIXED`
+and 0.0 for `HUMAN`, provided the attached criteria pass. Interventions add a disclosed penalty.
 
 ```text
-natural-language protocol
-→ typed action representation
-→ digital-twin execution
-→ supervised physical replay
-→ adaptive physical closed loop
+VWR = sum(w_i * verified_autonomy_credit_i) / sum(w_i)
+HLF = weighted human/mixed share + normalized intervention burden
+ARP = max(0, 1 - HLF)
 ```
 
-The protocol separates final-state success from trajectory safety. Sample identity,
-collision/clearance, force/torque, tilt/spill, contamination, instrument state, sensor receipts,
-safe abort and fault recovery are explicit gates. A robot that reaches the target after an
-unsafe step does not pass.
+`ARP` is an observed run metric, not a prediction that a whole occupation will disappear.
+A workflow may be scientifically successful with mandatory human authority and therefore have
+`GDS=1` but `VWR<1`.
 
-## Current executable fixtures
+## Persistence and false completion
 
-`protocols/protocols_v0.3.jsonl` contains three **synthetic protocol tests**:
+A Goal-Driven run records worker episodes. Failed or idle episodes require an identified
+successor. Required injected faults require recovery evidence. Required criteria must be
+independently verified. The following cause a false-completion failure:
 
-- materials multiscale evidence-to-decision replay;
-- scientific-robot digital-twin protocol execution;
-- software artifact deployment and recovery.
+- success claimed while required criteria remain open;
+- a final episode marked `CRITERIA_MET` when criteria are not met;
+- terminal `SUCCESS` after failed independent signoff;
+- untracked human repair presented as autonomous work.
 
-The oracle and negative runs validate the generalized scorer. They do not constitute real
-multiscale, robot or software capability results. Real task packs must replace synthetic
-artifacts with frozen replay assets, authorized live execution or certified physical hardware.
+## Tool-use and tool-reconstruction tracks
 
-## Domain adapter registry
+Operating a tool and replacing the tool are distinct:
 
-`DOMAIN_ADAPTER_REGISTRY.json` currently registers eight adapters:
+```text
+TOOL_USE:
+  typed input → admitted software → execution receipt → output verification
 
-- materials science;
-- chemistry;
-- biology and biotechnology;
-- manufacturing;
-- software engineering;
-- healthcare;
-- energy and climate technology;
-- scientific robotics.
+TOOL_RECONSTRUCTION:
+  frozen specification → implementation → build → differential/formal/physics tests
+  → compatibility signoff
+```
 
-The registry is intentionally extensible. Adding an industry means mapping its objects, tools,
-work classes, approvals and fatal gates to the same work protocol; it does not mean forcing
-all fields or safety rules to be identical across industries.
+The reconstruction track is necessary for evaluating specification-driven reimplementation of
+CAD, EDA, CAE, control/signal and scientific software without confusing a toy demo with product
+compatibility.
+
+## v0.4 executable fixtures
+
+Four protocols are included as `SYNTHETIC_PROTOCOL_TEST`:
+
+1. a role-level materials multiscale evidence-to-decision campaign;
+2. a specification-driven 1D finite-element solver reconstruction;
+3. a scientific-robot digital-twin workflow with trajectory and recovery criteria;
+4. a healthcare decision-support workflow that deliberately retains licensed human authority.
+
+The first three test high-verifiability replacement. The fourth tests whether the scorer can
+represent successful assistance without falsely claiming full replacement.
+
+## Metrics
+
+Goal-Driven Core reports:
+
+`GDS`, `GA`, `CCR`, `VWR`, `HLF`, `ARP`, `PI`, `CRR`, `FRR`, `FCR`, `FSR`,
+`HOURS_REPLACED`, and `RNU`.
+
+ProtocolCore v0.3 remains available with `VSS`, `WRC`, `E2E_ASR`, `HIR`, `RRR`, `RNU`, and
+`SSR` for backward compatibility.
 
 ## Claim boundary
 
-The executable cross-industry protocol and scorer demonstrate that multiscale simulation,
-robotics and other professional work can be evaluated by one common contract. They do not
-show that every industry adapter already has expert-adjudicated tasks or physical environments.
-Each adapter retains a readiness state, and leaderboard claims must report the exact domain,
-execution mode, horizon, autonomy level and hardware/software contract.
+The universal schema can represent every industry; it does not mean every industry pack has
+been built. Only adapters backed by real tasks, human baselines, hidden criteria, executable
+artifacts and independent adjudication may support capability claims.
