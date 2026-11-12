@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from .adapters import validate_adapter_registry
 from .grader import grade_submission, verify_assets
 from .io import BenchmarkFormatError, read_json, read_jsonl, write_json
 from .schema import (
@@ -17,7 +18,8 @@ from .schema import (
     validate_reference,
     validate_task,
 )
-from .suites import suite_rows, validate_task_roadmap
+from .suites import suite_rows, validate_suite_registry, validate_task_roadmap
+from .work_replacement import aggregate_runs, index_protocols
 
 
 def _load_bundle(args: argparse.Namespace) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
@@ -178,6 +180,103 @@ def command_list_suites(args: argparse.Namespace) -> int:
     return 0
 
 
+
+def command_validate_adapters(args: argparse.Namespace) -> int:
+    registry = read_json(args.adapters)
+    result = validate_adapter_registry(registry)
+    report = {
+        "schema": "tiai.agentbench.adapter_validation.v1",
+        "status": "PASSED",
+        "adapter_count": result["adapter_count"],
+        "adapter_ids": sorted(result["adapters"]),
+        "core_work_classes": sorted(result["core_work_classes"]),
+    }
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    return 0
+
+
+def command_validate_protocols(args: argparse.Namespace) -> int:
+    protocols = read_jsonl(args.protocols)
+    adapters = validate_adapter_registry(read_json(args.adapters))
+    suites = validate_suite_registry(read_json(args.suites))["suites"]
+    protocol_index = index_protocols(protocols)
+    unknown_adapters = sorted(
+        {protocol["domain_adapter"] for protocol in protocols} - set(adapters["adapters"])
+    )
+    unknown_suites = sorted(
+        {protocol["suite_id"] for protocol in protocols} - set(suites)
+    )
+    if unknown_adapters:
+        raise ValidationError(
+            f"protocols reference unknown domain adapters: {unknown_adapters}"
+        )
+    if unknown_suites:
+        raise ValidationError(f"protocols reference unknown suites: {unknown_suites}")
+    report = {
+        "schema": "tiai.agentbench.protocol_validation.v1",
+        "status": "PASSED",
+        "protocol_count": len(protocol_index),
+        "protocol_ids": sorted(protocol_index),
+        "domains": sorted({protocol["domain_adapter"] for protocol in protocols}),
+        "suites": sorted({protocol["suite_id"] for protocol in protocols}),
+        "data_kinds": dict(
+            sorted(
+                {
+                    kind: sum(protocol["data_kind"] == kind for protocol in protocols)
+                    for kind in {protocol["data_kind"] for protocol in protocols}
+                }.items()
+            )
+        ),
+    }
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    return 0
+
+
+def command_score_work_runs(args: argparse.Namespace) -> int:
+    protocols = read_jsonl(args.protocols)
+    runs = read_jsonl(args.runs)
+    report = aggregate_runs(protocols, runs)
+    if args.output:
+        write_json(args.output, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+    if args.require_vss is not None:
+        observed = report["metrics"]["VSS"]
+        if observed is None or observed + 1e-12 < args.require_vss:
+            return 1
+    if args.require_wrc is not None:
+        observed = report["metrics"]["WRC"]
+        if observed is None or observed + 1e-12 < args.require_wrc:
+            return 1
+    return 0
+
+
+def command_list_adapters(args: argparse.Namespace) -> int:
+    result = validate_adapter_registry(read_json(args.adapters))
+    rows = []
+    for adapter_id, adapter in sorted(result["adapters"].items()):
+        rows.append(
+            {
+                "adapter_id": adapter_id,
+                "title": adapter["title"],
+                "readiness": adapter["readiness"],
+                "work_classes": adapter["work_classes"],
+                "tool_families": adapter["tool_families"],
+            }
+        )
+    if args.json:
+        print(json.dumps(rows, ensure_ascii=False, indent=2, sort_keys=True))
+    else:
+        for row in rows:
+            print(
+                f"{row['adapter_id']}\t{row['readiness']}\t{row['title']}\t"
+                f"work_classes={len(row['work_classes'])}\ttools={len(row['tool_families'])}"
+            )
+    return 0
+
 def _common_bundle_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--tasks", required=True, help="task JSONL path")
     parser.add_argument("--references", required=True, help="reference JSONL path")
@@ -230,6 +329,44 @@ def build_parser() -> argparse.ArgumentParser:
     suites.add_argument("--registry", required=True)
     suites.add_argument("--json", action="store_true")
     suites.set_defaults(func=command_list_suites)
+
+
+    adapters = subparsers.add_parser(
+        "validate-adapters",
+        help="validate the cross-industry domain-adapter registry",
+    )
+    adapters.add_argument("--adapters", required=True)
+    adapters.add_argument("--output")
+    adapters.set_defaults(func=command_validate_adapters)
+
+    list_adapters = subparsers.add_parser(
+        "list-adapters",
+        help="list cross-industry adapters and their readiness states",
+    )
+    list_adapters.add_argument("--adapters", required=True)
+    list_adapters.add_argument("--json", action="store_true")
+    list_adapters.set_defaults(func=command_list_adapters)
+
+    protocols = subparsers.add_parser(
+        "validate-protocols",
+        help="validate domain-independent work protocols against adapter and suite registries",
+    )
+    protocols.add_argument("--protocols", required=True)
+    protocols.add_argument("--adapters", required=True)
+    protocols.add_argument("--suites", required=True)
+    protocols.add_argument("--output")
+    protocols.set_defaults(func=command_validate_protocols)
+
+    score_runs = subparsers.add_parser(
+        "score-work-runs",
+        help="score executed work with VSS, WRC, E2E_ASR, HIR, RRR, RNU and SSR",
+    )
+    score_runs.add_argument("--protocols", required=True)
+    score_runs.add_argument("--runs", required=True)
+    score_runs.add_argument("--output")
+    score_runs.add_argument("--require-vss", type=float)
+    score_runs.add_argument("--require-wrc", type=float)
+    score_runs.set_defaults(func=command_score_work_runs)
     return parser
 
 

@@ -37,6 +37,39 @@ jobs:
             --registry matbench/SUITE_REGISTRY.json \
             --roadmap matbench/suites/roadmap_v0.2.jsonl \
             --output suite_registry_report.json
+      - name: Validate cross-industry domain adapters
+        run: |
+          python -m tiai_matbench validate-adapters \
+            --adapters matbench/DOMAIN_ADAPTER_REGISTRY.json \
+            --output domain_adapter_report.json
+      - name: Validate work-replacement protocols
+        run: |
+          python -m tiai_matbench validate-protocols \
+            --protocols matbench/protocols/protocols_v0.3.jsonl \
+            --adapters matbench/DOMAIN_ADAPTER_REGISTRY.json \
+            --suites matbench/SUITE_REGISTRY.json \
+            --output work_protocol_validation.json
+      - name: Work-replacement oracle regression
+        run: |
+          python -m tiai_matbench score-work-runs \
+            --protocols matbench/protocols/protocols_v0.3.jsonl \
+            --runs matbench/examples/protocol_oracle_runs.jsonl \
+            --output protocol_oracle_report.json \
+            --require-vss 1.0 \
+            --require-wrc 1.0
+      - name: Work-replacement adversarial regression
+        run: |
+          python -m tiai_matbench score-work-runs \
+            --protocols matbench/protocols/protocols_v0.3.jsonl \
+            --runs matbench/examples/protocol_negative_runs.jsonl \
+            --output protocol_negative_report.json
+          python - <<'PYCODE'
+          import json
+          report = json.load(open("protocol_negative_report.json", encoding="utf-8"))
+          assert report["metrics"]["VSS"] == 0.0
+          assert "FALSE_SUCCESS_CLAIM" in report["violation_counts"]
+          assert "UNSAFE_TRAJECTORY" in report["violation_counts"]
+          PYCODE
       - name: Validate task and reference bundle
         run: |
           python -m tiai_matbench validate \

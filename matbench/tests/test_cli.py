@@ -64,6 +64,39 @@ class CliTests(unittest.TestCase):
         self.assertEqual(len(rows), 12)
         self.assertEqual(rows[0]["suite_id"], "S00_EVIDENCE")
 
+    def test_validate_cross_industry_adapters(self) -> None:
+        with redirect_stdout(StringIO()):
+            code = main([
+                "validate-adapters",
+                "--adapters", str(ROOT / "DOMAIN_ADAPTER_REGISTRY.json"),
+            ])
+        self.assertEqual(code, 0)
+
+    def test_validate_work_protocols(self) -> None:
+        with redirect_stdout(StringIO()):
+            code = main([
+                "validate-protocols",
+                "--protocols", str(ROOT / "protocols" / "protocols_v0.3.jsonl"),
+                "--adapters", str(ROOT / "DOMAIN_ADAPTER_REGISTRY.json"),
+                "--suites", str(ROOT / "SUITE_REGISTRY.json"),
+            ])
+        self.assertEqual(code, 0)
+
+    def test_score_work_run_oracles(self) -> None:
+        output = StringIO()
+        with redirect_stdout(output):
+            code = main([
+                "score-work-runs",
+                "--protocols", str(ROOT / "protocols" / "protocols_v0.3.jsonl"),
+                "--runs", str(ROOT / "examples" / "protocol_oracle_runs.jsonl"),
+                "--require-vss", "1.0",
+                "--require-wrc", "1.0",
+            ])
+        self.assertEqual(code, 0)
+        report = json.loads(output.getvalue())
+        self.assertEqual(report["metrics"]["VSS"], 1.0)
+        self.assertEqual(report["metrics"]["WRC"], 1.0)
+
 
 if __name__ == "__main__":
     unittest.main()

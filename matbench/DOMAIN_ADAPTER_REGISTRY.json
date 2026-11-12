@@ -1,0 +1,397 @@
+{
+  "adapters": [
+    {
+      "adapter_id": "materials_science",
+      "critical_gates": [
+        "material_and_state_identity",
+        "source_and_sample_lineage",
+        "solver_convergence",
+        "model_admission",
+        "unit_and_normalization",
+        "cross_scale_compatibility",
+        "instrument_calibration",
+        "claim_scope"
+      ],
+      "domain_objects": [
+        "material_state",
+        "composition",
+        "phase",
+        "structure",
+        "microstructure",
+        "specimen",
+        "test_condition",
+        "instrument",
+        "simulation",
+        "candidate",
+        "claim"
+      ],
+      "readiness": "MATERIALS_ACTIVE",
+      "scope": "Evidence, thermodynamics, atomistics, MLIP/MD, mesoscale, continuum, multiscale, experiments and materials laboratories.",
+      "title": "Materials science and engineering",
+      "tool_families": [
+        "literature_and_data",
+        "CALPHAD",
+        "DFT",
+        "MLIP_MD",
+        "phase_field_CA",
+        "CPFEM_RVE_FEM",
+        "DIC_EBSD_microscopy",
+        "laboratory_automation"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "MODELING_SIMULATION",
+        "EXPERIMENT_INSTRUMENT",
+        "ROBOTIC_ACTION",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "chemistry",
+      "critical_gates": [
+        "chemical_identity",
+        "stoichiometry",
+        "hazard_and_compatibility",
+        "instrument_calibration",
+        "mass_balance",
+        "protocol_order",
+        "claim_scope"
+      ],
+      "domain_objects": [
+        "molecule",
+        "reaction",
+        "reagent",
+        "batch",
+        "vessel",
+        "protocol",
+        "spectrum",
+        "yield",
+        "hazard"
+      ],
+      "readiness": "REQUIRES_DOMAIN_PARTNER",
+      "scope": "Molecular design, reaction planning, analytical characterization and autonomous synthesis.",
+      "title": "Chemistry and molecular synthesis",
+      "tool_families": [
+        "literature_and_reaction_databases",
+        "cheminformatics",
+        "quantum_chemistry",
+        "reaction_optimization",
+        "analytical_instruments",
+        "liquid_handling"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "MODELING_SIMULATION",
+        "EXPERIMENT_INSTRUMENT",
+        "ROBOTIC_ACTION",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "biology_biotechnology",
+      "critical_gates": [
+        "sample_lineage",
+        "contamination_control",
+        "biosafety",
+        "assay_validity",
+        "replicate_structure",
+        "data_leakage",
+        "claim_scope"
+      ],
+      "domain_objects": [
+        "sequence",
+        "construct",
+        "sample",
+        "cell_line",
+        "assay",
+        "plate",
+        "protocol",
+        "measurement",
+        "biosafety_class"
+      ],
+      "readiness": "REQUIRES_DOMAIN_PARTNER",
+      "scope": "Sequence, assay, cell, protein and experimental-design workflows with biosafety and sample lineage.",
+      "title": "Biology and biotechnology",
+      "tool_families": [
+        "bioinformatics",
+        "structure_prediction",
+        "assay_analysis",
+        "laboratory_information_systems",
+        "liquid_handling",
+        "imaging"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "MODELING_SIMULATION",
+        "EXPERIMENT_INSTRUMENT",
+        "ROBOTIC_ACTION",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "manufacturing",
+      "critical_gates": [
+        "part_revision",
+        "machine_capability",
+        "tolerance",
+        "process_safety",
+        "traceability",
+        "quality_acceptance",
+        "authorization"
+      ],
+      "domain_objects": [
+        "part",
+        "drawing",
+        "process_plan",
+        "machine",
+        "tool",
+        "batch",
+        "sensor_trace",
+        "inspection_record",
+        "nonconformance"
+      ],
+      "readiness": "REQUIRES_DOMAIN_PARTNER",
+      "scope": "Design, process planning, machine execution, quality control, maintenance and production optimization.",
+      "title": "Manufacturing and industrial process engineering",
+      "tool_families": [
+        "CAD_CAM",
+        "digital_twin",
+        "process_simulation",
+        "machine_control",
+        "computer_vision",
+        "quality_management"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "MODELING_SIMULATION",
+        "EXPERIMENT_INSTRUMENT",
+        "ROBOTIC_ACTION",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "software_engineering",
+      "critical_gates": [
+        "repository_and_revision_identity",
+        "test_target",
+        "security_and_permissions",
+        "build_reproducibility",
+        "deployment_health",
+        "rollback_and_recovery"
+      ],
+      "domain_objects": [
+        "repository",
+        "issue",
+        "commit",
+        "test",
+        "build",
+        "deployment",
+        "service",
+        "incident",
+        "artifact"
+      ],
+      "readiness": "EXTERNAL_CALIBRATION",
+      "scope": "Issue resolution, code change, testing, deployment, monitoring and incident recovery.",
+      "title": "Software engineering and operations",
+      "tool_families": [
+        "version_control",
+        "code_execution",
+        "CI_CD",
+        "containerization",
+        "observability",
+        "incident_management"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "healthcare",
+      "critical_gates": [
+        "patient_identity",
+        "privacy_and_consent",
+        "clinical_scope",
+        "human_approval",
+        "regulatory_compliance",
+        "uncertainty_and_escalation"
+      ],
+      "domain_objects": [
+        "patient_record",
+        "observation",
+        "test",
+        "intervention",
+        "guideline",
+        "consent",
+        "clinician_decision",
+        "audit_event"
+      ],
+      "readiness": "REQUIRES_REGULATORY_GOVERNANCE",
+      "scope": "Evidence synthesis, workflow support, measurement, triage and decision assistance under mandatory human and regulatory governance.",
+      "title": "Healthcare and clinical operations",
+      "tool_families": [
+        "clinical_information_systems",
+        "medical_literature",
+        "decision_support",
+        "medical_imaging",
+        "laboratory_systems"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "EXPERIMENT_INSTRUMENT",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "energy_climate",
+      "critical_gates": [
+        "scenario_identity",
+        "temporal_split",
+        "physical_constraints",
+        "uncertainty",
+        "operational_safety",
+        "emissions_accounting"
+      ],
+      "domain_objects": [
+        "asset",
+        "site",
+        "scenario",
+        "forecast",
+        "dispatch",
+        "experiment",
+        "sensor_trace",
+        "emissions_record",
+        "decision"
+      ],
+      "readiness": "DESIGN_ONLY",
+      "scope": "Modeling, forecasting, operations, experiment planning and infrastructure decision support.",
+      "title": "Energy systems and climate technology",
+      "tool_families": [
+        "simulation",
+        "optimization",
+        "forecasting",
+        "geospatial_analysis",
+        "sensor_systems",
+        "control_systems"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "EVIDENCE",
+        "DATA",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "MODELING_SIMULATION",
+        "EXPERIMENT_INSTRUMENT",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    },
+    {
+      "adapter_id": "scientific_robotics",
+      "critical_gates": [
+        "protocol_semantics",
+        "sample_identity",
+        "collision_force_tilt_limits",
+        "contamination_control",
+        "instrument_state",
+        "trajectory_safety",
+        "sim_to_real_accounting"
+      ],
+      "domain_objects": [
+        "protocol",
+        "robot",
+        "instrument",
+        "workspace",
+        "sample",
+        "container",
+        "trajectory",
+        "sensor_event",
+        "safety_event"
+      ],
+      "readiness": "REQUIRES_DOMAIN_PARTNER",
+      "scope": "Protocol compilation, digital twins, instrument manipulation, physical execution and trajectory-level safety across scientific domains.",
+      "title": "Scientific robotics and embodied laboratory work",
+      "tool_families": [
+        "protocol_compilers",
+        "robot_control",
+        "digital_twins",
+        "perception",
+        "instrument_APIs",
+        "safety_monitors"
+      ],
+      "work_classes": [
+        "GOAL_DEFINITION",
+        "PLANNING",
+        "SOFTWARE_EXECUTION",
+        "EXPERIMENT_INSTRUMENT",
+        "ROBOTIC_ACTION",
+        "VERIFICATION_RECOVERY",
+        "DECISION_OPTIMIZATION",
+        "KNOWLEDGE_UPDATE",
+        "COMMUNICATION_GOVERNANCE"
+      ]
+    }
+  ],
+  "benchmark": "TiAI-AgentBench",
+  "core_protocol": "work-replacement-v1",
+  "core_work_classes": [
+    "GOAL_DEFINITION",
+    "EVIDENCE",
+    "DATA",
+    "PLANNING",
+    "SOFTWARE_EXECUTION",
+    "MODELING_SIMULATION",
+    "EXPERIMENT_INSTRUMENT",
+    "ROBOTIC_ACTION",
+    "VERIFICATION_RECOVERY",
+    "DECISION_OPTIMIZATION",
+    "KNOWLEDGE_UPDATE",
+    "COMMUNICATION_GOVERNANCE"
+  ],
+  "schema": "tiai.agentbench.domain_adapter_registry.v1",
+  "version": "0.3.0-dev"
+}

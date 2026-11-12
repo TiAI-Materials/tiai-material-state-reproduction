@@ -67,6 +67,15 @@
   ],
   "primary_metric": "macro_score_after_critical_gates",
   "primary_population": "REAL_RELEASED",
+  "protocol_core": {
+    "claim_boundary": "Executable evaluator regression fixtures; not real domain capability results.",
+    "data_kind": "SYNTHETIC_PROTOCOL_TEST",
+    "domain_adapters": "DOMAIN_ADAPTER_REGISTRY.json",
+    "negative_runs": "examples/protocol_negative_runs.jsonl",
+    "oracle_runs": "examples/protocol_oracle_runs.jsonl",
+    "protocols": "protocols/protocols_v0.3.jsonl",
+    "version": "0.3.0-dev"
+  },
   "release_commit": "1f16938c615e5bbed742dc59faf168117dcd12fe",
   "schema": "tiai.matbench.manifest.v1",
   "scope_statement": "EvidenceCore is the currently executable public pack inside a twelve-suite full-stack materials-research benchmark architecture.",
@@ -79,5 +88,5 @@
   },
   "task_roadmap": "suites/roadmap_v0.2.jsonl",
   "umbrella_benchmark": "TiAI-AgentBench",
-  "umbrella_version": "0.2.0-architecture"
+  "umbrella_version": "0.3.0-protocol-core"
 }
