@@ -20,7 +20,12 @@ PARTS = (
     "part04b3.txt",
     "part04b4.txt",
     "part04b5.txt",
-    "part04b6.txt",
+    "part04b6a.txt",
+    "part04b6b.txt",
+    "part04b6c.txt",
+    "part04b6d.txt",
+    "part04b6e.txt",
+    "part04b6f.txt",
     "part05.txt",
 )
 
@@ -32,7 +37,9 @@ def main() -> None:
         (payload_dir / name).read_text(encoding="utf-8").strip()
         for name in PARTS
     )
-    compressed = base64.b64decode(encoded)
+    if len(encoded) % 4:
+        raise SystemExit(f"payload Base64 length is not divisible by 4: {len(encoded)}")
+    compressed = base64.b64decode(encoded, validate=True)
     observed = hashlib.sha256(compressed).hexdigest()
     if observed != PAYLOAD_SHA256:
         raise SystemExit(f"payload SHA-256 mismatch: {observed}")
