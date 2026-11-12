@@ -10,6 +10,7 @@ from pathlib import Path
 
 PAYLOAD_SHA256 = "d51047295cf3aefb3db80f6b928c8f32c17664cc6ad1dfbf2d0452a7814b7eba"
 EXPECTED_FILES = 25
+SKIPPED_PATHS = {".github/workflows/matbench.yml"}
 PARTS = (
     "part01.txt",
     "part02.txt",
@@ -58,16 +59,21 @@ def main() -> None:
     files = json.loads(gzip.decompress(compressed).decode("utf-8"))
     if len(files) != EXPECTED_FILES:
         raise SystemExit(f"payload file count mismatch: {len(files)}")
+
+    applied = 0
     for relative, content in files.items():
+        if relative in SKIPPED_PATHS:
+            continue
         target = (root / relative).resolve()
         if root != target and root not in target.parents:
             raise SystemExit(f"unsafe payload path: {relative}")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content, encoding="utf-8")
+        applied += 1
 
     shutil.rmtree(payload_dir)
     (root / "matbench" / "tools" / "apply_goal_driven_v04.py").unlink()
-    print(f"applied {len(files)} Goal-Driven Core v0.4 files")
+    print(f"applied {applied} Goal-Driven Core v0.4 files; skipped workflow mutation")
 
 
 if __name__ == "__main__":
