@@ -67,7 +67,6 @@ def main() -> None:
 
     shutil.rmtree(payload_dir)
     (root / "matbench" / "tools" / "apply_goal_driven_v04.py").unlink()
-    (root / ".github" / "workflows" / "apply_goal_driven_v04.yml").unlink()
     print(f"applied {len(files)} Goal-Driven Core v0.4 files")
 
 
