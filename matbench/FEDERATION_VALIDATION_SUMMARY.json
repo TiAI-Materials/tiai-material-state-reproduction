@@ -1,0 +1,76 @@
+{
+  "anchor_count": 12,
+  "claim_boundary": "Three native result schemas are executable adapters; remaining anchors are catalog or gap states, not completed benchmark runs.",
+  "example_reports": {
+    "calvin": {
+      "evidence_gaps": [
+        "COST_NOT_REPORTED",
+        "FALSE_COMPLETION_NOT_REPORTED",
+        "HUMAN_INTERVENTION_NOT_REPORTED",
+        "INFRASTRUCTURE_FAILURES_NOT_REPORTED",
+        "TRAJECTORY_SAFETY_NOT_REPORTED"
+      ],
+      "metrics": {
+        "execution_coverage": null,
+        "false_completion_rate": null,
+        "five_instruction_chain_success": 0.5,
+        "human_loop_fraction": null,
+        "infrastructure_reliability": null,
+        "long_horizon_depth": 0.6,
+        "native_verified_success": 0.8,
+        "resource_normalized_utility": null,
+        "trajectory_safety": null
+      },
+      "task_count": 10
+    },
+    "osworld": {
+      "evidence_gaps": [
+        "COST_NOT_REPORTED",
+        "FALSE_COMPLETION_NOT_REPORTED",
+        "HUMAN_INTERVENTION_NOT_REPORTED",
+        "TRAJECTORY_SAFETY_NOT_REPORTED"
+      ],
+      "metrics": {
+        "execution_coverage": 0.5,
+        "false_completion_rate": null,
+        "human_loop_fraction": null,
+        "infrastructure_reliability": 0.5,
+        "long_horizon_depth": null,
+        "native_verified_success": 0.5,
+        "resource_normalized_utility": null,
+        "trajectory_safety": null
+      },
+      "task_count": 2
+    },
+    "swe_bench": {
+      "evidence_gaps": [
+        "COST_NOT_REPORTED",
+        "FALSE_COMPLETION_NOT_REPORTED",
+        "HUMAN_INTERVENTION_NOT_REPORTED",
+        "TRAJECTORY_SAFETY_NOT_REPORTED"
+      ],
+      "metrics": {
+        "execution_coverage": 0.75,
+        "false_completion_rate": null,
+        "human_loop_fraction": null,
+        "infrastructure_reliability": 0.75,
+        "long_horizon_depth": null,
+        "native_verified_success": 0.25,
+        "resource_normalized_utility": null,
+        "trajectory_safety": null
+      },
+      "task_count": 4
+    }
+  },
+  "executable_anchor_count": 3,
+  "industry_count": 20,
+  "resource_use": {
+    "a100_gpu_hours": 0.0,
+    "mother_machine_heavy_compute": false,
+    "pc128_scientific_core_hours": 0.0
+  },
+  "schema": "tiai.agentbench.federation_validation.v1",
+  "status": "PASS",
+  "unit_tests": 8,
+  "version": "0.6"
+}
