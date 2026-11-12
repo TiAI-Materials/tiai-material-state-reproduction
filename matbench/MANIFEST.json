@@ -1,0 +1,68 @@
+{
+  "assets": [
+    {
+      "asset": "代码/文献抽取评分协议.py",
+      "git_blob_sha": "cf5e04da65c43a345b355bc4dd56b6ce4690dc47"
+    },
+    {
+      "asset": "数据/数值复现结果.json",
+      "git_blob_sha": "b69588db6ee51b56439b3492faddf9f9367d745e"
+    },
+    {
+      "asset": "数据/科研抽取任务与提示.jsonl",
+      "git_blob_sha": "24d9ce14c16af56a189504223409ee9af75ef7cc"
+    },
+    {
+      "asset": "数据/选择候选来源资格.json",
+      "git_blob_sha": "4c5a1013ccaa61abc0655f01b88d94a0ac1d8763"
+    },
+    {
+      "asset": "说明/数据字典.md",
+      "git_blob_sha": "bb6cb15388e2bc735ff7fccb944781153291415b"
+    }
+  ],
+  "benchmark": "TiAI-MatBench",
+  "benchmark_version": "0.1.0-dev",
+  "critical_gate_policy": {
+    "caps": {
+      "POOLED_WITHIN_DIRECTION_ERROR": 0.4,
+      "REQUIRED_EVIDENCE_MISSING": 0.4,
+      "STATE_CONDITION_CONFUSION": 0.25,
+      "TOOL_EXECUTION_FAILURE": 0.5
+    },
+    "zero_score": [
+      "UNREGISTERED_EVIDENCE_ASSET",
+      "EVIDENCE_IDENTITY_MISMATCH",
+      "EVIDENCE_LOCATOR_OUT_OF_SCOPE",
+      "STATE_CONDITION_MIXING",
+      "SOURCE_LEAKAGE_ALLOWED",
+      "WRONG_SPLIT_UNIT",
+      "UNSUPPORTED_CAUSAL_CLAIM",
+      "FABRICATED_EVIDENCE_ALLOWED",
+      "OUT_OF_SCOPE_ANSWER",
+      "UNSUPPORTED_PROSPECTIVE_ESTIMATE"
+    ]
+  },
+  "dimension_weights": {
+    "claim_calibration": 0.15,
+    "evidence_fidelity": 0.25,
+    "execution_integrity": 0.05,
+    "outcome_correctness": 0.3,
+    "split_integrity": 0.1,
+    "state_condition_fidelity": 0.15
+  },
+  "limitations": [
+    "Public development references are visible and must not be used for headline leaderboard claims.",
+    "The current tasks are titanium-alloy evidence and analysis tasks, not a complete materials-science domain census.",
+    "The synthetic execution task validates the scorer contract and is reported separately from real released tasks."
+  ],
+  "primary_metric": "macro_score_after_critical_gates",
+  "release_commit": "1f16938c615e5bbed742dc59faf168117dcd12fe",
+  "schema": "tiai.matbench.manifest.v1",
+  "status": "PUBLIC_DEV_SET",
+  "task_counts": {
+    "real_released": 7,
+    "synthetic_scorer_test": 1,
+    "total": 8
+  }
+}

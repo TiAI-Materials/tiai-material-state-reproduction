@@ -1,0 +1,53 @@
+name: TiAI-MatBench
+
+on:
+  pull_request:
+    paths:
+      - "matbench/**"
+      - ".github/workflows/matbench.yml"
+  push:
+    paths:
+      - "matbench/**"
+      - ".github/workflows/matbench.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-benchmark:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install benchmark package
+        run: python -m pip install --no-deps --no-build-isolation -e ./matbench
+      - name: Unit tests
+        run: python -m unittest discover -s matbench/tests -v
+      - name: Validate task and reference bundle
+        run: |
+          tiai-matbench validate \
+            --tasks matbench/tasks/dev.jsonl \
+            --references matbench/references/dev.jsonl \
+            --manifest matbench/MANIFEST.json
+      - name: Verify frozen source assets
+        run: |
+          tiai-matbench verify-assets \
+            --tasks matbench/tasks/dev.jsonl \
+            --references matbench/references/dev.jsonl \
+            --manifest matbench/MANIFEST.json \
+            --repository-root . \
+            --output matbench_asset_report.json
+      - name: Oracle regression
+        run: |
+          tiai-matbench grade \
+            --tasks matbench/tasks/dev.jsonl \
+            --references matbench/references/dev.jsonl \
+            --manifest matbench/MANIFEST.json \
+            --submission matbench/examples/oracle_submission.jsonl \
+            --output oracle_score_report.json \
+            --min-score 1.0
