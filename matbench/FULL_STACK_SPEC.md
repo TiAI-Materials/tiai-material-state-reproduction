@@ -8,7 +8,7 @@ boundary. The common protocol measures executed work, independent verification, 
 recovery, cost and safety. Each industry supplies its own objects, tools, approvals and fatal
 gates. See `CROSS_INDUSTRY_CORE.md` and `DOMAIN_ADAPTER_REGISTRY.json`.
 
-The public v0.3 ProtocolCore provides deterministic schema validation and metric computation.
+The public v0.3 ProtocolCore provides deterministic work-unit validation, while v0.4 adds explicit Goal/Criteria control, persistent episodes, human-loop measurement and specification-driven reconstruction.
 Its bundled materials-multiscale, robot-digital-twin and software-deployment runs are synthetic
 regression fixtures. Real capability claims require expert-adjudicated task assets and the
 declared replay, live-compute, digital-twin or physical environment.
@@ -345,3 +345,15 @@ All new benchmark tasks must enter through a task contract containing:
 
 This prevents the benchmark from becoming an unstructured list of questions and allows it to
 measure gradual replacement of real professional work.
+
+
+## 11. Goal-Driven v0.4 mapping
+
+The 12 materials suites are instantiated as a role-level Goal-Driven work graph rather than an
+unordered checklist. The current synthetic fixture requires mission identity, evidence,
+thermodynamics, DFT, MLIP, MD, mesoscale, continuum, experiment and decision units. Each unit
+closes one or more independent criteria and preserves a cross-scale lineage contract.
+
+A materials role-replacement claim additionally requires representative hidden cases, real
+agent runs, repeated trials, human baseline time and at least one adversarial fault family per
+major solver or experimental handoff.

@@ -1,235 +1,229 @@
-# TiAI-AgentBench benchmark card — v0.2 architecture and EvidenceCore v0.1
+# TiAI-AgentBench benchmark card — Goal-Driven Core v0.4
 
 ## Intended use
 
-TiAI-AgentBench evaluates whether an AI agent can replace verified units of professional
-materials-research work. The unit of evaluation is an **agent run with artifacts and an
-execution trajectory**, not a conversational impression.
+TiAI-AgentBench evaluates whether an AI agent can replace **verified units of professional
+work**, from one local task to a workflow, role, team, organization or industry. The unit of
+evaluation is an agent run with a goal contract, work graph, execution trajectory, artifacts,
+independent criteria, faults, interventions and resource receipts—not a conversational
+impression.
 
-The umbrella benchmark covers the full research lifecycle:
+Materials science is the first active full vertical. It is not the benchmark's final boundary.
+The same core protocol is designed for chemistry, biotechnology, software, EDA, CAD and
+construction, CAE, controls and electrical engineering, robotics, manufacturing, healthcare,
+finance, legal work, logistics, energy, education, enterprise operations, mathematics/TCS,
+media/design and public administration.
+
+## Source-derived thesis and engineering interpretation
+
+The design operationalizes three claims associated with Li Dang's Goal-Driven proposal:
+
+1. long-running agents need an explicit `Goal`, strict `Criteria`, persistent workers and a
+   master/verifier that does not accept a worker's self-declared completion;
+2. locally executable and thoroughly verifiable work is the first replacement frontier;
+3. the fraction of professional work that still requires a human in the loop must be measured,
+   not hidden.
+
+TiAI-AgentBench treats these as hypotheses to evaluate rather than as established facts. It
+therefore measures replacement and human dependence separately and permits a successful run to
+retain mandatory human authority when a domain requires it.
+
+## Release layers
+
+1. **EvidenceCore v0.1** — seven real released source/state/statistics tasks and one isolated
+   scorer self-test.
+2. **Materials Full-Stack v0.2** — 12 suites and 39 staged tasks from evidence to multiscale
+   simulation, experiments, robotics and communication.
+3. **Work-Replacement ProtocolCore v0.3** — criticality-weighted work units, artifacts,
+   interventions, fault recovery, resource use and trajectory safety.
+4. **Goal-Driven Core v0.4** — explicit Goal/Criteria contracts, persistent episodes,
+   independent completion authority, human-loop measurement, role-to-industry scope and
+   specification-driven tool reconstruction.
+
+## Goal-Driven execution model
 
 ```text
-goal → evidence → problem definition → method selection → execution → verification/recovery
-→ multiscale integration → decision → experiment/robot action → knowledge update → artifact
+Goal Contract
+→ professional Work Graph
+→ worker/subagent episodes
+→ tools and auditable artifacts
+→ independent Criteria evaluation
+→ restart / repair / replan if criteria are unmet
+→ verified success, abstention, failure or budget exhaustion
 ```
 
-The current executable public pack, EvidenceCore, evaluates source identity, material state,
-condition fidelity, source-aware statistics, split integrity, claim calibration, abstention
-and basic execution receipts. The full-stack registry adds staged suites for research
-software, thermodynamics, DFT, MLIP/MD, mesoscale and continuum simulation, cross-scale
-integration, experiments, robotics, campaigns and scientific communication.
+A worker may claim completion, but only the declared verifier can close the goal. Required
+criteria that are self-verified, unsupported by artifacts or evaluated after an untracked human
+repair do not pass. An inactive or failed episode must be resumed from an identified checkpoint
+or be recorded as unrecovered.
 
-## What the benchmark is trying to measure
+## Replacement scopes
 
-The central question is not whether an agent can produce a plausible answer. It is:
+Results are reported at six levels:
 
-> How much of the work normally performed by literature researchers, data analysts,
-> computational materials scientists, simulation engineers, experimentalists, instrument
-> operators, laboratory-automation engineers, scientific leads and authors can the agent
-> complete autonomously and pass to an independent verifier?
+```text
+TASK → WORKFLOW → ROLE → TEAM → ORGANIZATION → INDUSTRY
+```
 
-The benchmark therefore reports capability by work horizon, autonomy level, execution mode,
-suite, resource budget, intervention rate and safety—not only by final-answer accuracy.
+An agent that automates one visible task does not receive role- or industry-replacement credit.
+The benchmark requires a weighted human work graph and records which units were performed by an
+agent, jointly, or by a human.
 
-## Scientific construction principles
+## Verifiability levels
 
-1. **Goal → Execution → Verification.** A plan is not completion. Consequential work must
-   produce artifacts and pass independent gates.
-2. **Real work units before generic questions.** Tasks are derived from actual research
-   activities and failure modes.
-3. **Evidence is an object.** Sources, locators, material states, structures, specimens,
-   models and simulation inputs have stable identities.
-4. **Deterministic work belongs in code.** Stable checks, unit conversions, parsers and
-   numerical comparisons are programmatic; agents handle planning, adaptation and recovery.
-5. **The truth chain excludes unsupported model invention.** Scientific numerical truth must
-   originate from executed code, admitted models, instruments or admissible sources.
-6. **Human intervention is observable.** Corrections, overrides and takeovers are logged and
-   reduce autonomy credit.
-7. **Replay, live compute and physical work are distinct.** A frozen replay is not relabeled
-   as an HPC run; a digital twin is not relabeled as a physical laboratory.
-8. **Fatal errors cannot be averaged away.** Identity, convergence, leakage, cross-scale,
-   provenance, authorization and safety failures trigger gates.
-9. **Negative results remain.** Nonconvergence, absence of an event on an insufficient time
-   scale and rejected hypotheses are retained in the failure ledger.
-10. **Cross-industry extensibility.** The runtime and work-replacement protocol is generic;
-    materials science supplies the first domain adapter.
-
-## Suite taxonomy
-
-| Suite | Professional work represented |
+| Level | Evaluation environment |
 | --- | --- |
-| `S00_EVIDENCE` | literature review, extraction, scientific memory and source-aware analysis |
-| `S01_RESEARCH_OPS` | environment setup, artifact deployment, HPC dispatch, checkpoint and recovery |
-| `S02_THERMO_KINETICS` | CALPHAD, Scheil, diffusion, precipitation and phase stability |
-| `S03_DFT_ATOMISTIC` | crystallography, DFT, defects, interfaces and energy paths |
-| `S04_MLIP_MD` | dataset curation, potential training/admission and MD |
-| `S05_MESO` | phase-field, cellular automata and mesoscale evolution |
-| `S06_CONTINUUM` | CPFEM, RVE, FEM, calibration and field validation |
-| `S07_MULTISCALE` | quantity handoffs, UQ propagation and cross-scale contradiction resolution |
-| `S08_EXPERIMENT` | experimental design, specimen ledgers, DIC, EBSD and characterization |
-| `S09_ROBOT_LAB` | protocol compilation, safe embodied execution and hardware recovery |
-| `S10_CAMPAIGN` | goal-directed end-to-end research campaigns and closed loops |
-| `S11_COMMUNICATION` | figures, source data, manuscripts, peer review and revision |
+| `V0_LOCAL_DETERMINISTIC` | locally executable and deterministically or differentially testable |
+| `V1_COMPUTE_OR_REPLAY` | scientific solver, authorized compute or frozen replay |
+| `V2_DIGITAL_TWIN` | stateful simulator with trajectory, fault and recovery checks |
+| `V3_PHYSICAL_INSTRUMENT` | instrument, specimen or robot execution with safety receipts |
+| `V4_SOCIO_REGULATORY` | material human judgment, consent, negotiation or regulatory authority |
 
-## Work horizons and autonomy
+Scores are not transferable across levels. Replay is not live compute; a digital twin is not a
+physical laboratory; correct decision support is not autonomous clinical authority.
 
-Unit tasks test local competence. Workflow tasks test multi-step state and tool coordination.
-Campaign tasks test method selection and budgets. Closed-loop tasks test adaptation from new
-observations.
+## Universal metrics
 
-Autonomy ranges from `A0` advisory work to `A5` embodied closed-loop operation. A task's target
-level is declared before evaluation. A system cannot gain A4/A5 credit by returning a plan for
-work a human subsequently performs.
+The v0.4 scorer reports a vector rather than one headline score:
 
-## Primary full-stack metrics
+- **Goal-Driven Success (`GDS`)** — required criteria, persistence, recovery and budget gates
+  pass;
+- **Goal Attainment (`GA`)** — the declared success terminal state is independently verified;
+- **Criteria Closure Rate (`CCR`)** — weighted fraction of criteria closed;
+- **Verified Work Replacement (`VWR`)** — criticality-weighted work completed autonomously and
+  independently accepted;
+- **Human-Loop Fraction (`HLF`)** — weighted human or mixed work plus intervention burden;
+- **Autonomous Replacement Potential (`ARP`)** — observed `1 - HLF`, never a universal forecast;
+- **Persistence Integrity (`PI`)** — continuity, heartbeat and recovery integrity;
+- **Continuity Recovery Rate (`CRR`)** — failed or idle episodes successfully resumed;
+- **Fault Recovery Rate (`FRR`)** — required injected faults successfully recovered;
+- **False Completion Rate (`FCR`)** — runs claiming success before required criteria close;
+- **Functional Signoff Rate (`FSR`)** — compatibility/signoff criteria passed for reconstructed
+  tools;
+- **Hours Replaced** — verified baseline human time replaced;
+- **Resource-Normalized Utility (`RNU`)** — verified replacement relative to declared budgets.
 
-- **Verified Scientific Success (`VSS`)**: mandatory scientific and execution gates pass.
-- **Work Replacement Coverage (`WRC`)**: criticality-weighted fraction of human work units
-  executed autonomously and accepted independently.
-- **End-to-End Autonomous Success Rate (`E2E_ASR`)**: full campaign success under fixed
-  budgets.
-- **Human Intervention Rate (`HIR`)**: frequency and severity of disclosed human help.
-- **Recovery and Resume Reliability (`RRR`)**: successful terminal states after faults.
-- **Resource-Normalized Utility (`RNU`)**: scientific utility relative to time, compute, cost
-  and experimental budget.
-- **Scientific Safety Rate (`SSR`)**: trajectory-level compliance with physical, instrument,
-  data-governance and laboratory safety constraints.
+The older ProtocolCore vector—`VSS`, `WRC`, `E2E_ASR`, `HIR`, `RRR`, `RNU`, `SSR`—remains for
+backward compatibility. EvidenceCore retains its six source/state/statistics dimensions.
 
-No single aggregate may hide suite- or horizon-level collapse. Results must include the metric
-vector and gate profile.
+## Materials full-stack vertical
 
+The materials vertical is not restricted to literature or data analysis. Its flagship role-level
+protocol spans:
 
-## Cross-industry ProtocolCore v0.3
+```text
+mission and material identity
+→ source-resolved evidence
+→ CALPHAD / Scheil / kinetics
+→ DFT and atomistic defects
+→ MLIP admission
+→ finite-temperature MD
+→ phase-field / cellular automata
+→ CPFEM / RVE / FEM
+→ DIC / EBSD / microscopy bridge
+→ contradiction ledger
+→ bounded decision and next action
+```
 
-The benchmark now separates a domain-independent work protocol from domain adapters. A run
-records criticality-weighted work units, artifacts and SHA-256 identities, verifier gates,
-performer identity, human interventions, fault recovery, resources and trajectory safety.
-The deterministic scorer implements VSS, WRC, E2E_ASR, HIR, RRR, RNU and SSR.
+Each handoff checks quantity semantics, units, composition, temperature, phase, structure,
+specimen and model lineage, applicability domain, uncertainty, calibration independence and
+claim scope. Two individually converged calculations fail the multiscale protocol when the
+handoff between them is invalid.
 
-The adapter registry currently stages materials science, chemistry, biotechnology,
-manufacturing, software engineering, healthcare, energy/climate and scientific robotics.
-Materials science remains the first active full vertical. Other adapters are contracts for
-expert partnership and future task packs, not completed public leaderboards.
+## Tool operation and tool reconstruction
 
-Three synthetic protocol fixtures exercise the generalized evaluator: a materials multiscale
-chain, a scientific-robot digital twin and software deployment/recovery. They are reported as
-`SYNTHETIC_PROTOCOL_TEST` and never count as evidence that a model can perform those real jobs.
+The benchmark distinguishes two different replacement claims:
 
-## Multiscale evaluation contract
+- `TOOL_USE`: configure and operate an admitted professional tool correctly;
+- `TOOL_RECONSTRUCTION`: implement a compatible tool from a frozen specification and obtain
+  functional signoff through differential, formal, simulation or physical tests.
 
-Cross-scale tasks must verify more than the individual solvers. Each handoff declares:
+The first executable reconstruction fixture is a 1D axial-bar finite-element kernel with 12
+frozen cases. It checks numerical agreement, global equilibrium, fixed-boundary invariants and
+invalid-input behavior. It validates the reconstruction harness; it is not evidence that an
+Ansys-class product has been rebuilt.
 
-- source and target quantity semantics;
-- units and normalization;
-- composition, temperature, material state and structure compatibility;
-- phase, specimen, trajectory and model lineage;
-- uncertainty and applicability-domain propagation;
-- calibration and validation independence;
-- allowed claims and contradiction handling.
+## Robotics and physical work
 
-A scientifically correct abstention from an invalid handoff can outscore a forced but
-unsupported multiscale narrative.
+Robotics is a horizontal work domain and a materials-laboratory suite. Evaluation is staged:
 
-## Robotics and physical-lab protocol
+1. protocol-to-action compilation;
+2. digital-twin execution;
+3. supervised physical replay;
+4. adaptive physical closed loop.
 
-Physical evaluation is staged through protocol reasoning, digital twins, supervised physical
-replay and adaptive physical campaigns. Task success and trajectory safety are scored
-separately. A robot that reaches the final state after unsafe force, tilt, collision,
-contamination or sample-identity violations does not pass.
+Task success and trajectory safety are separate. A robot that reaches the final state after an
+unsafe force, collision, tilt, contamination, sample-identity or authorization event fails the
+physical protocol.
 
-The physical benchmark must freeze or report:
+## Human authority and bounded replacement
 
-- robot and instrument configuration;
-- calibration and safety envelopes;
-- sample and reagent inventory;
-- perception and control interfaces;
-- human emergency supervision;
-- sim-to-real differences;
-- intervention and abort policy.
+The benchmark does not force every profession to report full autonomy. A v0.4 synthetic
+healthcare fixture demonstrates a successful workflow in which the agent performs de-
+identification, evidence summarization and risk screening, while a licensed clinician retains
+the final decision and consent interaction. The run can achieve `GDS=1` while `VWR<1` and
+`HLF>0`. This is deliberate: success and replacement are different quantities.
 
-## Current executable pack: EvidenceCore
+## Fatal conditions
 
-EvidenceCore contains seven real released tasks and one isolated scorer fixture. Its primary
-metric is the post-gate macro-average over only the real tasks. Its six dimensions are:
+The following cannot be averaged away by attractive prose or partial task completion:
 
-- outcome correctness;
-- evidence fidelity;
-- state/condition fidelity;
-- split integrity;
-- claim calibration;
-- execution integrity.
+- premature or false completion;
+- self-verification where independence is required;
+- missing or identity-mismatched artifacts;
+- nonconverged solver output reported as a result;
+- invalid cross-scale transfer;
+- source, train/test or workflow leakage;
+- hidden human repair or takeover;
+- required faults not recovered;
+- resource or authorization violations;
+- unsafe digital or physical trajectories;
+- unsupported causal, mechanistic, clinical or regulatory claims.
 
-Examples of critical failures are source leakage, temperature mixing, unregistered evidence,
-unsupported causal endorsement and answering an estimand that the released evidence cannot
-identify.
+## Current executable contents
+
+The repository currently contains:
+
+- a real public EvidenceCore materials pack;
+- a validated 12-suite materials architecture with 39 staged task specifications;
+- an executable domain-neutral ProtocolCore;
+- a 20-family industry registry with 80 representative roles;
+- four synthetic Goal-Driven protocols: materials multiscale, CAE reconstruction, scientific
+  robotics and a mandatory-human-authority healthcare workflow;
+- oracle, human-loop and adversarial regressions;
+- one executable finite-element reconstruction fixture.
+
+Synthetic protocol fixtures validate schemas and scorers. They do not demonstrate that a real
+agent has replaced the corresponding profession.
 
 ## Data and artifact governance
 
-Each public task identifies admissible assets and frozen Git identities. Future computational
-and physical task packs must additionally record:
+Each run must record, where applicable:
 
-- software, solver and parser versions;
-- database, pseudopotential or interatomic-potential identities;
-- input hashes and boundary conditions;
-- hardware and parallel layout;
-- queue time, wall time and restart lineage;
-- raw-output and derived-output locations;
-- convergence and admission status;
-- sample, instrument and calibration identities;
-- human interventions and safety events.
+- source, task and material/specimen identity;
+- software, solver, model, database, pseudopotential or potential identity;
+- inputs, boundary conditions, hashes and versions;
+- checkpoints, restarts, failures and human interventions;
+- raw and derived artifacts;
+- verifier identity and independence;
+- resource use and safety events;
+- execution level: replay, live compute, digital twin or physical.
 
-Commercial software and proprietary databases are not redistributed. A benchmark can expose
-an adapter and input/output contract without exposing licensed binaries or files.
+Commercial binaries and proprietary databases are not redistributed. An adapter may expose a
+licensed tool's input/output and verification contract without distributing the licensed asset.
 
-## Contamination policy
+## Contamination and hidden evaluation
 
-Public development references are visible and cannot support definitive leaderboard claims.
-A blind release must:
+Public references cannot support definitive leaderboard claims. A publication-grade release
+must freeze hidden tasks before model access, hold out source and workflow families, keep
+criteria and adversarial variants private, audit training contamination, run multiple trials,
+report time/cost/interventions and separate replay, live-compute, digital-twin and physical
+scores.
 
-- freeze candidate tasks before evaluated model access;
-- keep reference values, gate thresholds and adversarial variants private;
-- group variants by source, scientific template, structure lineage and workflow family;
-- prevent near-duplicate protocols or calculations crossing development and test;
-- disclose model and agent exposure to TiAI repositories;
-- publish hashes and construction methodology after the evaluation window;
-- separate public-development, private-replay, live-compute and physical-lab scores.
+## Claim boundary
 
-## Baseline reporting protocol
-
-A defensible baseline must disclose:
-
-- model, agent scaffold and prompt;
-- tool permissions and network access;
-- software and hardware environment;
-- retry, timeout, checkpoint and recovery policy;
-- number and severity of human interventions;
-- run success distribution over repeated trials;
-- wall time, compute, monetary and experimental cost;
-- artifacts and failure ledger;
-- per-suite, per-horizon and per-autonomy results;
-- VSS, WRC, E2E_ASR, HIR, RRR, RNU and SSR where applicable.
-
-The included oracle remains a scorer regression fixture, not a competitive baseline.
-
-## Limitations and claim boundary
-
-- EvidenceCore is currently the only executable public **real scientific** pack. ProtocolCore
-  v0.3 is executable, but its bundled multiscale, robot and software runs are scorer fixtures.
-- The 39 v0.2 task specifications are a validated implementation roadmap, not 39 completed
-  benchmark environments.
-- Sanitized simulation assets, licensed-software adapters, live HPC contracts, digital twins
-  and physical-lab setups remain staged work.
-- The benchmark begins with titanium alloys and titanium-matrix composites, not a complete
-  census of materials science.
-- Expert review remains necessary for open-ended mechanism novelty and physical safety, but
-  expert review must be calibrated against deterministic artifacts and cannot replace them.
-
-## Release path
-
-1. keep EvidenceCore stable and add real agent baselines;
-2. release sanitized computational replay packs;
-3. add sandboxed and authorized live-compute tracks;
-4. add experiment and characterization task packs;
-5. certify scientific-robot digital twins;
-6. run supervised physical tasks;
-7. release externally adjudicated hidden campaigns and a public leaderboard.
+The current release supports claims about the **benchmark protocol and evaluator**, not universal
+job replacement. EvidenceCore is the only released real scientific task pack. Role,
+organization or industry replacement claims require representative human baselines, hidden real
+work, repeated runs, expert adjudication, authorized tools/compute, certified digital twins and
+supervised physical evaluation.
