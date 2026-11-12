@@ -98,6 +98,23 @@ work a human subsequently performs.
 No single aggregate may hide suite- or horizon-level collapse. Results must include the metric
 vector and gate profile.
 
+
+## Cross-industry ProtocolCore v0.3
+
+The benchmark now separates a domain-independent work protocol from domain adapters. A run
+records criticality-weighted work units, artifacts and SHA-256 identities, verifier gates,
+performer identity, human interventions, fault recovery, resources and trajectory safety.
+The deterministic scorer implements VSS, WRC, E2E_ASR, HIR, RRR, RNU and SSR.
+
+The adapter registry currently stages materials science, chemistry, biotechnology,
+manufacturing, software engineering, healthcare, energy/climate and scientific robotics.
+Materials science remains the first active full vertical. Other adapters are contracts for
+expert partnership and future task packs, not completed public leaderboards.
+
+Three synthetic protocol fixtures exercise the generalized evaluator: a materials multiscale
+chain, a scientific-robot digital twin and software deployment/recovery. They are reported as
+`SYNTHETIC_PROTOCOL_TEST` and never count as evidence that a model can perform those real jobs.
+
 ## Multiscale evaluation contract
 
 Cross-scale tasks must verify more than the individual solvers. Each handoff declares:
@@ -196,7 +213,8 @@ The included oracle remains a scorer regression fixture, not a competitive basel
 
 ## Limitations and claim boundary
 
-- EvidenceCore is currently the only executable public scientific pack.
+- EvidenceCore is currently the only executable public **real scientific** pack. ProtocolCore
+  v0.3 is executable, but its bundled multiscale, robot and software runs are scorer fixtures.
 - The 39 v0.2 task specifications are a validated implementation roadmap, not 39 completed
   benchmark environments.
 - Sanitized simulation assets, licensed-software adapters, live HPC contracts, digital twins

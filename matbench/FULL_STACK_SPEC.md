@@ -1,4 +1,17 @@
-# TiAI-AgentBench full-stack specification
+# TiAI-AgentBench materials vertical and cross-industry work-replacement specification
+
+## 0. Umbrella architecture
+
+TiAI-AgentBench has a domain-independent Agent Work Replacement Protocol and domain-specific
+adapters. Materials science is the first complete vertical; it is not the intended outer
+boundary. The common protocol measures executed work, independent verification, interventions,
+recovery, cost and safety. Each industry supplies its own objects, tools, approvals and fatal
+gates. See `CROSS_INDUSTRY_CORE.md` and `DOMAIN_ADAPTER_REGISTRY.json`.
+
+The public v0.3 ProtocolCore provides deterministic schema validation and metric computation.
+Its bundled materials-multiscale, robot-digital-twin and software-deployment runs are synthetic
+regression fixtures. Real capability claims require expert-adjudicated task assets and the
+declared replay, live-compute, digital-twin or physical environment.
 
 ## 1. Correct benchmark target
 
@@ -311,7 +324,7 @@ fixed budget.
 | `P4 PhysicalLoop` | Supervised instruments/robots and adaptive campaigns | Physical closed-loop performance on the released hardware configuration |
 | `P5 Hidden evaluation` | Externally adjudicated hidden tasks and campaigns | Headline comparison and leaderboard claims |
 
-The repository must always state which stage is actually implemed. The presence of a task
+The repository must always state which stage is actually implemented. The presence of a task
 specification in the roadmap is not evidence that the corresponding runtime or physical
 benchmark is complete.
 

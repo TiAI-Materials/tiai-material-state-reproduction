@@ -63,23 +63,26 @@ lineage.
 
 ## Robotics and scientific embodied-agent benchmarks
 
-- **RoboCerebra** and long-horizon manipulation benchmarks evaluate hierarchical planning,
-  reflection, memory and subtask sequences.
-- **LADDER** isolates task-horizon scaling and shows that orchestration and verification help
-  but do not eliminate physical execution failures.
+- **RLBench**, **CALVIN**, **LIBERO**, **RoboCasa** and related manipulation benchmarks
+  established task suites for vision-language action, multi-task control and long-horizon
+  composition. Recent benchmark audits show why shortcut solvability, data-source dependence,
+  statistical significance and overfitting must also be tested rather than inferred from a
+  single success rate.
 - **SafeLab** evaluates scientific-laboratory manipulation with trajectory-level safety,
-  calibrated laboratory assets and simulated-to-physical checks.
+  calibrated assets, unsafe-but-successful trajectories and simulated-to-physical replay.
+- **LABSHIELD** evaluates multimodal hazard identification and safety-critical planning in
+  scientific laboratories.
 - **SciHorizon-eLab** compiles natural-language scientific protocols into certified embodied
-  tasks with ordered step-level evaluation.
+  tasks with executable programs, expert demonstrations and ordered step-level evaluation.
 - **ADePT** frames autonomous-laboratory robotics across adaptability and learning, dexterity,
   perception and task complexity.
-- **AutoLabs** evaluates multi-agent generation of hardware-ready experimental procedures and
-  quantitative correctness for liquid-handling workflows.
+- **AutoLabs** evaluates multi-agent generation of hardware-ready experimental procedures,
+  quantitative correctness and self-correction for liquid-handling workflows.
 
-These works support the user's broader premise: benchmark design must eventually evaluate
-physical work, not only text or code. TiAI-AgentBench therefore includes a staged
-`S09_ROBOT_LAB` suite with protocol compilation, digital twins, trajectory safety, physical
-replay and fault recovery.
+These works support the broader premise that benchmark design must eventually evaluate
+physical work, not only text or code. TiAI-AgentBench therefore treats scientific robotics as
+a horizontal domain adapter and includes a staged `S09_ROBOT_LAB` suite with protocol
+compilation, digital twins, trajectory safety, supervised physical replay and fault recovery.
 
 ## TiAI-AgentBench's intended contribution
 
@@ -113,16 +116,26 @@ A final public name should be frozen before DOI registration and leaderboard lau
 3. Zhang, C. et al. “CompMat-Bench: Benchmarking AI Agents for Computational Materials
    Science.” arXiv:2610.00636.
 4. Shen, Y. et al. “SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents.”
-   arXiv:2602.12984.
+   *Proceedings of ICML 2026*, PMLR 306.
 5. Zhong, T. et al. “SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks.”
    arXiv:2610.32441.
 6. Wen, Y. and Liu, H. “Autonomous Science Bench: Evaluating AI Agents for Autonomous
    Scientific Discovery.” arXiv:2610.18449.
-7. Bai, F. et al. “SafeLab: An Interactive High-Fidelity Benchmark for Embodied Safety in
-   Scientific Robotics.” ICML 2026.
-8. Qin, M. et al. “SciHorizon-eLab: An Agentic Protocol-to-Task Compiler for Scalable
-   Benchmarking of Scientific Embodied Agents.” arXiv:2609.30971.
-9. Salazar-Villacis, P. and Benyahia, B. “The ADePT framework for assessing autonomous
-   laboratory robotics.” *Communications Chemistry* 9, 99 (2026).
-10. Panapitiya, G. et al. “AutoLabs: cognitive multi-agent systems with self-correction for
+7. Zhang, C. et al. “DFT-Agent Bench: Scaffold Effects and Execution Provenance in Autonomous
+   DFT.” arXiv:2611.10629.
+8. Wu, M. et al. “MatToolBench: Benchmarking Multimodal Agents in Real-World Materials
+   Science Workflows.” arXiv:2609.37053.
+9. Mees, O. et al. “CALVIN: A Benchmark for Language-Conditioned Policy Learning for
+   Long-Horizon Robot Manipulation Tasks.” arXiv:2112.03227.
+10. Bai, F. et al. “SafeLab: An Interactive High-Fidelity Benchmark for Embodied Safety in
+    Scientific Robotics.” *Proceedings of ICML 2026*, PMLR 306.
+11. Sun, Q. et al. “LABSHIELD: A Multimodal Benchmark for Safety-Critical Reasoning and
+    Planning in Scientific Laboratories.” arXiv:2603.11987.
+12. Qin, M. et al. “SciHorizon-eLab: An Agentic Protocol-to-Task Compiler for Scalable
+    Benchmarking of Scientific Embodied Agents.” arXiv:2609.30971.
+13. Salazar-Villacis, P. and Benyahia, B. “The ADePT framework for assessing autonomous
+    laboratory robotics.” *Communications Chemistry* 9, 99 (2026).
+14. Panapitiya, G. et al. “AutoLabs: cognitive multi-agent systems with self-correction for
     autonomous chemical experimentation.” *Scientific Reports* 16, 19554 (2026).
+15. Jiang, T. et al. “What Are We Actually Benchmarking in Robot Manipulation?”
+    arXiv:2606.04233.

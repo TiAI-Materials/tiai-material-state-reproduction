@@ -1,12 +1,14 @@
 # TiAI-AgentBench
 
-**A full-stack benchmark for verifiable autonomous materials research.**
+**A cross-industry work-replacement benchmark with materials science as the first full vertical.**
 
-`TiAI-AgentBench` measures how much of a real materials-research workflow an agent can
-replace: evidence acquisition, data analysis, research-software deployment, thermodynamics,
-DFT, ML potentials, MD, phase-field, CPFEM/RVE/FEM, multiscale integration, experimental
-planning, characterization, laboratory robotics, closed-loop campaigns and scientific
-communication.
+`TiAI-AgentBench` measures how much of real professional work an agent actually replaces,
+using executed artifacts, independent verifier gates, human-intervention records, fault
+recovery, resources and trajectory safety. Materials science is the first full vertical and
+includes evidence, research software, thermodynamics, DFT, ML potentials, MD, phase-field,
+CPFEM/RVE/FEM, multiscale integration, experiments, laboratory robotics, campaigns and
+scientific communication. The same core protocol is designed for other industries through
+domain adapters.
 
 The package name and CLI remain `tiai-matbench` for backward compatibility. The earlier
 **TiAI-MatBench v0.1** source-aware benchmark is retained as the first executable suite,
@@ -14,22 +16,29 @@ The package name and CLI remain `tiai-matbench` for backward compatibility. The 
 
 ## Current status
 
-Two layers are committed:
+Three layers are committed:
 
 1. **Executable EvidenceCore public development pack** — seven real released TiAI tasks plus
    one isolated scorer self-test. It has deterministic grading, critical scientific gates,
    frozen Git-blob evidence and CI regression tests.
-2. **Full-stack v0.2 architecture** — twelve suites and 39 concrete staged task
+2. **Full-stack materials v0.2 architecture** — twelve suites and 39 concrete staged task
    specifications spanning digital analysis, live computation, multiscale simulation,
    experiments, robotics and end-to-end research campaigns.
+3. **Cross-industry ProtocolCore v0.3** — a deterministic work-replacement schema and scorer,
+   eight staged domain adapters, and synthetic regression fixtures for a materials multiscale
+   chain, a scientific-robot digital twin and software deployment/recovery.
 
-Only layer 1 is currently a runnable scientific task pack. The remaining suite entries carry
+Only layer 1 is currently a runnable real scientific task pack. Layer 3 is executable as a
+protocol/scorer harness, but its included runs are synthetic regression fixtures rather than
+claims of real multiscale, robot or cross-industry capability. The remaining suite entries carry
 explicit readiness states such as `DESIGN_READY`, `REQUIRES_SANITIZED_ASSETS`,
 `REQUIRES_LIVE_HPC`, `REQUIRES_DIGITAL_TWIN` and `REQUIRES_PHYSICAL_LAB`. A roadmap entry is
 not mislabeled as a completed benchmark.
 
-Read [FULL_STACK_SPEC.md](FULL_STACK_SPEC.md) for the benchmark model and
-[SUITE_REGISTRY.json](SUITE_REGISTRY.json) for the machine-readable authority.
+Read [FULL_STACK_SPEC.md](FULL_STACK_SPEC.md) for the materials benchmark model,
+[CROSS_INDUSTRY_CORE.md](CROSS_INDUSTRY_CORE.md) for the universal work protocol,
+[SUITE_REGISTRY.json](SUITE_REGISTRY.json) for the materials suite authority and
+[DOMAIN_ADAPTER_REGISTRY.json](DOMAIN_ADAPTER_REGISTRY.json) for staged industry adapters.
 
 ## Full-stack suites
 
@@ -86,6 +95,31 @@ The validator checks the suite vocabulary, autonomy levels, horizons, execution 
 readiness states, metric registry, task-to-suite compatibility, resource-mode consistency
 and the requirement that every suite has at least one concrete task specification.
 
+## Validate the cross-industry ProtocolCore
+
+```bash
+tiai-matbench validate-adapters \
+  --adapters matbench/DOMAIN_ADAPTER_REGISTRY.json
+
+tiai-matbench validate-protocols \
+  --protocols matbench/protocols/protocols_v0.3.jsonl \
+  --adapters matbench/DOMAIN_ADAPTER_REGISTRY.json \
+  --suites matbench/SUITE_REGISTRY.json
+
+tiai-matbench score-work-runs \
+  --protocols matbench/protocols/protocols_v0.3.jsonl \
+  --runs matbench/examples/protocol_oracle_runs.jsonl \
+  --output protocol_oracle_report.json \
+  --require-vss 1.0 \
+  --require-wrc 1.0
+```
+
+The protocol scorer emits `VSS`, `WRC`, `E2E_ASR`, `HIR`, `RRR`, `RNU` and `SSR`, plus
+work-unit credit, failed gates, interventions, resource accounting, fault recovery, safety
+steps and a violation ledger. The current protocol fixtures are marked
+`SYNTHETIC_PROTOCOL_TEST`; they validate the evaluator and cannot be reported as domain
+capability results.
+
 ## Run the executable EvidenceCore pack
 
 ```bash
@@ -130,21 +164,26 @@ real released tasks; the synthetic scorer fixture is reported separately.
 
 ## Repository map
 
-- `FULL_STACK_SPEC.md`: benchmark vision, axes, metrics, multiscale and robotics protocol;
-- `SUITE_REGISTRY.json`: authoritative suite, metric, autonomy and readiness registry;
-- `suites/roadmap_v0.2.jsonl`: 39 concrete task specifications and implementation states;
+- `CROSS_INDUSTRY_CORE.md`: domain-independent work-replacement, multiscale and robotics protocol;
+- `FULL_STACK_SPEC.md`: materials benchmark vision, axes, suites and flagship campaigns;
+- `DOMAIN_ADAPTER_REGISTRY.json`: staged cross-industry domain objects, tools and fatal gates;
+- `SUITE_REGISTRY.json`: authoritative materials suite, metric, autonomy and readiness registry;
+- `suites/roadmap_v0.2.jsonl`: 39 materials task specifications and implementation states;
+- `protocols/protocols_v0.3.jsonl`: domain-independent executable protocol fixtures;
+- `examples/protocol_*_runs.jsonl`: oracle and adversarial protocol regression runs;
 - `tasks/dev.jsonl`, `references/dev.jsonl`: executable EvidenceCore public development pack;
 - `MANIFEST.json`: EvidenceCore scoring and frozen asset registry plus umbrella metadata;
-- `src/tiai_matbench/`: strict parser, grader, asset verifier, suite validator and CLI;
-- `tests/`: EvidenceCore and full-stack registry regression tests;
+- `src/tiai_matbench/`: strict parser, EvidenceCore grader, suite/adapter validators, work-replacement scorer and CLI;
+- `tests/`: EvidenceCore, suite, adapter and work-replacement regression tests;
 - `BENCHMARK_CARD.md`: governance, claims and evaluation protocol;
 - `RELATED_WORK.md`: benchmark landscape and positioning.
 
 ## Interpretation boundary
 
 The public EvidenceCore references are visible and cannot support a headline blind
-leaderboard. The v0.2 full-stack registry is an executable architecture and task roadmap, not
-a claim that all simulation, robotics and physical-lab suites have already been built. A
+leaderboard. The v0.2 full-stack registry is an executable architecture and task roadmap, and ProtocolCore
+v0.3 is an executable generalized scorer. Neither is a claim that all simulation, robotics,
+industry adapters or physical-lab environments have already been built. A
 publication-grade comparison requires externally adjudicated hidden tasks, frozen hardware and
 software contracts where relevant, strong agent baselines, repeated trials, cost and
 intervention accounting, contamination auditing and expert review.
