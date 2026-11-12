@@ -260,11 +260,11 @@
     },
     {
       "industry_family": "cae_simulation",
-      "status": "EXECUTABLE",
+      "status": "ANCHORED",
       "benchmark_ids": [
         "tiai_fea1d_reconstruction"
       ],
-      "next_minimum_task": "Add one external two-dimensional benchmark case only after the 1D functional-signoff kernel remains stable."
+      "next_minimum_task": "Add an external two-dimensional benchmark case and a tested native result adapter only after the 1D functional-signoff kernel remains stable."
     },
     {
       "industry_family": "control_signal_electrical",
