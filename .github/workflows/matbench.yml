@@ -17,26 +17,29 @@ jobs:
   deterministic-benchmark:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.11", "3.13"]
+    env:
+      PYTHONPATH: matbench/src
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install benchmark package
-        run: python -m pip install --no-deps --no-build-isolation -e ./matbench
+      - name: Compile benchmark package
+        run: python -m compileall -q matbench/src matbench/tests
       - name: Unit tests
         run: python -m unittest discover -s matbench/tests -v
       - name: Validate task and reference bundle
         run: |
-          tiai-matbench validate \
+          python -m tiai_matbench validate \
             --tasks matbench/tasks/dev.jsonl \
             --references matbench/references/dev.jsonl \
             --manifest matbench/MANIFEST.json
       - name: Verify frozen source assets
         run: |
-          tiai-matbench verify-assets \
+          python -m tiai_matbench verify-assets \
             --tasks matbench/tasks/dev.jsonl \
             --references matbench/references/dev.jsonl \
             --manifest matbench/MANIFEST.json \
@@ -44,7 +47,7 @@ jobs:
             --output matbench_asset_report.json
       - name: Oracle regression
         run: |
-          tiai-matbench grade \
+          python -m tiai_matbench grade \
             --tasks matbench/tasks/dev.jsonl \
             --references matbench/references/dev.jsonl \
             --manifest matbench/MANIFEST.json \
