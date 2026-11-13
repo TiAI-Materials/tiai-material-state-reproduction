@@ -51,7 +51,7 @@
     {
       "task_id": "task_202603_034_step_batio3-dislocation-dipole-relaxed",
       "source_path": "tasks/task_202603_034_step_batio3-dislocation-dipole-relaxed",
-      "task_tree_git_sha": "4d3b5a71cff0e4ceef5448c5336c9f01bc202c81",
+      "task_tree_git_sha": "cc0f9a2fc727a9bdab09a6e6e8328b0a1358dafa",
       "task_yaml_git_sha": "8b4cf6899b5e7ba19ee1daccd8615b36ee909727",
       "role": "analyze",
       "source_kind": "GIT_METADATA_NOT_STAGED",
