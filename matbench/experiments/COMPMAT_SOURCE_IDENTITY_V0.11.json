@@ -1,0 +1,140 @@
+{
+  "schema": "tiai.agentbench.compmat_source_identity.v0.11",
+  "status": "SOURCE_IDENTIFIED_NOT_NATIVE_STAGED",
+  "protocol_sha256": "6d2673a95e1b6f731d1d83673ed42782efb0b3305bafd6ae7f58b113958b9001",
+  "upstream": {
+    "repo": "cz2014/CompMat-Bench",
+    "commit": "03fec439ca9c9b1b14ea914896886b74d3e739bc",
+    "release": "v1.0.0",
+    "license": "CC-BY-4.0 for author-produced tasks/graders; third-party assets retain their own licenses",
+    "published_core_release": {
+      "filename": "compmat_bench_core.zip",
+      "byte_size": 516859324,
+      "expected_sha256": "6be09447536a8d3e23aa9e21e3cea3864380ad1a7c841fb9970930b008f067bb",
+      "downloaded_actual_sha256": null
+    },
+    "evaluation_guide": "https://github.com/cz2014/CompMat-Bench/blob/03fec439ca9c9b1b14ea914896886b74d3e739bc/docs/evaluation.md",
+    "download_guide": "https://github.com/cz2014/CompMat-Bench/blob/03fec439ca9c9b1b14ea914896886b74d3e739bc/docs/download.md",
+    "workflow_guide": "https://github.com/cz2014/CompMat-Bench/blob/03fec439ca9c9b1b14ea914896886b74d3e739bc/workflows/README.md"
+  },
+  "public_tasks": [
+    {
+      "task_id": "task_202602_015_step_ws2-wse2-moire-lammps-inputs",
+      "source_path": "tasks/task_202602_015_step_ws2-wse2-moire-lammps-inputs",
+      "task_tree_git_sha": "532960a2ceea6b18379fe0238885c49a11183a9f",
+      "task_yaml_git_sha": "c212bb1597a2c2fc9dd6f73128a1663be7108971",
+      "role": "gen_input",
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null
+    },
+    {
+      "task_id": "task_202601_009_step_snte-110-surface-dirac-cones",
+      "source_path": "tasks/task_202601_009_step_snte-110-surface-dirac-cones",
+      "task_tree_git_sha": "944b5485f695709e9b51512c1850e11f19dd19a0",
+      "task_yaml_git_sha": "9048fb5888f5060b7dc76864b809f5b39c851708",
+      "role": "analyze",
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null
+    },
+    {
+      "task_id": "task_202603_007_step_znmgo-strain-composition-phase-map",
+      "source_path": "tasks/task_202603_007_step_znmgo-strain-composition-phase-map",
+      "task_tree_git_sha": "f261454f7a57999e50186a906da9c747d16c1066",
+      "task_yaml_git_sha": "bbd3bd278f168f85f386a4a86f54dd3b949d2330",
+      "role": "analyze",
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null
+    },
+    {
+      "task_id": "task_202603_034_step_batio3-dislocation-dipole-relaxed",
+      "source_path": "tasks/task_202603_034_step_batio3-dislocation-dipole-relaxed",
+      "task_tree_git_sha": "4d3b5a71cff0e4ceef5448c5336c9f01bc202c81",
+      "task_yaml_git_sha": "8b4cf6899b5e7ba19ee1daccd8615b36ee909727",
+      "role": "analyze",
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null
+    },
+    {
+      "task_id": "task_202603_024_step_si-ge-slab-thermal-conductivity",
+      "source_path": "tasks/task_202603_024_step_si-ge-slab-thermal-conductivity",
+      "task_tree_git_sha": "9c494f1a607e0dfdf4ca139ee5a56712e578e623",
+      "task_yaml_git_sha": "57fad0e15bc9f476a82f2294fd77fbda61fd7209",
+      "role": "analyze",
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null
+    },
+    {
+      "task_id": "task_202603_031_step_batio3-hysteresis-lammps-inputs",
+      "source_path": "tasks/task_202603_031_step_batio3-hysteresis-lammps-inputs",
+      "task_tree_git_sha": "a4b6898d42ea31e4398b87f322bb8ab4119ccfea",
+      "task_yaml_git_sha": "cc0644630229f883f2ab97aca45c4da6063233e9",
+      "role": "gen_input",
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null
+    }
+  ],
+  "public_workflows": [
+    {
+      "task_id": "C03",
+      "source_path": "workflows/C03",
+      "workflow_tree_git_sha": "b184b7ac82f53e046581e45beffda9a3407f8fe7",
+      "agent_full_guidance_tree_git_sha": "f97c64314b32fde4c29d89266651d0cb885ff39c",
+      "grader_tree_git_sha": "e763c37007ce47e1e66b219e9355a4efbc7690b6",
+      "requires_licensed_vasp_potcar": false,
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null,
+      "licensed_potcar_verified": "NOT_REQUIRED"
+    },
+    {
+      "task_id": "C07",
+      "source_path": "workflows/C07",
+      "workflow_tree_git_sha": "61cbb16abbf174e421a0c1c222b3a076b8a8de9a",
+      "agent_full_guidance_tree_git_sha": "328279472348d0d1477109ee1079981747c33317",
+      "grader_tree_git_sha": "9586a5aafff52243f03dcf041f1cc8074bdcdc6b",
+      "requires_licensed_vasp_potcar": true,
+      "source_kind": "GIT_METADATA_NOT_STAGED",
+      "native_input_sha256": null,
+      "native_grader_reference_receipt": null,
+      "licensed_potcar_verified": null
+    }
+  ],
+  "hidden_real_replay": [
+    {
+      "task_id": "RR-MAT-DESIGN-C2-001",
+      "private_input_digest": null,
+      "independent_hidden_verifier_attestation": null
+    },
+    {
+      "task_id": "RR-TC4-Q296-SCF-001",
+      "private_input_digest": null,
+      "independent_hidden_verifier_attestation": null
+    },
+    {
+      "task_id": "RR-TC4-L160-G1-001",
+      "private_input_digest": null,
+      "independent_hidden_verifier_attestation": null
+    },
+    {
+      "task_id": "RR-TI65-MLIP-GATE-001",
+      "private_input_digest": null,
+      "independent_hidden_verifier_attestation": null
+    }
+  ],
+  "execution_bindings": {
+    "model_id": null,
+    "provider_route": null,
+    "allowed_tools": null,
+    "budgets_by_stratum": null,
+    "independent_verifier_key_id": null
+  },
+  "selected_public_are_core_only": true,
+  "native_dispatch_allowed": false,
+  "claim_boundary": "Git tree and release-asset published hashes identify upstream sources only. They do not hash the extracted staged agent workspaces, verify proprietary POTCAR access, attest native graders, prove model credentials, or create any real TiAI-AgentBench run."
+}
