@@ -1,0 +1,78 @@
+{
+  "claim_boundary": "Official source-only grader tested for coherent crystal-core naming equivalence and false-positive avoidance. No core inputs staged, no independent production signature, no TiAI Agent results.",
+  "core_asset_sha256_verified": false,
+  "evaluations": {
+    "coherent_global_swap": {
+      "accepted_naming_convention": "BaO_TiO2_swapped",
+      "returncode": 0,
+      "score": 1,
+      "stderr_tail": [],
+      "stdout_sha256": "e16aa12e4106372eb2107ae0845d4459eb762e518fe54a9322b23e20f57b0695"
+    },
+    "corrupted_spacing": {
+      "accepted_naming_convention": null,
+      "returncode": 0,
+      "score": 0,
+      "stderr_tail": [],
+      "stdout_sha256": "5f2c87fdfe81a770824fcf181332fbb45fd5600b90adf8872c55ab2dd3e4bd3c"
+    },
+    "identity_reference": {
+      "accepted_naming_convention": "identity",
+      "returncode": 0,
+      "score": 1,
+      "stderr_tail": [],
+      "stdout_sha256": "3747038d3572a298018401e989b0b47b9db2a003464d6454919291de77035f2b"
+    },
+    "incoherent_label_only_swap": {
+      "accepted_naming_convention": null,
+      "returncode": 0,
+      "score": 0,
+      "stderr_tail": [],
+      "stdout_sha256": "a961039881afb696aa1e4bb01877ef5aac72b052dbb37e9817cbfc7235275872"
+    }
+  },
+  "execution_kind": "OFFICIAL_UPSTREAM_REFERENCE_GRADER_SELFTEST_NOT_AGENT_EVALUATION",
+  "expected_scores": {
+    "coherent_global_swap": 1,
+    "corrupted_spacing": 0,
+    "identity_reference": 1,
+    "incoherent_label_only_swap": 0
+  },
+  "files": [
+    {
+      "byte_size": 5036,
+      "git_blob_sha": "ac59c40b428472c9b50ce29c484309f9c64028c8",
+      "path": "grader/grader.py",
+      "sha256": "dc283689b476b1f16b92410e4abe20d955fae984109f5f4611887674e2d52b05"
+    },
+    {
+      "byte_size": 12874,
+      "git_blob_sha": "9a451f81d09ad5f9e943fa0085c954c91303ebf1",
+      "path": "grader/graderlib/grader_numeric.py",
+      "sha256": "e8fefd86fc36a3a386cacc786b4e0559443624b4ef4b012df2553c1999da92c2"
+    },
+    {
+      "byte_size": 4267,
+      "git_blob_sha": "49e70a0ae8346153aa60938368db3b0522ae02d1",
+      "path": "grader/ground_truth.json",
+      "sha256": "e22ef12a0bbeaf7ba3ed910ca30e9c32d3c4bcf210809cd216180e67844dc8e0"
+    },
+    {
+      "byte_size": 482,
+      "git_blob_sha": "7dff3887037e109c60c45458472c4cb7c20f6211",
+      "path": "grader/reference_submission/answer.json",
+      "sha256": "3c722c7e1454fd3b10d7bfe5207358abbdbe522936c0d95b469625ed82263830"
+    }
+  ],
+  "git_blob_integrity": true,
+  "native_dispatch_allowed": false,
+  "official_tree_sha": "cc0f9a2fc727a9bdab09a6e6e8328b0a1358dafa",
+  "pilot_ready_slots": 0,
+  "real_tiai_agent_runs": 0,
+  "schema": "tiai.agentbench.compmat_dislocation_native_selftest.v0.14",
+  "selftest_pass": true,
+  "source_mode": "GIT_BLOBS_NOT_CORE_RELEASE",
+  "status": "NATIVE_EQUIVALENCE_SELFTEST_PASS",
+  "task_id": "task_202603_034_step_batio3-dislocation-dipole-relaxed",
+  "upstream_commit": "03fec439ca9c9b1b14ea914896886b74d3e739bc"
+}
