@@ -1,0 +1,176 @@
+{
+  "schema": "tiai.agentbench.compmat_public_evidence.v0.8",
+  "source": {
+    "repository": "cz2014/CompMat-Bench",
+    "release": "v1.0.0",
+    "commit": "03fec439ca9c9b1b14ea914896886b74d3e739bc",
+    "manifest_blob_sha": "de6f82bc77a35b1a01d1d03a608c58e502e36516",
+    "manifest_sha256": "63e29888f514a139d2c0e20394d7d4e7a3fe08ea803232e6e8b3c991be0c5e22"
+  },
+  "global": {
+    "attempts": 976,
+    "passes": 771,
+    "native_pass_rate": 0.7899590163934426,
+    "reported_infrastructure_reruns": 79,
+    "workflow_attempts": 144,
+    "workflow_passes": 94
+  },
+  "guidance_paired": {
+    "task_count": 52,
+    "task_ids_sha256": "04e91b44b33a655ce98046c9e660d99f25a72baf90b9a5cc9cb2e0cd56410c51",
+    "models": {
+      "deepseek_v4_1_flash": {
+        "paired_task_count": 52,
+        "full_passes": 33,
+        "reduced_passes": 28,
+        "full_pass_rate": 0.6346153846153846,
+        "reduced_pass_rate": 0.5384615384615384,
+        "reduced_minus_full": -0.09615384615384616,
+        "both_pass": 24,
+        "full_only": 9,
+        "reduced_only": 4,
+        "both_fail": 15,
+        "mcnemar_exact_two_sided_p": 0.266845703125
+      },
+      "gemini_3_8_flash": {
+        "paired_task_count": 52,
+        "full_passes": 47,
+        "reduced_passes": 43,
+        "full_pass_rate": 0.9038461538461539,
+        "reduced_pass_rate": 0.8269230769230769,
+        "reduced_minus_full": -0.07692307692307693,
+        "both_pass": 42,
+        "full_only": 5,
+        "reduced_only": 1,
+        "both_fail": 4,
+        "mcnemar_exact_two_sided_p": 0.21875
+      },
+      "gpt_5_6_sol": {
+        "paired_task_count": 52,
+        "full_passes": 46,
+        "reduced_passes": 46,
+        "full_pass_rate": 0.8846153846153846,
+        "reduced_pass_rate": 0.8846153846153846,
+        "reduced_minus_full": 0.0,
+        "both_pass": 44,
+        "full_only": 2,
+        "reduced_only": 2,
+        "both_fail": 4,
+        "mcnemar_exact_two_sided_p": 1.0
+      }
+    },
+    "interpretation": "Same-model, same-task published contrast. Treat as descriptive sensitivity, not a definitive causal estimate from a single stochastic draw per condition."
+  },
+  "repeatability": {
+    "task_count": 20,
+    "trials_per_task_model": 5,
+    "task_ids_sha256": "564049169b12b13b0381d6dea24a6c1691c4ea61f0ca26e483e1e531ba5242e4",
+    "models": {
+      "deepseek_v4_1_flash": {
+        "attempts": 100,
+        "passes": 62,
+        "pass_rate": 0.62,
+        "unanimous_pass_tasks": 7,
+        "unanimous_fail_tasks": 2,
+        "mixed_outcome_tasks": 11,
+        "mean_pairwise_agreement": 0.73,
+        "pass_count_distribution": {"0": 2, "1": 3, "2": 3, "3": 2, "4": 3, "5": 7}
+      },
+      "gemini_3_8_flash": {
+        "attempts": 100,
+        "passes": 88,
+        "pass_rate": 0.88,
+        "unanimous_pass_tasks": 16,
+        "unanimous_fail_tasks": 1,
+        "mixed_outcome_tasks": 3,
+        "mean_pairwise_agreement": 0.93,
+        "pass_count_distribution": {"0": 1, "1": 1, "2": 0, "3": 1, "4": 1, "5": 16}
+      },
+      "gpt_5_6_sol": {
+        "attempts": 100,
+        "passes": 93,
+        "pass_rate": 0.93,
+        "unanimous_pass_tasks": 17,
+        "unanimous_fail_tasks": 1,
+        "mixed_outcome_tasks": 2,
+        "mean_pairwise_agreement": 0.96,
+        "pass_count_distribution": {"0": 1, "1": 0, "2": 0, "3": 0, "4": 2, "5": 17}
+      }
+    },
+    "diagnostic_tasks": {
+      "universal_failure_0_of_15": [
+        "task_202602_015_step_ws2-wse2-moire-lammps-inputs"
+      ],
+      "universal_pass_15_of_15": [
+        "task_202601_003_step_v2coal-formation-energies-ordering",
+        "task_202601_004_step_v2coal-l21-abacus-inputs",
+        "task_202602_022_step_moire-screened-piezo-potential",
+        "task_202602_027_step_doped-mnte-momentum-spin-splitting",
+        "task_202602_031_step_ni-island-eam-saddle-points",
+        "task_202603_010_step_crn-relaxed-structure-exchange-paths",
+        "task_202603_032_step_batio3-polarization-hysteresis"
+      ]
+    }
+  },
+  "workflow": {
+    "workflow_count": 8,
+    "workflow_ids_sha256": "fd976d919bc20af7af0b1b691c80701d8c0bb72f5b7cea1a095199a75032bf9d",
+    "trials_per_model_guidance_workflow": 3,
+    "models": {
+      "deepseek_v4_1_flash": {
+        "LG": {"attempts": 24, "passes": 10, "pass_rate": 0.4166666666666667, "mean_pairwise_agreement": 0.75},
+        "LA": {"attempts": 24, "passes": 12, "pass_rate": 0.5, "mean_pairwise_agreement": 0.8333333333333334},
+        "LA_minus_LG": 0.08333333333333331
+      },
+      "gemini_3_8_flash": {
+        "LG": {"attempts": 24, "passes": 19, "pass_rate": 0.7916666666666666, "mean_pairwise_agreement": 0.9166666666666666},
+        "LA": {"attempts": 24, "passes": 13, "pass_rate": 0.5416666666666666, "mean_pairwise_agreement": 0.8333333333333334},
+        "LA_minus_LG": -0.25
+      },
+      "gpt_5_6_sol": {
+        "LG": {"attempts": 24, "passes": 22, "pass_rate": 0.9166666666666666, "mean_pairwise_agreement": 0.8333333333333334},
+        "LA": {"attempts": 24, "passes": 18, "pass_rate": 0.75, "mean_pairwise_agreement": 0.8333333333333334},
+        "LA_minus_LG": -0.16666666666666663
+      }
+    },
+    "workflow_diagnostics": {
+      "C01": {"LG_passes_of_9": 6, "LA_passes_of_9": 3},
+      "C02": {"LG_passes_of_9": 7, "LA_passes_of_9": 7},
+      "C03": {"LG_passes_of_9": 6, "LA_passes_of_9": 0},
+      "C04": {"LG_passes_of_9": 4, "LA_passes_of_9": 5},
+      "C05": {"LG_passes_of_9": 9, "LA_passes_of_9": 9},
+      "C06": {"LG_passes_of_9": 2, "LA_passes_of_9": 1},
+      "C07": {"LG_passes_of_9": 9, "LA_passes_of_9": 9},
+      "C08": {"LG_passes_of_9": 8, "LA_passes_of_9": 9}
+    },
+    "interpretation": "Three-trial published workflow evidence. Guidance contrasts remain descriptive; model, task and stochastic interactions are retained rather than averaged away."
+  },
+  "frozen_matched_protocol": {
+    "published_attempts_used": 756,
+    "paired_single_step_tasks": 52,
+    "paired_single_step_models": ["deepseek_v4_1_flash", "gemini_3_8_flash", "gpt_5_6_sol"],
+    "paired_single_step_attempts": 312,
+    "repeat_tasks": 20,
+    "repeat_trials_per_task_model": 5,
+    "repeat_attempts": 300,
+    "workflow_ids": ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08"],
+    "workflow_guidance_conditions": ["LG", "LA"],
+    "workflow_trials_per_chain_model_guidance": 3,
+    "workflow_attempts": 144,
+    "selection_rule": "Use every public row in reduced52, repeat20x5 and workflow; pair reduced52 only to the same model and task in full94. No outcome-based task selection."
+  },
+  "claim_boundary": {
+    "allowed": [
+      "descriptive native pass rates",
+      "same-task paired full-versus-reduced published contrasts",
+      "five-trial task-level repeatability",
+      "three-trial workflow stability and long-horizon pass rates"
+    ],
+    "forbidden": [
+      "claiming TiAI-AgentBench or Goal-Driven improvement from upstream results",
+      "treating reported reruns as a complete infrastructure-failure denominator",
+      "inferring human-loop, cost, safety or false-completion metrics",
+      "calling one published stochastic contrast a definitive causal effect"
+    ]
+  }
+}
