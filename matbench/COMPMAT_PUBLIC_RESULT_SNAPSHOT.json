@@ -1,0 +1,31 @@
+{
+  "schema": "tiai.agentbench.compmat_public_snapshot.v1",
+  "upstream": {
+    "repository": "cz2014/CompMat-Bench",
+    "release": "v1.0.0",
+    "commit": "03fec439ca9c9b1b14ea914896886b74d3e739bc",
+    "manifest_path": "trajectories/manifest.json",
+    "manifest_blob_sha": "de6f82bc77a35b1a01d1d03a608c58e502e36516",
+    "license": "CC-BY-4.0"
+  },
+  "reported_rows": 976,
+  "reported_passes": 771,
+  "native_verified_success": 0.7899590163934426,
+  "reported_reruns_after_infrastructure_failure": 79,
+  "reported_infrastructure_rerun_fraction": 0.08094262295081968,
+  "campaigns": {
+    "full94": {"rows":376,"passes":317,"pass_rate":0.8430851063829787},
+    "reduced52": {"rows":156,"passes":117,"pass_rate":0.75},
+    "repeat20x5": {"rows":300,"passes":243,"pass_rate":0.81},
+    "workflow": {"rows":144,"passes":94,"pass_rate":0.6527777777777778}
+  },
+  "evidence_gaps": [
+    "ARTIFACT_HASHES_NOT_REPORTED_IN_MANIFEST",
+    "COST_NOT_REPORTED",
+    "FALSE_COMPLETION_NOT_REPORTED",
+    "HUMAN_INTERVENTION_NOT_REPORTED",
+    "INFRASTRUCTURE_FAILURE_DENOMINATOR_NOT_REPORTED",
+    "TRAJECTORY_SAFETY_NOT_REPORTED"
+  ],
+  "claim_boundary": "This snapshot reproduces the aggregate counts in the upstream public manifest. It is not a matched TiAI-AgentBench baseline, does not infer safety or autonomy, and does not replace the full upstream trajectory records."
+}
