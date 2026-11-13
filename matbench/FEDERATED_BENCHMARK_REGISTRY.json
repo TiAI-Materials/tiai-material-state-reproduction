@@ -1,7 +1,7 @@
 {
   "schema": "tiai.agentbench.federation_registry.v1",
   "benchmark": "TiAI-AgentBench",
-  "version": "0.6",
+  "version": "0.7",
   "policy": "Preserve each upstream benchmark's native success definition; normalize only observable outcomes and never impute missing safety, human-loop, cost, provenance or false-completion evidence as success.",
   "expected_industry_families": [
     "materials_science",
@@ -184,14 +184,16 @@
       "title": "CompMat-Bench",
       "industry_family": "materials_science",
       "official_repository": "https://github.com/cz2014/CompMat-Bench",
-      "native_success_semantics": "Computational-materials tasks and linked workflows are graded by the upstream fixed-rule evaluators over precomputed expensive simulations.",
-      "adapter_status": "CATALOG_ONLY",
-      "result_adapter": "NONE",
+      "native_success_semantics": "Each published agent attempt is a fixed-rule pass/fail row in trajectories/manifest.json; campaign/model counts, passes and infrastructure-failure reruns must reconcile exactly with those rows.",
+      "adapter_status": "EXECUTABLE",
+      "result_adapter": "COMPMAT_TRAJECTORY_MANIFEST_V1",
       "execution_mode": "PRECOMPUTED_REPLAY",
       "verifiability_level": "V1_COMPUTE_OR_REPLAY",
       "replacement_scope": "WORKFLOW",
       "source_files": [
-        "https://github.com/cz2014/CompMat-Bench"
+        "https://github.com/cz2014/CompMat-Bench/blob/03fec439ca9c9b1b14ea914896886b74d3e739bc/trajectories/README.md",
+        "https://github.com/cz2014/CompMat-Bench/blob/03fec439ca9c9b1b14ea914896886b74d3e739bc/trajectories/manifest.json",
+        "https://github.com/cz2014/CompMat-Bench/blob/03fec439ca9c9b1b14ea914896886b74d3e739bc/README.md"
       ]
     },
     {
@@ -213,12 +215,12 @@
   "industry_coverage": [
     {
       "industry_family": "materials_science",
-      "status": "ANCHORED",
+      "status": "EXECUTABLE",
       "benchmark_ids": [
         "science_agent_bench",
         "compmat_bench"
       ],
-      "next_minimum_task": "Add a public adapter for one CompMat-Bench result schema while retaining TiAI RealReplayCore as the source-bound full-stack vertical."
+      "next_minimum_task": "Run matched agents on a frozen CompMat-Bench subset and TiAI RealReplayCore under the same intervention, cost, recovery and false-completion ledger."
     },
     {
       "industry_family": "chemistry",
