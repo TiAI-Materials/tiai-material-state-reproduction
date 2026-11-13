@@ -1,0 +1,59 @@
+{
+  "schema": "tiai.agentbench.compmat_native_reference_selftest.v0.13",
+  "task_id": "task_202603_007_step_znmgo-strain-composition-phase-map",
+  "upstream_commit": "03fec439ca9c9b1b14ea914896886b74d3e739bc",
+  "official_tree_sha": "f261454f7a57999e50186a906da9c747d16c1066",
+  "source_mode": "GIT_BLOBS_NOT_CORE_RELEASE",
+  "core_asset_sha256_verified": false,
+  "git_blob_integrity": true,
+  "reference_native_evaluation": {
+    "returncode": 0,
+    "score": 1,
+    "stderr_tail": [],
+    "stdout_sha256": "f86fd691152ad20b2f683b059087a7ba78fe834ea8e2d6fc7eeeb1be8968f4bb"
+  },
+  "corrupt_native_evaluation": {
+    "returncode": 0,
+    "score": 0,
+    "stderr_tail": [],
+    "stdout_sha256": "c502ca43482f10ff0e8e337b496deb97fed57c116a1c1f6fb8a26d994f4595d8"
+  },
+  "expected_reference_score": 1,
+  "actual_reference_score": 1,
+  "expected_corrupt_control_score": 0,
+  "actual_corrupt_control_score": 0,
+  "selftest_pass": true,
+  "status": "REFERENCE_NATIVE_GRADER_SELFTEST_PASS",
+  "files": [
+    {
+      "path": "grader/grader.py",
+      "byte_size": 1689,
+      "git_blob_sha": "b04635647c049955f9b1a07844d7bbbfb1f4eca1",
+      "sha256": "9ee4a93f6c06eedaf6242b579b38e3bd1cc0ce0a2bdb728377fc411293408b7c"
+    },
+    {
+      "path": "grader/graderlib/grader_numeric.py",
+      "byte_size": 12874,
+      "git_blob_sha": "9a451f81d09ad5f9e943fa0085c954c91303ebf1",
+      "sha256": "e8fefd86fc36a3a386cacc786b4e0559443624b4ef4b012df2553c1999da92c2"
+    },
+    {
+      "path": "grader/ground_truth.json",
+      "byte_size": 2685,
+      "git_blob_sha": "bcc9b0b5b0ef2a7a961cdd38d2c9c22f46363ebb",
+      "sha256": "24ed5880e27fbb8d50164d5e171b478da60f258a9cc348d309d7244d1371d7ab"
+    },
+    {
+      "path": "grader/reference_submission/answer.json",
+      "byte_size": 265,
+      "git_blob_sha": "efabb1b82f323f3e9303c1cc535292381c22bcce",
+      "sha256": "4e7ea08aa73e5bf47de5f652c4f4f540dbe2b788482f942a74d9536b75d83186"
+    }
+  ],
+  "real_tiai_agent_runs": 0,
+  "pilot_ready_slots": 0,
+  "native_dispatch_allowed": false,
+  "execution_host": "DESKTOP-B514PPT",
+  "execution_kind": "OFFICIAL_UPSTREAM_REFERENCE_GRADER_SELFTEST_NOT_AGENT_EVALUATION",
+  "claim_boundary": "Only one official Git-sourced ZnMgO native grader and its published reference and corrupted control were executed. This does not verify the 516859324-byte release archive or its staged inputs and cannot authorize any of the 192 preregistered agent runs."
+}
