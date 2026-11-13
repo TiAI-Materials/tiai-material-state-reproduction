@@ -276,9 +276,11 @@ def audit_pilot(protocol: dict, plan: dict, records: list[dict],
         "verified_native_passes": sum(x["native_success"] for x in accepted),
         "false_completions": sum(x["false_completion"] for x in accepted),
         "matched_complete": missing == 0 and not errors,
-        "real_agent_effect_estimate": None if missing or errors else
-            "ELIGIBLE_FOR_SEPARATE_STRATIFIED_ANALYSIS",
-        "claim_boundary": "No native score without independently imported trusted receipts; incomplete trials are not a leaderboard.",
+        # A digest index is not an independent verifier signature. This
+        # legacy structural audit never grants permission for effect analysis.
+        # Use attested_pilot.audit_attested_pilot with an out-of-band key.
+        "real_agent_effect_estimate": None,
+        "claim_boundary": "STRUCTURAL AUDIT ONLY: supplied digest index can be forged. Require externally authenticated native receipts and independently sealed run/artifact telemetry before any system-effect estimate.",
     }
 
 
