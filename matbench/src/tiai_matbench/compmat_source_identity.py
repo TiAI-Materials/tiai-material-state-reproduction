@@ -25,7 +25,7 @@ TASK_SHA = {
     "task_202602_015_step_ws2-wse2-moire-lammps-inputs": ("532960a2ceea6b18379fe0238885c49a11183a9f", "c212bb1597a2c2fc9dd6f73128a1663be7108971", "gen_input"),
     "task_202601_009_step_snte-110-surface-dirac-cones": ("944b5485f695709e9b51512c1850e11f19dd19a0", "9048fb5888f5060b7dc76864b809f5b39c851708", "analyze"),
     "task_202603_007_step_znmgo-strain-composition-phase-map": ("f261454f7a57999e50186a906da9c747d16c1066", "bbd3bd278f168f85f386a4a86f54dd3b949d2330", "analyze"),
-    "task_202603_034_step_batio3-dislocation-dipole-relaxed": ("4d3b5a71cff0e4ceef5448c5336c9f01bc202c81", "8b4cf6899b5e7ba19ee1daccd8615b36ee909727", "analyze"),
+    "task_202603_034_step_batio3-dislocation-dipole-relaxed": ("cc0f9a2fc727a9bdab09a6e6e8328b0a1358dafa", "8b4cf6899b5e7ba19ee1daccd8615b36ee909727", "analyze"),
     "task_202603_024_step_si-ge-slab-thermal-conductivity": ("9c494f1a607e0dfdf4ca139ee5a56712e578e623", "57fad0e15bc9f476a82f2294fd77fbda61fd7209", "analyze"),
     "task_202603_031_step_batio3-hysteresis-lammps-inputs": ("a4b6898d42ea31e4398b87f322bb8ab4119ccfea", "cc0644630229f883f2ab97aca45c4da6063233e9", "gen_input"),
 }
