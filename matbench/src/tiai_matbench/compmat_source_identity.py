@@ -95,7 +95,7 @@ def audit_source_identity(doc: dict, protocol: dict) -> dict:
                  row.get("native_input_sha256") is None and
                  row.get("native_grader_reference_receipt") is None,
                  "workflow not natively staged: " + task_id)
-        _require(row.get("licensed_potcar_verified") is
+        _require(row.get("licensed_potcar_verified") ==
                  (None if potcar else "NOT_REQUIRED"),
                  "licensed POTCAR was improperly inferred: " + task_id)
     hidden = doc.get("hidden_real_replay", [])
